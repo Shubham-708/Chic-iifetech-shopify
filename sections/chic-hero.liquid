@@ -1,0 +1,302 @@
+{% liquid
+  assign s = section.settings
+  assign default_asset = s.default_asset | default: 'chic-hero.jpg'
+  if s.image != blank
+    assign image_url = s.image | image_url: width: 2400
+  else
+    assign image_url = default_asset | asset_url
+  endif
+%}
+
+<div
+  class="chic-hero chic-hero--{{ s.layout }} chic-hero--content-{{ s.content_position }} color-scheme-none"
+  style="
+    --chic-hero-height: {{ s.height }}svh;
+    --chic-hero-height-mobile: {{ s.height_mobile }}svh;
+    --chic-hero-overlay: {{ s.overlay_opacity | divided_by: 100.0 }};
+    --chic-hero-panel-bg: {{ s.panel_color }};
+    --chic-hero-text: {{ s.text_color }};
+  "
+>
+  <div class="chic-hero__media">
+    <img
+      src="{{ image_url }}"
+      alt="{{ s.heading | strip_html | escape }}"
+      loading="{% if section.index == 1 %}eager{% else %}lazy{% endif %}"
+      class="chic-hero__image"
+    >
+    {% if s.layout == 'overlay' %}
+      <div class="chic-hero__overlay"></div>
+    {% endif %}
+  </div>
+
+  <div class="chic-hero__content section-content-width">
+    {% if s.subheading != blank %}
+      <p class="chic-hero__subheading">{{ s.subheading | escape }}</p>
+    {% endif %}
+    {% if s.heading != blank %}
+      <h2 class="chic-hero__heading">{{ s.heading }}</h2>
+    {% endif %}
+    {% if s.text != blank %}
+      <p class="chic-hero__text">{{ s.text }}</p>
+    {% endif %}
+    {% if s.button_label != blank %}
+      <a href="{{ s.button_link | default: routes.all_products_collection_url }}" class="chic-hero__button">
+        {{ s.button_label | escape }}
+        <svg width="26" height="10" viewBox="0 0 26 10" fill="none" aria-hidden="true"><path d="M0 5h24m0 0-4-4m4 4-4 4" stroke="currentColor" stroke-width="1.2"/></svg>
+      </a>
+    {% endif %}
+  </div>
+</div>
+
+{% stylesheet %}
+  .chic-hero {
+    position: relative;
+    display: flex;
+    width: 100%;
+    min-height: var(--chic-hero-height-mobile);
+    overflow: hidden;
+  }
+
+  @media screen and (min-width: 750px) {
+    .chic-hero {
+      min-height: var(--chic-hero-height);
+    }
+  }
+
+  .chic-hero__media,
+  .chic-hero__media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .chic-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgb(20 28 18 / var(--chic-hero-overlay)), rgb(20 28 18 / calc(var(--chic-hero-overlay) * 0.45)));
+  }
+
+  .chic-hero__content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 14px;
+    width: 100%;
+    padding: clamp(32px, 6vw, 80px) clamp(16px, 5vw, 64px);
+    color: var(--chic-hero-text);
+  }
+
+  .chic-hero--content-left .chic-hero__content { align-items: flex-start; text-align: left; }
+  .chic-hero--content-center .chic-hero__content { align-items: center; text-align: center; }
+  .chic-hero--content-right .chic-hero__content { align-items: flex-end; text-align: right; }
+
+  .chic-hero__subheading {
+    margin: 0;
+    font-family: var(--font-accent--family);
+    font-size: 0.75rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+  }
+
+  .chic-hero__heading {
+    margin: 0;
+    max-width: 22ch;
+    font-family: var(--font-heading--family);
+    font-weight: var(--font-heading--weight);
+    font-size: clamp(2rem, 5.2vw, 4rem);
+    line-height: 1.08;
+  }
+
+  .chic-hero--content-center .chic-hero__heading { max-width: 26ch; }
+
+  .chic-hero__text {
+    margin: 0;
+    max-width: 46ch;
+    font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+    line-height: 1.6;
+    opacity: 0.92;
+  }
+
+  .chic-hero__button {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 10px;
+    padding: 14px 28px;
+    border: 1px solid currentColor;
+    color: inherit;
+    font-family: var(--font-accent--family);
+    font-size: 0.78rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+
+  .chic-hero__button:hover {
+    background-color: var(--chic-hero-text);
+    color: var(--chic-hero-panel-bg, #2f3a2f);
+    text-decoration: none;
+  }
+
+  /* Split layout: colored content panel beside the image */
+  .chic-hero--split {
+    flex-direction: column;
+  }
+
+  .chic-hero--split .chic-hero__media,
+  .chic-hero--split .chic-hero__media img {
+    position: relative;
+    inset: auto;
+    min-height: 320px;
+  }
+
+  .chic-hero--split .chic-hero__content {
+    background-color: var(--chic-hero-panel-bg);
+  }
+
+  @media screen and (min-width: 750px) {
+    .chic-hero--split {
+      flex-direction: row;
+      align-items: stretch;
+    }
+
+    .chic-hero--split .chic-hero__content {
+      width: 45%;
+    }
+
+    .chic-hero--split .chic-hero__media {
+      position: relative;
+      width: 55%;
+      order: 1;
+    }
+
+    .chic-hero--split .chic-hero__media img {
+      position: absolute;
+      inset: 0;
+      height: 100%;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Chic hero banner",
+  "settings": [
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        { "value": "overlay", "label": "Text over image" },
+        { "value": "split", "label": "Split panel + image" }
+      ],
+      "default": "overlay"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "Leave empty to use the bundled brand image"
+    },
+    {
+      "type": "text",
+      "id": "default_asset",
+      "label": "Fallback asset filename",
+      "default": "chic-hero.jpg"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "NATURE. SCIENCE. RITUAL."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Luxury Botanical Beauty Crafted by Nature"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "select",
+      "id": "content_position",
+      "label": "Content alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "height",
+      "label": "Height (desktop)",
+      "min": 30,
+      "max": 100,
+      "step": 5,
+      "unit": "svh",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "height_mobile",
+      "label": "Height (mobile)",
+      "min": 30,
+      "max": 100,
+      "step": 5,
+      "unit": "svh",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay opacity",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "default": 35
+    },
+    {
+      "type": "color",
+      "id": "panel_color",
+      "label": "Panel color (split layout)",
+      "default": "#2F3A2F"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#FBF9F4"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Chic hero banner",
+      "category": "Banners"
+    }
+  ]
+}
+{% endschema %}

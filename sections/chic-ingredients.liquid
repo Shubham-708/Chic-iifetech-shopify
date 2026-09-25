@@ -1,0 +1,205 @@
+{% liquid
+  assign s = section.settings
+%}
+
+<div
+  class="chic-ingredients"
+  style="--chic-ing-bg: {{ s.background_color }}; --chic-ing-text: {{ s.text_color }};"
+>
+  <div class="chic-ingredients__inner">
+    <div class="chic-ingredients__header">
+      {% if s.subheading != blank %}
+        <p class="chic-ingredients__subheading">{{ s.subheading | escape }}</p>
+      {% endif %}
+      {% if s.heading != blank %}
+        <h2 class="chic-ingredients__heading">{{ s.heading | escape }}</h2>
+      {% endif %}
+    </div>
+
+    <div class="chic-ingredients__grid">
+      {% for block in section.blocks %}
+        <div class="chic-ingredients__card" {{ block.shopify_attributes }}>
+          <div class="chic-ingredients__image-wrap">
+            {% if block.settings.image != blank %}
+              {{ block.settings.image | image_url: width: 640 | image_tag: class: 'chic-ingredients__image', alt: block.settings.title }}
+            {% elsif block.settings.default_asset != blank %}
+              <img
+                src="{{ block.settings.default_asset | asset_url }}"
+                class="chic-ingredients__image"
+                alt="{{ block.settings.title | escape }}"
+                loading="lazy"
+                width="560"
+                height="560"
+              >
+            {% endif %}
+          </div>
+          <p class="chic-ingredients__title">{{ block.settings.title | escape }}</p>
+          {% if block.settings.text != blank %}
+            <p class="chic-ingredients__text">{{ block.settings.text | escape }}</p>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .chic-ingredients {
+    background-color: var(--chic-ing-bg);
+    color: var(--chic-ing-text);
+  }
+
+  .chic-ingredients__inner {
+    max-width: var(--page-width, 1400px);
+    margin: 0 auto;
+    padding: clamp(48px, 7vw, 88px) clamp(16px, 4vw, 48px);
+  }
+
+  .chic-ingredients__header {
+    text-align: center;
+    margin-bottom: clamp(32px, 5vw, 56px);
+  }
+
+  .chic-ingredients__subheading {
+    margin: 0 0 10px;
+    font-family: var(--font-accent--family);
+    font-size: 0.75rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+
+  .chic-ingredients__heading {
+    margin: 0;
+    font-family: var(--font-heading--family);
+    font-weight: var(--font-heading--weight);
+    font-size: clamp(1.7rem, 3.6vw, 2.6rem);
+  }
+
+  .chic-ingredients__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(24px, 4vw, 48px);
+  }
+
+  @media screen and (min-width: 750px) {
+    .chic-ingredients__grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .chic-ingredients__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    text-align: center;
+  }
+
+  .chic-ingredients__image-wrap {
+    width: min(200px, 60vw);
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .chic-ingredients__image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.4s ease;
+  }
+
+  .chic-ingredients__card:hover .chic-ingredients__image {
+    transform: scale(1.06) rotate(-1.5deg);
+  }
+
+  .chic-ingredients__title {
+    margin: 0;
+    font-family: var(--font-heading--family);
+    font-size: 1.15rem;
+  }
+
+  .chic-ingredients__text {
+    margin: 0;
+    max-width: 26ch;
+    font-size: 0.88rem;
+    line-height: 1.55;
+    opacity: 0.78;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Chic ingredients",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "POWERED BY PLANTS"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Our Botanical Ingredients"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#FBF9F4"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#2F3A2F"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "ingredient",
+      "name": "Ingredient",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "default_asset",
+          "label": "Fallback asset filename"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Name",
+          "default": "Neem"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Description"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Chic ingredients",
+      "category": "Storytelling",
+      "blocks": [
+        { "type": "ingredient", "settings": { "default_asset": "chic-ing-neem.png", "title": "Neem", "text": "Deeply purifies and soothes skin with natural antibacterial properties." } },
+        { "type": "ingredient", "settings": { "default_asset": "chic-ing-rosehip.png", "title": "Rosehip", "text": "Rich in vitamins and essential fatty acids for regeneration." } },
+        { "type": "ingredient", "settings": { "default_asset": "chic-ing-calendula.png", "title": "Calendula", "text": "Calms sensitive skin and promotes healing." } },
+        { "type": "ingredient", "settings": { "default_asset": "chic-ing-primrose.png", "title": "Evening Primrose", "text": "Intensely nourishes and improves skin elasticity." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

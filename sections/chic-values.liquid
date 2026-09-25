@@ -1,0 +1,139 @@
+{% liquid
+  assign s = section.settings
+%}
+
+<div
+  class="chic-values"
+  style="--chic-values-bg: {{ s.background_color }}; --chic-values-text: {{ s.text_color }};"
+>
+  <div class="chic-values__inner">
+    {% for block in section.blocks %}
+      <div class="chic-values__item" {{ block.shopify_attributes }}>
+        <span class="chic-values__icon" aria-hidden="true">
+          {% case block.settings.icon %}
+            {% when 'leaf' %}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M5 19C5 9 11 4 20 4c0 9-5 15-15 15Zm0 0c1.5-4.5 4-8 9-11"/></svg>
+            {% when 'rabbit' %}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M13 16c3.5 0 6-2.2 6-5.5S16.5 5 13 5c-2 0-3.6.8-4.6 2M13 16c-4 0-7 1.4-7 3.5h14c0-2.1-3-3.5-7-3.5Zm-4.6-9C7.5 5 6.5 3 4.8 3 3.6 3 3 3.8 3 4.8 3 6.5 5.2 7.6 8.4 7Z"/><circle cx="14.6" cy="9.4" r="0.8" fill="currentColor" stroke="none"/></svg>
+            {% when 'lotus' %}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 20c-2.5-1.6-4-4.2-4-7 0-3.5 2-6.5 4-8 2 1.5 4 4.5 4 8 0 2.8-1.5 5.4-4 7Zm0 0c-4.5.6-8-1.5-9-4.5 2-.8 4.3-.8 6.2 0M12 20c4.5.6 8-1.5 9-4.5-2-.8-4.3-.8-6.2 0"/></svg>
+            {% else %}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="m12 3 2.4 6.1L21 9.6l-5 4.2 1.6 6.4L12 16.7l-5.6 3.5L8 13.8 3 9.6l6.6-.5L12 3Z"/></svg>
+          {% endcase %}
+        </span>
+        <p class="chic-values__title">{{ block.settings.title | escape }}</p>
+        {% if block.settings.text != blank %}
+          <p class="chic-values__text">{{ block.settings.text | escape }}</p>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% stylesheet %}
+  .chic-values {
+    background-color: var(--chic-values-bg);
+    color: var(--chic-values-text);
+  }
+
+  .chic-values__inner {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 28px;
+    max-width: var(--page-width, 1400px);
+    margin: 0 auto;
+    padding: clamp(36px, 5vw, 56px) clamp(16px, 4vw, 48px);
+  }
+
+  .chic-values__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .chic-values__icon svg {
+    width: 44px;
+    height: 44px;
+  }
+
+  .chic-values__title {
+    margin: 0;
+    font-family: var(--font-accent--family);
+    font-size: 0.82rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+  }
+
+  .chic-values__text {
+    margin: 0;
+    max-width: 30ch;
+    font-size: 0.9rem;
+    line-height: 1.55;
+    opacity: 0.8;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Chic brand values",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#EEF1E6"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#2F3A2F"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "value",
+      "name": "Value",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "leaf", "label": "Leaf" },
+            { "value": "rabbit", "label": "Rabbit" },
+            { "value": "lotus", "label": "Lotus" },
+            { "value": "star", "label": "Star" }
+          ],
+          "default": "leaf"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "100% Botanical"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Chic brand values",
+      "category": "Storytelling",
+      "blocks": [
+        { "type": "value", "settings": { "icon": "leaf", "title": "100% Botanical" } },
+        { "type": "value", "settings": { "icon": "rabbit", "title": "Cruelty Free" } },
+        { "type": "value", "settings": { "icon": "lotus", "title": "Ayurveda Wisdom" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
