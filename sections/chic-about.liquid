@@ -33,6 +33,12 @@
           </div>
         {% endfor %}
       </div>
+      {% if s.founder_name != blank %}
+        <div class="chic-about__sign">
+          <span>{{ s.founder_name | escape }}</span>
+          {% if s.founder_role != blank %}<small>{{ s.founder_role | escape }}</small>{% endif %}
+        </div>
+      {% endif %}
     </div>
   </div>
 </div>
@@ -134,6 +140,24 @@
     color: var(--chic-muted);
   }
 
+  .chic-about__sign {
+    margin-top: 26px;
+  }
+
+  .chic-about__sign span {
+    display: block;
+    font-family: var(--chic-serif);
+    font-style: italic;
+    font-size: 26px;
+    color: var(--chic-navy);
+    line-height: 1.2;
+  }
+
+  .chic-about__sign small {
+    font-size: 12.5px;
+    color: var(--chic-muted);
+  }
+
   @media screen and (max-width: 1100px) {
     .chic-about__stats { grid-template-columns: repeat(2, auto); }
   }
@@ -164,7 +188,9 @@
       "id": "text",
       "label": "Text",
       "default": "At CHIC, we believe nature is not a luxury — it is a necessity. Every formulation begins with carefully chosen botanicals, inspired by centuries of Ayurvedic wisdom and refined through modern skincare research."
-    }
+    },
+    { "type": "text", "id": "founder_name", "label": "Founder signature" },
+    { "type": "text", "id": "founder_role", "label": "Founder role" }
   ],
   "blocks": [
     {

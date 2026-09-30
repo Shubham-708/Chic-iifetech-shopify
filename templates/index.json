@@ -43,6 +43,20 @@
         "link_label": "View All Categories"
       }
     },
+    "chic_promos": {
+      "type": "chic-promos",
+      "name": "Chic promo banners",
+      "blocks": {
+        "promo_hair": { "type": "promo", "settings": { "style": "light", "tag": "Flat 25% Discount", "heading": "Special Hair Care", "heading_accent": "Deals", "text": "Nourish, strengthen & shine with our expert hair care range.", "btn_label": "Shop Now", "btn_link": "shopify://collections/hair-care", "fallback_asset": "chic-promo-hair.png" } },
+        "promo_skin": { "type": "promo", "settings": { "style": "dark", "tag": "Flat 20% Discount", "heading": "Save Big on", "heading_accent": "Skincare", "text": "Pamper your skin with our premium skincare essentials.", "btn_label": "Shop Now", "btn_link": "shopify://collections/skin-care", "fallback_asset": "chic-promo-skin.png" } },
+        "trust_natural": { "type": "trust", "settings": { "icon": "leaf", "title": "Natural Ingredients", "text": "Made with care" } },
+        "trust_derm": { "type": "trust", "settings": { "icon": "shield", "title": "Dermatologist Tested", "text": "Safe for all skin types" } },
+        "trust_cruelty": { "type": "trust", "settings": { "icon": "rabbit", "title": "Cruelty Free", "text": "Not tested on animals" } },
+        "trust_support": { "type": "trust", "settings": { "icon": "users", "title": "Customer Support", "text": "We're here for you" } }
+      },
+      "block_order": ["promo_hair", "promo_skin", "trust_natural", "trust_derm", "trust_cruelty", "trust_support"],
+      "settings": {}
+    },
     "chic_about": {
       "type": "chic-about",
       "name": "Chic about",
@@ -58,7 +72,25 @@
         "badge_text": "That Lasts. Softness That Shows.",
         "eyebrow": "About CHIC",
         "heading": "Beauty That's Botanical. Confidence That's Real.",
-        "text": "At CHIC, we believe nature is not a luxury — it is a necessity. Every formulation begins with carefully chosen botanicals, inspired by centuries of Ayurvedic wisdom and refined through modern skincare research."
+        "text": "At CHIC, we believe nature is not a luxury — it is a necessity. Every formulation begins with carefully chosen botanicals, inspired by centuries of Ayurvedic wisdom and refined through modern skincare research.",
+        "founder_name": "CHIC The Botanical Beauty",
+        "founder_role": "Founded in Bhopal, Madhya Pradesh"
+      }
+    },
+    "chic_story": {
+      "type": "chic-story",
+      "name": "Chic our story",
+      "blocks": {
+        "story_natural": { "type": "feature", "settings": { "icon": "leaf", "title": "Natural Ingredients" } },
+        "story_healthy": { "type": "feature", "settings": { "icon": "heart", "title": "Healthy Skin & Hair" } },
+        "story_green": { "type": "feature", "settings": { "icon": "lotus", "title": "A Greener Tomorrow" } }
+      },
+      "block_order": ["story_natural", "story_healthy", "story_green"],
+      "settings": {
+        "eyebrow": "Our Story",
+        "heading": "Beauty, Inspired by Nature",
+        "text": "At The Botanical Beauty, we believe nature gives us the purest form of care. Our products are crafted with the finest botanical ingredients, without harmful chemicals, so you can feel good about what you put on your skin and hair.",
+        "btn_label": "More About Us"
       }
     },
     "chic_products": {
@@ -106,8 +138,10 @@
     "chic_hero",
     "chic_features",
     "chic_categories",
+    "chic_promos",
     "chic_about",
     "chic_products",
+    "chic_story",
     "chic_testimonials",
     "chic_journal"
   ]

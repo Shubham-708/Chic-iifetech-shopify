@@ -1,0 +1,248 @@
+{% liquid
+  assign s = section.settings
+  if s.image != blank
+    assign story_img = s.image | image_url: width: 900
+  else
+    assign story_img = 'chic-story.png' | asset_url
+  endif
+%}
+
+<div class="chic-story">
+  <svg class="chic-story__leaf chic-story__leaf--r" viewBox="0 0 100 120" aria-hidden="true">
+    <g fill="none" stroke="#7ba883" stroke-width="1.6" stroke-linecap="round">
+      <path d="M50 115C50 70 55 35 78 8"/>
+      <path d="M52 92c-14-4-24-14-26-30 16 2 26 12 26 30Zm3-24c-2-17 3-30 18-40 4 16-3 30-18 40Zm-5 46c-12-2-21-9-25-22 13 1 22 9 25 22Zm8-68c0-14 6-24 18-31 2 13-5 24-18 31Z"/>
+    </g>
+  </svg>
+  <div class="chic-story__wrap chic-wrap">
+    <div class="chic-story__img">
+      <img src="{{ story_img }}" alt="{{ s.heading | escape }}" loading="lazy" width="700" height="800">
+    </div>
+    <div class="chic-story__txt">
+      {% if s.eyebrow != blank %}<p class="chic-story__kick">{{ s.eyebrow | escape }}</p>{% endif %}
+      <h2>{{ s.heading | escape }}</h2>
+      {% if s.text != blank %}<p class="chic-story__p">{{ s.text }}</p>{% endif %}
+
+      {% if section.blocks.size > 0 %}
+        <ul class="chic-story__feats">
+          {% for block in section.blocks %}
+            <li {{ block.shopify_attributes }}>
+              {% render 'chic-icon', icon: block.settings.icon %}
+              <span>{{ block.settings.title | escape }}</span>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+
+      {% if s.btn_label != blank %}
+        <a class="chic-story__btn" href="{{ s.btn_link | default: '/pages/about' }}">
+          {{ s.btn_label | escape }}
+          {% render 'chic-icon', icon: 'arrow' %}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .chic-story {
+    position: relative;
+    background: var(--chic-mint-xl);
+    overflow: hidden;
+  }
+
+  .chic-story__leaf {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  .chic-story__leaf--r {
+    width: 220px;
+    height: auto;
+    right: -30px;
+    top: 20px;
+    transform: rotate(12deg);
+  }
+
+  .chic-story__wrap {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    align-items: center;
+    gap: clamp(30px, 5vw, 70px);
+    padding-top: clamp(40px, 5vw, 70px);
+    padding-bottom: clamp(40px, 5vw, 70px);
+    position: relative;
+    z-index: 1;
+  }
+
+  .chic-story__img {
+    display: flex;
+    justify-content: center;
+  }
+
+  .chic-story__img img {
+    max-height: 480px;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 24px 40px rgb(15 61 36 / 0.18));
+  }
+
+  .chic-story__kick {
+    margin: 0 0 10px;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--chic-green-d);
+  }
+
+  .chic-story__txt h2 {
+    font-family: var(--chic-serif);
+    font-weight: 400;
+    font-size: clamp(26px, 3vw, 44px);
+    line-height: 1.15;
+    margin: 0 0 16px;
+    color: #0f3d24;
+  }
+
+  .chic-story__p {
+    font-size: 15px;
+    line-height: 1.7;
+    margin: 0 0 26px;
+    color: #1d3a28;
+    max-width: 46em;
+  }
+
+  .chic-story__feats {
+    list-style: none;
+    margin: 0 0 28px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .chic-story__feats li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 22px;
+    font-size: 14px;
+    line-height: 1.35;
+    color: #1d3a28;
+    max-width: 180px;
+  }
+
+  .chic-story__feats li:first-child { padding-left: 0; }
+  .chic-story__feats li + li { border-left: 1px solid #c8d6c0; }
+
+  .chic-story__feats svg {
+    width: 38px;
+    height: 38px;
+    fill: none;
+    stroke: #0f3d24;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex: none;
+  }
+
+  .chic-story__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #0f4a2a;
+    color: #fff;
+    border-radius: 4px;
+    padding: 13px 28px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+  }
+
+  .chic-story__btn:hover {
+    background: #0a3a20;
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .chic-story__btn svg {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  @media screen and (max-width: 860px) {
+    .chic-story__wrap { grid-template-columns: 1fr; }
+    .chic-story__img { order: 2; }
+    .chic-story__img img { max-height: 340px; }
+    .chic-story__leaf--r { width: 140px; opacity: 0.3; }
+  }
+
+  @media screen and (max-width: 560px) {
+    .chic-story__feats { gap: 14px 0; }
+    .chic-story__feats li { flex: 1 1 100%; padding: 0; }
+    .chic-story__feats li + li { border-left: 0; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Chic our story",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image", "info": "Leave empty to use the bundled product image" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Our Story" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Beauty, Inspired by Nature" },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "At The Botanical Beauty, we believe nature gives us the purest form of care. Our products are crafted with the finest botanical ingredients, without harmful chemicals, so you can feel good about what you put on your skin and hair."
+    },
+    { "type": "text", "id": "btn_label", "label": "Button label", "default": "More About Us" },
+    { "type": "url", "id": "btn_link", "label": "Button link" }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "leaf", "label": "Leaf" },
+            { "value": "heart", "label": "Heart" },
+            { "value": "sparkle", "label": "Sparkle" },
+            { "value": "drop", "label": "Drop" },
+            { "value": "lotus", "label": "Lotus" },
+            { "value": "shield", "label": "Shield" }
+          ],
+          "default": "leaf"
+        },
+        { "type": "text", "id": "title", "label": "Title", "default": "Natural Ingredients" }
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "presets": [
+    {
+      "name": "Chic our story",
+      "category": "Storytelling",
+      "blocks": [
+        { "type": "feature", "settings": { "icon": "leaf", "title": "Natural Ingredients" } },
+        { "type": "feature", "settings": { "icon": "heart", "title": "Healthy Skin & Hair" } },
+        { "type": "feature", "settings": { "icon": "lotus", "title": "A Greener Tomorrow" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,294 @@
+{% comment %} Two promo banner cards + trust strip (CHIC design). {% endcomment %}
+<div class="chic-section chic-promos">
+  <div class="chic-wrap">
+    <div class="chic-promo-grid">
+      {% for block in section.blocks %}
+        {% if block.type == 'promo' %}
+          {% liquid
+            assign bs = block.settings
+            if bs.image != blank
+              assign promo_img = bs.image | image_url: width: 900
+            elsif bs.fallback_asset != blank
+              assign promo_img = bs.fallback_asset | asset_url
+            else
+              assign promo_img = 'chic-promo-skin.png' | asset_url
+            endif
+          %}
+          <div class="chic-promo chic-promo--{{ bs.style }}" {{ block.shopify_attributes }}>
+            <div class="chic-promo__pt">
+              {% if bs.tag != blank %}<span class="chic-promo__tag">{{ bs.tag | escape }}</span>{% endif %}
+              <h3>
+                {{ bs.heading | escape }}
+                {% if bs.heading_accent != blank %}<em>{{ bs.heading_accent | escape }}</em>{% endif %}
+              </h3>
+              {% if bs.text != blank %}<p>{{ bs.text | escape }}</p>{% endif %}
+              {% if bs.btn_label != blank %}
+                <a class="chic-promo__btn" href="{{ bs.btn_link | default: routes.all_products_collection_url }}">
+                  {{ bs.btn_label | escape }}
+                  {% render 'chic-icon', icon: 'arrow' %}
+                </a>
+              {% endif %}
+            </div>
+            <div class="chic-promo__pi">
+              <img src="{{ promo_img }}" alt="{{ bs.heading | escape }}" loading="lazy" width="800" height="700">
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    {% assign trust_blocks = section.blocks | where: 'type', 'trust' %}
+    {% if trust_blocks.size > 0 %}
+      <div class="chic-trust">
+        {% for block in trust_blocks %}
+          <div class="chic-trust__item" {{ block.shopify_attributes }}>
+            {% render 'chic-icon', icon: block.settings.icon %}
+            <div>
+              <h4>{{ block.settings.title | escape }}</h4>
+              {% if block.settings.text != blank %}<p>{{ block.settings.text | escape }}</p>{% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% stylesheet %}
+  .chic-promo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+  }
+
+  .chic-promo {
+    border-radius: 18px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    align-items: center;
+    min-height: 280px;
+  }
+
+  .chic-promo__pt {
+    padding: 30px 4px 30px 32px;
+  }
+
+  .chic-promo__tag {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 14px;
+  }
+
+  .chic-promo h3 {
+    font-family: var(--chic-serif);
+    font-weight: 400;
+    font-size: clamp(22px, 2.2vw, 30px);
+    line-height: 1.2;
+    margin: 0 0 12px;
+  }
+
+  .chic-promo h3 em { font-style: normal; display: block; }
+
+  .chic-promo p {
+    font-size: 13px;
+    margin: 0 0 20px;
+    max-width: 260px;
+    line-height: 1.6;
+  }
+
+  .chic-promo__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 40px;
+    padding: 0 20px;
+    border-radius: 22px;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .chic-promo__btn:hover { opacity: 0.88; text-decoration: none; }
+
+  .chic-promo__btn svg {
+    width: 16px;
+    height: 16px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .chic-promo__pi {
+    height: 100%;
+    min-height: 260px;
+    position: relative;
+  }
+
+  .chic-promo__pi img {
+    position: absolute;
+    inset: 16px 16px 16px 0;
+    width: calc(100% - 16px);
+    height: calc(100% - 32px);
+    object-fit: cover;
+    border-radius: 14px;
+    transition: transform 0.4s ease;
+  }
+
+  .chic-promo:hover .chic-promo__pi img { transform: scale(1.03); }
+
+  .chic-promo--light { background: var(--chic-mint); color: var(--chic-ink); }
+  .chic-promo--light .chic-promo__tag { background: var(--chic-green); color: #fff; }
+  .chic-promo--light h3 em { color: var(--chic-green); }
+  .chic-promo--light p { color: var(--chic-muted); }
+  .chic-promo--light .chic-promo__btn { background: var(--chic-green); color: #fff; }
+
+  .chic-promo--dark { background: var(--chic-green-d); color: #fff; }
+  .chic-promo--dark .chic-promo__tag { background: rgb(255 255 255 / 0.16); color: #fff; }
+  .chic-promo--dark h3 em { color: #d9e89a; }
+  .chic-promo--dark p { color: rgb(255 255 255 / 0.85); }
+  .chic-promo--dark .chic-promo__btn { background: #fff; color: var(--chic-green-d); }
+
+  .chic-trust {
+    margin-top: 26px;
+    background: var(--chic-cream);
+    border-radius: 14px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 20px 10px;
+  }
+
+  .chic-trust__item {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 14px;
+  }
+
+  .chic-trust__item svg {
+    width: 34px;
+    height: 34px;
+    stroke: var(--chic-green);
+    fill: none;
+    stroke-width: 1.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex: none;
+  }
+
+  .chic-trust__item h4 {
+    margin: 0;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--chic-ink);
+  }
+
+  .chic-trust__item p {
+    margin: 0;
+    font-size: 12.5px;
+    color: var(--chic-muted);
+  }
+
+  @media screen and (max-width: 860px) {
+    .chic-promo-grid { grid-template-columns: 1fr; }
+
+    .chic-trust {
+      grid-template-columns: 1fr 1fr;
+      gap: 14px 0;
+    }
+
+    .chic-trust__item { justify-content: flex-start; }
+  }
+
+  @media screen and (max-width: 560px) {
+    .chic-promo { grid-template-columns: 1fr; }
+    .chic-promo__pt { padding: 26px 24px 6px; }
+    .chic-promo__pi { min-height: 220px; }
+
+    .chic-promo__pi img {
+      inset: 12px;
+      width: calc(100% - 24px);
+      height: calc(100% - 24px);
+    }
+
+    .chic-trust { grid-template-columns: 1fr; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Chic promo banners",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "promo",
+      "name": "Promo banner",
+      "settings": [
+        {
+          "type": "select",
+          "id": "style",
+          "label": "Style",
+          "options": [
+            { "value": "light", "label": "Light green" },
+            { "value": "dark", "label": "Dark green" }
+          ],
+          "default": "light"
+        },
+        { "type": "text", "id": "tag", "label": "Tag", "default": "Flat 25% Discount" },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Special Hair Care" },
+        { "type": "text", "id": "heading_accent", "label": "Heading accent line", "default": "Deals" },
+        { "type": "text", "id": "text", "label": "Text", "default": "Nourish, strengthen & shine with our expert hair care range." },
+        { "type": "text", "id": "btn_label", "label": "Button label", "default": "Shop Now" },
+        { "type": "url", "id": "btn_link", "label": "Button link" },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "fallback_asset", "label": "Fallback asset filename", "default": "chic-promo-hair.png" }
+      ]
+    },
+    {
+      "type": "trust",
+      "name": "Trust item",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "leaf", "label": "Leaf" },
+            { "value": "users", "label": "People" },
+            { "value": "rabbit", "label": "Rabbit" },
+            { "value": "shield", "label": "Shield" },
+            { "value": "truck", "label": "Truck" },
+            { "value": "clock", "label": "Clock" },
+            { "value": "sparkle", "label": "Sparkle" },
+            { "value": "check", "label": "Check" }
+          ],
+          "default": "leaf"
+        },
+        { "type": "text", "id": "title", "label": "Title", "default": "Natural Ingredients" },
+        { "type": "text", "id": "text", "label": "Text", "default": "Made with care" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Chic promo banners",
+      "category": "Banners",
+      "blocks": [
+        { "type": "promo", "settings": { "style": "light", "tag": "Flat 25% Discount", "heading": "Special Hair Care", "heading_accent": "Deals", "text": "Nourish, strengthen & shine with our expert hair care range.", "btn_label": "Shop Now", "fallback_asset": "chic-promo-hair.png" } },
+        { "type": "promo", "settings": { "style": "dark", "tag": "Flat 20% Discount", "heading": "Save Big on", "heading_accent": "Skincare", "text": "Pamper your skin with our premium skincare essentials.", "btn_label": "Shop Now", "fallback_asset": "chic-promo-skin.png" } },
+        { "type": "trust", "settings": { "icon": "leaf", "title": "Natural Ingredients", "text": "Made with care" } },
+        { "type": "trust", "settings": { "icon": "shield", "title": "Dermatologist Tested", "text": "Safe for all skin types" } },
+        { "type": "trust", "settings": { "icon": "rabbit", "title": "Cruelty Free", "text": "Not tested on animals" } },
+        { "type": "trust", "settings": { "icon": "users", "title": "Customer Support", "text": "We're here for you" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
