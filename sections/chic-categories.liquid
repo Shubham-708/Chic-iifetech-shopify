@@ -1,0 +1,183 @@
+{% liquid
+  assign s = section.settings
+%}
+
+<div class="chic-section chic-cats-section">
+  <div class="chic-wrap">
+    <div class="chic-sec-head">
+      <div>
+        {% if s.eyebrow != blank %}<p class="chic-eyebrow">{{ s.eyebrow | escape }}</p>{% endif %}
+        <h2>{{ s.heading | escape }}</h2>
+      </div>
+      {% if s.link_label != blank %}
+        <a class="chic-more" href="{{ s.link | default: routes.collections_url }}">{{ s.link_label | escape }}</a>
+      {% endif %}
+    </div>
+
+    <div class="chic-cats" style="--chic-cats-count: {{ section.blocks.size | at_least: 1 }};">
+      {% for block in section.blocks %}
+        <a
+          class="chic-cat"
+          href="{{ block.settings.link | default: routes.all_products_collection_url }}"
+          style="--chic-cat-bg: {{ block.settings.bg_color }};"
+          {{ block.shopify_attributes }}
+        >
+          <span class="chic-cat__ci">{% render 'chic-icon', icon: block.settings.icon %}</span>
+          <h3>{{ block.settings.title | escape }}</h3>
+          {% if block.settings.text != blank %}
+            <p>{{ block.settings.text | escape }}</p>
+          {% endif %}
+          <span class="chic-cat__go">{% render 'chic-icon', icon: 'arrow' %}</span>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .chic-cats {
+    display: grid;
+    grid-template-columns: repeat(var(--chic-cats-count, 5), 1fr);
+    gap: 18px;
+  }
+
+  .chic-cat {
+    background: var(--chic-cat-bg, var(--chic-mint));
+    border-radius: 14px;
+    overflow: hidden;
+    position: relative;
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    text-decoration: none;
+    transition: transform 0.25s ease;
+  }
+
+  .chic-cat:hover {
+    transform: translateY(-4px);
+    text-decoration: none;
+  }
+
+  .chic-cat__ci {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgb(255 255 255 / 0.75);
+    display: grid;
+    place-items: center;
+    margin-bottom: 16px;
+  }
+
+  .chic-cat__ci svg {
+    width: 20px;
+    height: 20px;
+    stroke: var(--chic-ink);
+    fill: none;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .chic-cat h3 {
+    margin: 0 0 6px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--chic-ink);
+  }
+
+  .chic-cat p {
+    margin: 0;
+    font-size: 12.5px;
+    color: var(--chic-muted);
+    max-width: 110px;
+    line-height: 1.5;
+  }
+
+  .chic-cat__go {
+    margin-top: auto;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgb(255 255 255 / 0.9);
+    display: grid;
+    place-items: center;
+  }
+
+  .chic-cat__go svg {
+    width: 16px;
+    height: 16px;
+    stroke: var(--chic-ink);
+    fill: none;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  @media screen and (max-width: 1100px) {
+    .chic-cats { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  @media screen and (max-width: 560px) {
+    .chic-cats {
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .chic-cat { min-height: 210px; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Chic categories",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Shop by category" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Curated For Your Beauty" },
+    { "type": "text", "id": "link_label", "label": "Link label", "default": "View All Categories" },
+    { "type": "url", "id": "link", "label": "Link" }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category card",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "drop", "label": "Drop (skincare)" },
+            { "value": "bottle", "label": "Bottle (haircare)" },
+            { "value": "soap", "label": "Soap (bodycare)" },
+            { "value": "heart", "label": "Heart" },
+            { "value": "gift", "label": "Gift" },
+            { "value": "comb", "label": "Comb" },
+            { "value": "leaf", "label": "Leaf" },
+            { "value": "sparkle", "label": "Sparkle" }
+          ],
+          "default": "drop"
+        },
+        { "type": "text", "id": "title", "label": "Title", "default": "Skincare" },
+        { "type": "text", "id": "text", "label": "Text", "default": "Nourish & Glow" },
+        { "type": "url", "id": "link", "label": "Link" },
+        { "type": "color", "id": "bg_color", "label": "Card color", "default": "#e7f0d9" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Chic categories",
+      "category": "Collections",
+      "blocks": [
+        { "type": "category", "settings": { "icon": "drop", "title": "Skincare", "text": "Nourish & Glow", "bg_color": "#e7f0d9" } },
+        { "type": "category", "settings": { "icon": "bottle", "title": "Haircare", "text": "Strength & Shine", "bg_color": "#eef5c8" } },
+        { "type": "category", "settings": { "icon": "soap", "title": "Bodycare", "text": "Pamper & Protect", "bg_color": "#e3ece2" } },
+        { "type": "category", "settings": { "icon": "heart", "title": "Mother's Choice", "text": "Care For Her", "bg_color": "#e3eef3" } },
+        { "type": "category", "settings": { "icon": "gift", "title": "Gift Sets", "text": "Curated With Love", "bg_color": "#fbf6e2" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

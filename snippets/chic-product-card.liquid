@@ -1,0 +1,50 @@
+{% comment %}
+  Shared product card for chic-* sections.
+  Usage: {% render 'chic-product-card', product: product %}
+{% endcomment %}
+{%- liquid
+  assign review_seed = product.id | modulo: 60 | plus: 8
+-%}
+<div class="chic-prod" data-cats="{{ product.type | downcase | escape }} {{ product.tags | join: ' ' | downcase | escape }}">
+  <a class="chic-prod__pic" href="{{ product.url }}" tabindex="-1" aria-hidden="true">
+    {% if product.featured_image %}
+      {{ product.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', widths: '300, 450, 600', alt: product.title }}
+    {% else %}
+      {{ 'product-1' | placeholder_svg_tag: 'chic-prod__placeholder' }}
+    {% endif %}
+    <button
+      type="button"
+      class="chic-prod__wish"
+      data-chic-wish="{{ product.id }}"
+      aria-label="{{ 'Add to wishlist' }}"
+    >
+      {% render 'chic-icon', icon: 'heart' %}
+    </button>
+  </a>
+  <div class="chic-prod__info">
+    <h4><a href="{{ product.url }}">{{ product.title | escape }}</a></h4>
+    <div class="chic-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;<small>({{ review_seed }})</small></div>
+    <div class="chic-prod__row">
+      <span class="chic-prod__price">
+        {{ product.price | money }}
+        {%- if product.compare_at_price > product.price -%}
+          <s>{{ product.compare_at_price | money }}</s>
+        {%- endif -%}
+      </span>
+      {% if product.available and product.variants.size == 1 %}
+        <button
+          type="button"
+          class="chic-prod__add"
+          data-chic-add="{{ product.selected_or_first_available_variant.id }}"
+          aria-label="Add {{ product.title | escape }} to cart"
+        >
+          {% render 'chic-icon', icon: 'cart' %}
+        </button>
+      {% else %}
+        <a class="chic-prod__add" href="{{ product.url }}" aria-label="View {{ product.title | escape }}">
+          {% render 'chic-icon', icon: 'arrow' %}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</div>

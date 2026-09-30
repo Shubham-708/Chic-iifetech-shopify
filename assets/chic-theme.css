@@ -1,0 +1,190 @@
+/* CHIC – The Botanical Beauty · shared design system for chic-* sections */
+:root {
+  --chic-navy: #0d4a70;
+  --chic-navy-d: #083550;
+  --chic-green: #4f8455;
+  --chic-green-d: #2d5a36;
+  --chic-lime: #eef5c8;
+  --chic-mint: #e7f0d9;
+  --chic-mint-xl: #f5f9ee;
+  --chic-sage: #e3ece2;
+  --chic-cream: #fbf6e2;
+  --chic-sky: #e3eef3;
+  --chic-pink: #fbe3e8;
+  --chic-ink: #1d1a22;
+  --chic-muted: #6b6576;
+  --chic-line: #e3ead8;
+  --chic-card: #ffffff;
+  --chic-star: #f0b429;
+  --chic-serif: var(--font-heading--family, Georgia, serif);
+  --chic-sans: var(--font-body--family, 'Poppins', system-ui, sans-serif);
+}
+
+/* layout container */
+.chic-wrap {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding-inline: 24px;
+}
+
+@media screen and (max-width: 749px) {
+  .chic-wrap { padding-inline: 16px; }
+}
+
+/* eyebrow label */
+.chic-eyebrow {
+  margin: 0 0 14px;
+  color: var(--chic-green);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* section header row */
+.chic-sec-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.chic-sec-head .chic-eyebrow { margin-bottom: 6px; }
+
+.chic-sec-head h2 {
+  margin: 0;
+  font-family: var(--chic-serif);
+  font-weight: 400;
+  font-size: clamp(24px, 2.6vw, 32px);
+  line-height: 1.25;
+  color: var(--chic-ink);
+}
+
+.chic-more {
+  color: var(--chic-navy);
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.chic-more:hover { text-decoration: underline; }
+
+/* buttons */
+.chic-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 48px;
+  padding: 0 28px;
+  border-radius: 6px;
+  font-family: var(--chic-sans);
+  font-size: 14px;
+  font-weight: 500;
+  border: 1.5px solid var(--chic-navy);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.chic-btn--solid { background: var(--chic-navy); color: #fff; }
+.chic-btn--solid:hover { background: var(--chic-navy-d); color: #fff; text-decoration: none; }
+.chic-btn--ghost { background: transparent; color: var(--chic-navy); }
+.chic-btn--ghost:hover { background: var(--chic-navy); color: #fff; text-decoration: none; }
+.chic-btn--green { background: var(--chic-green); border-color: var(--chic-green); color: #fff; }
+.chic-btn--green:hover { background: var(--chic-green-d); border-color: var(--chic-green-d); color: #fff; }
+
+/* stars */
+.chic-stars {
+  color: var(--chic-star);
+  font-size: 12px;
+  letter-spacing: 1px;
+  line-height: 1.4;
+}
+
+.chic-stars small {
+  color: var(--chic-muted);
+  letter-spacing: 0;
+  margin-left: 4px;
+  font-size: 11px;
+}
+
+/* icon circle */
+.chic-ic {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--chic-mint);
+  display: grid;
+  place-items: center;
+  flex: none;
+}
+
+.chic-ic svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--chic-green);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* generic section spacing */
+.chic-section { padding: 70px 0; }
+
+@media screen and (max-width: 749px) {
+  .chic-section { padding: 50px 0; }
+}
+
+/* toast */
+.chic-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translate(-50%, 120px);
+  background: var(--chic-ink);
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 13px;
+  transition: transform 0.3s ease, visibility 0.3s ease;
+  visibility: hidden;
+  z-index: 70;
+}
+
+.chic-toast.show {
+  transform: translate(-50%, 0);
+  visibility: visible;
+}
+
+/* navy footer (matches CHIC mockup) */
+.shopify-section-group-footer-group {
+  --color-foreground: #ffffff;
+  --color-foreground-rgb: 255 255 255;
+  --color-foreground-muted: rgb(255 255 255 / 0.85);
+  --color-foreground-subdued: rgb(255 255 255 / 0.7);
+  --color-border: rgb(255 255 255 / 0.25);
+  --color-border-rgb: 255 255 255;
+  color: #ffffff;
+}
+
+.shopify-section-group-footer-group a { color: #ffffff; }
+
+.shopify-section-group-footer-group input {
+  background: #ffffff;
+  color: #1d1a22;
+}
+
+.shopify-section-group-footer-group button[type='submit'] {
+  color: #ffffff;
+}
+
+/* footer logo readability on navy */
+.shopify-section-group-footer-group .logo-block__image {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 8px;
+}

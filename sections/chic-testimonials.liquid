@@ -1,0 +1,173 @@
+{% liquid
+  assign s = section.settings
+%}
+
+<div class="chic-section chic-reviews-outer">
+  <div class="chic-wrap">
+    <div class="chic-reviews">
+      <div class="chic-sec-head">
+        <div>
+          {% if s.eyebrow != blank %}<p class="chic-eyebrow">{{ s.eyebrow | escape }}</p>{% endif %}
+          <h2>{{ s.heading | escape }}</h2>
+        </div>
+      </div>
+      <div class="chic-rgrid">
+        {% for block in section.blocks %}
+          <div class="chic-rcard" {{ block.shopify_attributes }}>
+            <div class="chic-stars chic-rcard__stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="chic-rcard__text">{{ block.settings.quote | escape }}</p>
+            <div class="chic-rcard__who">
+              <span class="chic-rcard__avatar" aria-hidden="true">{{ block.settings.name | slice: 0 | upcase }}</span>
+              <div>
+                <b>{{ block.settings.name | escape }}</b>
+                <small>{% render 'chic-icon', icon: 'check' %} Verified Buyer</small>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .chic-reviews {
+    background: var(--chic-mint-xl);
+    border: 1px solid var(--chic-line);
+    border-radius: 22px;
+    padding: clamp(28px, 4vw, 48px);
+  }
+
+  .chic-rgrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .chic-rcard {
+    background: var(--chic-card);
+    border: 1px solid var(--chic-line);
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.25s ease;
+  }
+
+  .chic-rcard:hover { border-color: #c9d8b8; }
+
+  .chic-rcard__stars {
+    font-size: 14px;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+
+  .chic-rcard__text {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--chic-ink);
+    margin: 0 0 20px;
+    flex: 1;
+  }
+
+  .chic-rcard__who {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-top: 1px solid var(--chic-line);
+    padding-top: 16px;
+  }
+
+  .chic-rcard__avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--chic-mint);
+    color: var(--chic-green-d);
+    display: grid;
+    place-items: center;
+    font-family: var(--chic-serif);
+    font-size: 18px;
+    flex: none;
+  }
+
+  .chic-rcard__who b {
+    display: block;
+    font-size: 14px;
+    color: var(--chic-ink);
+  }
+
+  .chic-rcard__who small {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    color: var(--chic-muted);
+  }
+
+  .chic-rcard__who small svg {
+    width: 13px;
+    height: 13px;
+    stroke: var(--chic-green);
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  @media screen and (max-width: 860px) {
+    .chic-rgrid {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 14px;
+      margin: 0 -16px;
+      padding: 4px 16px 8px;
+      scrollbar-width: none;
+    }
+
+    .chic-rgrid::-webkit-scrollbar { display: none; }
+
+    .chic-rcard {
+      flex: 0 0 84%;
+      scroll-snap-align: center;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Chic testimonials",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The Botanical Circle" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "What Our Customers Say" }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "Natural, luxurious, and deeply hydrating. The Body Yogurt has become part of my everyday routine."
+        },
+        { "type": "text", "id": "name", "label": "Name", "default": "Verena Yadav" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Chic testimonials",
+      "category": "Storytelling",
+      "blocks": [
+        { "type": "review", "settings": { "quote": "Natural, luxurious, and deeply hydrating. The Body Yogurt has become part of my everyday routine.", "name": "Verena Yadav" } },
+        { "type": "review", "settings": { "quote": "The Probiotic Facewash cleared my skin without drying it out. Gentle, honest products that actually work.", "name": "Sakshi Agarwal" } },
+        { "type": "review", "settings": { "quote": "Herbal Hair Oil with the comb is a ritual I look forward to every week. Less hair fall, more shine.", "name": "Siya Goyal" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

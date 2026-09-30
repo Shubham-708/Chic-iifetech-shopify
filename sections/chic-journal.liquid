@@ -1,0 +1,126 @@
+{% liquid
+  assign s = section.settings
+  assign blog = s.blog | default: blogs['news']
+%}
+
+<div class="chic-section">
+  <div class="chic-wrap">
+    <div class="chic-sec-head">
+      <div>
+        {% if s.eyebrow != blank %}<p class="chic-eyebrow">{{ s.eyebrow | escape }}</p>{% endif %}
+        <h2>{{ s.heading | escape }}</h2>
+      </div>
+      {% if blog != blank and s.link_label != blank %}
+        <a class="chic-more" href="{{ blog.url }}">{{ s.link_label | escape }}</a>
+      {% endif %}
+    </div>
+
+    <div class="chic-blogs">
+      {% if blog != blank and blog.articles_count > 0 %}
+        {% for article in blog.articles limit: 3 %}
+          <a class="chic-blog" href="{{ article.url }}">
+            {% if article.image %}
+              {{ article.image | image_url: width: 480 | image_tag: loading: 'lazy', alt: article.title }}
+            {% else %}
+              {{ 'lifestyle-1' | placeholder_svg_tag: 'chic-blog__placeholder' }}
+            {% endif %}
+            <div>
+              <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%B %d, %Y' }}</time>
+              <h4>{{ article.title | escape }}</h4>
+              <span class="chic-blog__rm">Read More</span>
+            </div>
+          </a>
+        {% endfor %}
+      {% else %}
+        {% assign placeholders = 'Why Nature Is Not a Luxury, But a Necessity|The Champi Ritual: Herbal Hair Oiling, Done Right|Morning vs. Night: Building Your Skin Ritual' | split: '|' %}
+        {% for title in placeholders %}
+          <div class="chic-blog">
+            <img src="{{ 'chic-insta-' | append: forloop.index | append: '.jpg' | asset_url }}" alt="" loading="lazy" width="480" height="480">
+            <div>
+              <time>{{ 'now' | date: '%B %d, %Y' }}</time>
+              <h4>{{ title }}</h4>
+              <span class="chic-blog__rm">Read More</span>
+            </div>
+          </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .chic-blogs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+
+  .chic-blog {
+    display: grid;
+    grid-template-columns: 48% 1fr;
+    background: var(--chic-card);
+    border: 1px solid var(--chic-line);
+    border-radius: 12px;
+    overflow: hidden;
+    text-decoration: none;
+  }
+
+  .chic-blog:hover { text-decoration: none; }
+  .chic-blog:hover h4 { color: var(--chic-navy); }
+
+  .chic-blog img,
+  .chic-blog__placeholder {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    min-height: 150px;
+  }
+
+  .chic-blog > div { padding: 16px; }
+
+  .chic-blog time {
+    font-size: 11px;
+    color: var(--chic-muted);
+  }
+
+  .chic-blog h4 {
+    font-family: var(--chic-serif);
+    font-weight: 400;
+    font-size: 14.5px;
+    line-height: 1.45;
+    margin: 6px 0 10px;
+    color: var(--chic-ink);
+  }
+
+  .chic-blog__rm {
+    font-size: 12px;
+    color: var(--chic-navy);
+    font-weight: 500;
+  }
+
+  @media screen and (max-width: 1100px) {
+    .chic-blogs { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media screen and (max-width: 560px) {
+    .chic-blogs { grid-template-columns: 1fr; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Chic journal",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "From the Journal" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Tips, Rituals & Insights" },
+    { "type": "blog", "id": "blog", "label": "Blog" },
+    { "type": "text", "id": "link_label", "label": "Link label", "default": "View All Posts" }
+  ],
+  "presets": [
+    {
+      "name": "Chic journal",
+      "category": "Blog"
+    }
+  ]
+}
+{% endschema %}

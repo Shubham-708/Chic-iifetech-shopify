@@ -1,0 +1,207 @@
+{% liquid
+  assign s = section.settings
+  if s.image != blank
+    assign image_url = s.image | image_url: width: 1200
+  else
+    assign image_url = 'chic-insta-4.jpg' | asset_url
+  endif
+%}
+
+<div class="chic-about">
+  <div class="chic-about__wrap">
+    <div class="chic-about__img">
+      <img src="{{ image_url }}" alt="{{ s.heading | escape }}" loading="lazy" width="1200" height="900">
+      {% if s.badge_title != blank %}
+        <div class="chic-about__badge">
+          <b>{{ s.badge_title | escape }}</b>
+          {% if s.badge_text != blank %}<span>{{ s.badge_text | escape }}</span>{% endif %}
+        </div>
+      {% endif %}
+    </div>
+    <div class="chic-about__txt">
+      {% if s.eyebrow != blank %}<p class="chic-eyebrow">{{ s.eyebrow | escape }}</p>{% endif %}
+      <h2>{{ s.heading | escape }}</h2>
+      {% if s.text != blank %}<p class="chic-about__lead">{{ s.text }}</p>{% endif %}
+      <div class="chic-about__stats">
+        {% for block in section.blocks %}
+          <div class="chic-about__stat" {{ block.shopify_attributes }}>
+            <div class="chic-about__stat-n">
+              {% render 'chic-icon', icon: block.settings.icon %}
+              {{ block.settings.value | escape }}
+            </div>
+            <small>{{ block.settings.label | escape }}</small>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .chic-about {
+    background: linear-gradient(90deg, var(--chic-mint), var(--chic-mint-xl));
+    overflow: hidden;
+  }
+
+  .chic-about__wrap {
+    max-width: 1240px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 40px;
+    padding-right: 24px;
+  }
+
+  .chic-about__img {
+    position: relative;
+  }
+
+  .chic-about__img img {
+    width: 100%;
+    height: 440px;
+    object-fit: cover;
+    object-position: center 30%;
+  }
+
+  .chic-about__badge {
+    position: absolute;
+    right: 22px;
+    bottom: 22px;
+    background: rgb(255 255 255 / 0.92);
+    border-radius: 12px;
+    padding: 12px 18px;
+    box-shadow: 0 10px 30px rgb(13 74 112 / 0.15);
+  }
+
+  .chic-about__badge b {
+    display: block;
+    font-family: var(--chic-serif);
+    font-weight: 400;
+    font-size: 20px;
+    color: var(--chic-ink);
+  }
+
+  .chic-about__badge span {
+    font-size: 12px;
+    color: var(--chic-muted);
+  }
+
+  .chic-about__txt h2 {
+    font-family: var(--chic-serif);
+    font-weight: 400;
+    font-size: clamp(26px, 2.8vw, 34px);
+    line-height: 1.25;
+    margin: 0 0 16px;
+    color: var(--chic-ink);
+  }
+
+  .chic-about__lead {
+    color: var(--chic-muted);
+    max-width: 470px;
+    margin: 0 0 30px;
+    line-height: 1.7;
+  }
+
+  .chic-about__stats {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    gap: 10px 26px;
+    justify-content: start;
+  }
+
+  .chic-about__stat-n {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--chic-serif);
+    font-size: 22px;
+    color: var(--chic-navy);
+  }
+
+  .chic-about__stat-n svg {
+    width: 22px;
+    height: 22px;
+    stroke: var(--chic-green);
+    fill: none;
+    stroke-width: 1.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .chic-about__stat small {
+    font-size: 12px;
+    color: var(--chic-muted);
+  }
+
+  @media screen and (max-width: 1100px) {
+    .chic-about__stats { grid-template-columns: repeat(2, auto); }
+  }
+
+  @media screen and (max-width: 860px) {
+    .chic-about__wrap {
+      grid-template-columns: 1fr;
+      gap: 0;
+      padding: 0 0 40px;
+    }
+
+    .chic-about__txt { padding: 28px 24px 0; }
+    .chic-about__img img { height: 300px; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Chic about",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image", "info": "Leave empty to use the bundled brand image" },
+    { "type": "text", "id": "badge_title", "label": "Image badge title", "default": "Hydration" },
+    { "type": "text", "id": "badge_text", "label": "Image badge text", "default": "That Lasts. Softness That Shows." },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "About CHIC" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Beauty That's Botanical. Confidence That's Real." },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "At CHIC, we believe nature is not a luxury — it is a necessity. Every formulation begins with carefully chosen botanicals, inspired by centuries of Ayurvedic wisdom and refined through modern skincare research."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "leaf", "label": "Leaf" },
+            { "value": "drop", "label": "Drop" },
+            { "value": "users", "label": "People" },
+            { "value": "clock", "label": "Clock" },
+            { "value": "sparkle", "label": "Sparkle" },
+            { "value": "shield", "label": "Shield" }
+          ],
+          "default": "leaf"
+        },
+        { "type": "text", "id": "value", "label": "Value", "default": "100%" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Botanical Formulas" }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Chic about",
+      "category": "Storytelling",
+      "blocks": [
+        { "type": "stat", "settings": { "icon": "leaf", "value": "100%", "label": "Botanical Formulas" } },
+        { "type": "stat", "settings": { "icon": "drop", "value": "29+", "label": "Products & Rituals" } },
+        { "type": "stat", "settings": { "icon": "users", "value": "10K+", "label": "Happy Customers" } },
+        { "type": "stat", "settings": { "icon": "clock", "value": "24/7", "label": "Customer Support" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
