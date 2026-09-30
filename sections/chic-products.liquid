@@ -1,6 +1,19 @@
 {% liquid
   assign s = section.settings
-  assign col = s.collection | default: collections.all
+  assign col = s.collection
+
+  # Fallbacks: 'all' collection, then the first collection that has products
+  if col == blank or col.products.size == 0
+    assign col = collections['all']
+  endif
+  if col == blank or col.products.size == 0
+    for c in collections
+      if c.products.size > 0
+        assign col = c
+        break
+      endif
+    endfor
+  endif
 %}
 
 <div class="chic-section chic-products" id="chic-products-{{ section.id }}">

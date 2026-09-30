@@ -189,23 +189,35 @@
   padding: 8px;
 }
 
-/* Horizon default product cards -> match chic homepage card style */
+/* Horizon default product cards -> match chic homepage card style.
+   Every card gets a uniform 1:1 white tile; images are contained (never
+   awkwardly cropped), which pairs perfectly with the padded square imports. */
 .product-card {
-  background: var(--chic-card);
+  background: #ffffff;
   border: 1px solid var(--chic-line);
   border-radius: 12px;
   overflow: hidden;
+  height: 100%;
 }
 
 .product-card .card-gallery {
+  --gallery-aspect-ratio: 1 !important;
   aspect-ratio: 1 / 1 !important;
-  background: var(--chic-mint-xl);
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.product-card .card-gallery .product-media-container {
+  --product-media-fit: contain;
+  width: 100% !important;
+  height: 100% !important;
+  aspect-ratio: auto !important;
 }
 
 .product-card .card-gallery img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   transition: transform 0.4s ease;
 }
 
