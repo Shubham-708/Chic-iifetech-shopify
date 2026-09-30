@@ -90,7 +90,8 @@
         "eyebrow": "Our Story",
         "heading": "Beauty, Inspired by Nature",
         "text": "At The Botanical Beauty, we believe nature gives us the purest form of care. Our products are crafted with the finest botanical ingredients, without harmful chemicals, so you can feel good about what you put on your skin and hair.",
-        "btn_label": "More About Us"
+        "btn_label": "More About Us",
+        "btn_link": "/pages/about-us"
       }
     },
     "chic_products": {
