@@ -1,9 +1,20 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "chic_hero": {
       "type": "chic-hero",
       "name": "Chic hero",
       "settings": {
+        "image": "shopify://shop_images/Screenshot_2026-07-10_155124.png",
+        "focal_x": 72,
         "eyebrow": "Botanical Skin Rituals",
         "heading": "Glow Naturally.",
         "heading_accent": "Shine Confidently.",
@@ -16,57 +27,234 @@
     },
     "chic_features": {
       "type": "chic-features",
-      "name": "Chic features strip",
       "blocks": {
-        "feat_botanical": { "type": "feature", "settings": { "icon": "leaf", "title": "100% Botanical", "text": "Pure, plant-based ingredients" } },
-        "feat_cruelty": { "type": "feature", "settings": { "icon": "rabbit", "title": "Cruelty Free", "text": "Never tested on animals" } },
-        "feat_ayurveda": { "type": "feature", "settings": { "icon": "lotus", "title": "Ayurveda Wisdom", "text": "Ancient recipes, modern care" } },
-        "feat_india": { "type": "feature", "settings": { "icon": "flag", "title": "Made in India", "text": "Handcrafted in Bhopal, MP" } }
+        "feat_botanical": {
+          "type": "feature",
+          "settings": {
+            "icon": "leaf",
+            "title": "100% Botanical",
+            "text": "Pure, plant-based ingredients"
+          }
+        },
+        "feat_cruelty": {
+          "type": "feature",
+          "settings": {
+            "icon": "rabbit",
+            "title": "Cruelty Free",
+            "text": "Never tested on animals"
+          }
+        },
+        "feat_ayurveda": {
+          "type": "feature",
+          "settings": {
+            "icon": "lotus",
+            "title": "Ayurveda Wisdom",
+            "text": "Ancient recipes, modern care"
+          }
+        },
+        "feat_india": {
+          "type": "feature",
+          "settings": {
+            "icon": "flag",
+            "title": "Made in India",
+            "text": "Handcrafted in Bhopal, MP"
+          }
+        }
       },
-      "block_order": ["feat_botanical", "feat_cruelty", "feat_ayurveda", "feat_india"],
+      "block_order": [
+        "feat_botanical",
+        "feat_cruelty",
+        "feat_ayurveda",
+        "feat_india"
+      ],
+      "name": "Chic features strip",
       "settings": {}
     },
     "chic_categories": {
       "type": "chic-categories",
-      "name": "Chic categories",
       "blocks": {
-        "cat_skin": { "type": "category", "settings": { "icon": "drop", "title": "Skincare", "text": "Nourish & Glow", "link": "shopify://collections/skin-care", "bg_color": "#e7f0d9" } },
-        "cat_hair": { "type": "category", "settings": { "icon": "bottle", "title": "Haircare", "text": "Strength & Shine", "link": "shopify://collections/hair-care", "bg_color": "#eef5c8" } },
-        "cat_body": { "type": "category", "settings": { "icon": "soap", "title": "Bodycare", "text": "Pamper & Protect", "link": "shopify://collections/body-care", "bg_color": "#e3ece2" } },
-        "cat_mom": { "type": "category", "settings": { "icon": "heart", "title": "Mother's Choice", "text": "Care For Her", "link": "shopify://collections/all", "bg_color": "#e3eef3" } },
-        "cat_gift": { "type": "category", "settings": { "icon": "gift", "title": "Gift Sets", "text": "Curated With Love", "link": "shopify://collections/gift-sets", "bg_color": "#fbf6e2" } }
+        "cat_skin": {
+          "type": "category",
+          "settings": {
+            "icon": "drop",
+            "title": "Skincare",
+            "text": "Nourish & Glow",
+            "link": "shopify://collections/skin-care",
+            "bg_color": "#e7f0d9"
+          }
+        },
+        "cat_hair": {
+          "type": "category",
+          "settings": {
+            "icon": "bottle",
+            "title": "Haircare",
+            "text": "Strength & Shine",
+            "link": "shopify://collections/hair-care",
+            "bg_color": "#eef5c8"
+          }
+        },
+        "cat_body": {
+          "type": "category",
+          "settings": {
+            "icon": "soap",
+            "title": "Bodycare",
+            "text": "Pamper & Protect",
+            "link": "shopify://collections/body-care",
+            "bg_color": "#e3ece2"
+          }
+        },
+        "cat_mom": {
+          "type": "category",
+          "settings": {
+            "icon": "heart",
+            "title": "Mother's Choice",
+            "text": "Care For Her",
+            "link": "shopify://collections/all",
+            "bg_color": "#e3eef3"
+          }
+        },
+        "cat_gift": {
+          "type": "category",
+          "settings": {
+            "icon": "gift",
+            "title": "Gift Sets",
+            "text": "Curated With Love",
+            "link": "shopify://collections/gift-sets",
+            "bg_color": "#fbf6e2"
+          }
+        }
       },
-      "block_order": ["cat_skin", "cat_hair", "cat_body", "cat_mom", "cat_gift"],
+      "block_order": [
+        "cat_skin",
+        "cat_hair",
+        "cat_body",
+        "cat_mom",
+        "cat_gift"
+      ],
+      "name": "Chic categories",
       "settings": {
         "eyebrow": "Shop by category",
         "heading": "Curated For Your Beauty",
-        "link_label": "View All Categories"
+        "link_label": "View All Categories",
+        "link": ""
       }
     },
     "chic_promos": {
       "type": "chic-promos",
-      "name": "Chic promo banners",
       "blocks": {
-        "promo_hair": { "type": "promo", "settings": { "style": "light", "tag": "Flat 25% Discount", "heading": "Special Hair Care", "heading_accent": "Deals", "text": "Nourish, strengthen & shine with our expert hair care range.", "btn_label": "Shop Now", "btn_link": "shopify://collections/hair-care", "fallback_asset": "chic-promo-hair.png" } },
-        "promo_skin": { "type": "promo", "settings": { "style": "dark", "tag": "Flat 20% Discount", "heading": "Save Big on", "heading_accent": "Skincare", "text": "Pamper your skin with our premium skincare essentials.", "btn_label": "Shop Now", "btn_link": "shopify://collections/skin-care", "fallback_asset": "chic-promo-skin.png" } },
-        "trust_natural": { "type": "trust", "settings": { "icon": "leaf", "title": "Natural Ingredients", "text": "Made with care" } },
-        "trust_derm": { "type": "trust", "settings": { "icon": "shield", "title": "Dermatologist Tested", "text": "Safe for all skin types" } },
-        "trust_cruelty": { "type": "trust", "settings": { "icon": "rabbit", "title": "Cruelty Free", "text": "Not tested on animals" } },
-        "trust_support": { "type": "trust", "settings": { "icon": "users", "title": "Customer Support", "text": "We're here for you" } }
+        "promo_hair": {
+          "type": "promo",
+          "settings": {
+            "style": "light",
+            "tag": "Flat 25% Discount",
+            "heading": "Special Hair Care",
+            "heading_accent": "Deals",
+            "text": "Nourish, strengthen & shine with our expert hair care range.",
+            "btn_label": "Shop Now",
+            "btn_link": "shopify://collections/hair-care",
+            "fallback_asset": "chic-promo-hair.png"
+          }
+        },
+        "promo_skin": {
+          "type": "promo",
+          "settings": {
+            "style": "dark",
+            "tag": "Flat 20% Discount",
+            "heading": "Save Big on",
+            "heading_accent": "Skincare",
+            "text": "Pamper your skin with our premium skincare essentials.",
+            "btn_label": "Shop Now",
+            "btn_link": "shopify://collections/skin-care",
+            "fallback_asset": "chic-promo-skin.png"
+          }
+        },
+        "trust_natural": {
+          "type": "trust",
+          "settings": {
+            "icon": "leaf",
+            "title": "Natural Ingredients",
+            "text": "Made with care"
+          }
+        },
+        "trust_derm": {
+          "type": "trust",
+          "settings": {
+            "icon": "shield",
+            "title": "Dermatologist Tested",
+            "text": "Safe for all skin types"
+          }
+        },
+        "trust_cruelty": {
+          "type": "trust",
+          "settings": {
+            "icon": "rabbit",
+            "title": "Cruelty Free",
+            "text": "Not tested on animals"
+          }
+        },
+        "trust_support": {
+          "type": "trust",
+          "settings": {
+            "icon": "users",
+            "title": "Customer Support",
+            "text": "We're here for you"
+          }
+        }
       },
-      "block_order": ["promo_hair", "promo_skin", "trust_natural", "trust_derm", "trust_cruelty", "trust_support"],
+      "block_order": [
+        "promo_hair",
+        "promo_skin",
+        "trust_natural",
+        "trust_derm",
+        "trust_cruelty",
+        "trust_support"
+      ],
+      "name": "Chic promo banners",
       "settings": {}
     },
     "chic_about": {
       "type": "chic-about",
-      "name": "Chic about",
       "blocks": {
-        "stat_botanical": { "type": "stat", "settings": { "icon": "leaf", "value": "100%", "label": "Botanical Formulas" } },
-        "stat_products": { "type": "stat", "settings": { "icon": "drop", "value": "29+", "label": "Products & Rituals" } },
-        "stat_customers": { "type": "stat", "settings": { "icon": "users", "value": "10K+", "label": "Happy Customers" } },
-        "stat_support": { "type": "stat", "settings": { "icon": "clock", "value": "24/7", "label": "Customer Support" } }
+        "stat_botanical": {
+          "type": "stat",
+          "settings": {
+            "icon": "leaf",
+            "value": "100%",
+            "label": "Botanical Formulas"
+          }
+        },
+        "stat_products": {
+          "type": "stat",
+          "settings": {
+            "icon": "drop",
+            "value": "29+",
+            "label": "Products & Rituals"
+          }
+        },
+        "stat_customers": {
+          "type": "stat",
+          "settings": {
+            "icon": "users",
+            "value": "10K+",
+            "label": "Happy Customers"
+          }
+        },
+        "stat_support": {
+          "type": "stat",
+          "settings": {
+            "icon": "clock",
+            "value": "24/7",
+            "label": "Customer Support"
+          }
+        }
       },
-      "block_order": ["stat_botanical", "stat_products", "stat_customers", "stat_support"],
+      "block_order": [
+        "stat_botanical",
+        "stat_products",
+        "stat_customers",
+        "stat_support"
+      ],
+      "name": "Chic about",
       "settings": {
         "badge_title": "Hydration",
         "badge_text": "That Lasts. Softness That Shows.",
@@ -77,15 +265,85 @@
         "founder_role": "Founded in Bhopal, Madhya Pradesh"
       }
     },
+    "chic_products": {
+      "type": "chic-products",
+      "blocks": {
+        "tab_skin": {
+          "type": "tab",
+          "settings": {
+            "label": "Skincare",
+            "match": "skin care"
+          }
+        },
+        "tab_hair": {
+          "type": "tab",
+          "settings": {
+            "label": "Haircare",
+            "match": "hair"
+          }
+        },
+        "tab_body": {
+          "type": "tab",
+          "settings": {
+            "label": "Bodycare",
+            "match": "body"
+          }
+        },
+        "tab_gift": {
+          "type": "tab",
+          "settings": {
+            "label": "Gift Sets & Combos",
+            "match": "gift"
+          }
+        }
+      },
+      "block_order": [
+        "tab_skin",
+        "tab_hair",
+        "tab_body",
+        "tab_gift"
+      ],
+      "name": "Chic products",
+      "settings": {
+        "eyebrow": "Our bestsellers",
+        "heading": "Loved By Thousands",
+        "collection": "",
+        "max_products": 10,
+        "link_label": "View All Products",
+        "link": ""
+      }
+    },
     "chic_story": {
       "type": "chic-story",
-      "name": "Chic our story",
       "blocks": {
-        "story_natural": { "type": "feature", "settings": { "icon": "leaf", "title": "Natural Ingredients" } },
-        "story_healthy": { "type": "feature", "settings": { "icon": "heart", "title": "Healthy Skin & Hair" } },
-        "story_green": { "type": "feature", "settings": { "icon": "lotus", "title": "A Greener Tomorrow" } }
+        "story_natural": {
+          "type": "feature",
+          "settings": {
+            "icon": "leaf",
+            "title": "Natural Ingredients"
+          }
+        },
+        "story_healthy": {
+          "type": "feature",
+          "settings": {
+            "icon": "heart",
+            "title": "Healthy Skin & Hair"
+          }
+        },
+        "story_green": {
+          "type": "feature",
+          "settings": {
+            "icon": "lotus",
+            "title": "A Greener Tomorrow"
+          }
+        }
       },
-      "block_order": ["story_natural", "story_healthy", "story_green"],
+      "block_order": [
+        "story_natural",
+        "story_healthy",
+        "story_green"
+      ],
+      "name": "Chic our story",
       "settings": {
         "eyebrow": "Our Story",
         "heading": "Beauty, Inspired by Nature",
@@ -94,32 +352,37 @@
         "btn_link": "/pages/about-us"
       }
     },
-    "chic_products": {
-      "type": "chic-products",
-      "name": "Chic products",
-      "blocks": {
-        "tab_skin": { "type": "tab", "settings": { "label": "Skincare", "match": "skin care" } },
-        "tab_hair": { "type": "tab", "settings": { "label": "Haircare", "match": "hair" } },
-        "tab_body": { "type": "tab", "settings": { "label": "Bodycare", "match": "body" } },
-        "tab_gift": { "type": "tab", "settings": { "label": "Gift Sets & Combos", "match": "gift" } }
-      },
-      "block_order": ["tab_skin", "tab_hair", "tab_body", "tab_gift"],
-      "settings": {
-        "eyebrow": "Our bestsellers",
-        "heading": "Loved By Thousands",
-        "max_products": 10,
-        "link_label": "View All Products"
-      }
-    },
     "chic_testimonials": {
       "type": "chic-testimonials",
-      "name": "Chic testimonials",
       "blocks": {
-        "rev_1": { "type": "review", "settings": { "quote": "Natural, luxurious, and deeply hydrating. The Body Yogurt has become part of my everyday routine.", "name": "Verena Yadav" } },
-        "rev_2": { "type": "review", "settings": { "quote": "The Probiotic Facewash cleared my skin without drying it out. Gentle, honest products that actually work.", "name": "Sakshi Agarwal" } },
-        "rev_3": { "type": "review", "settings": { "quote": "Herbal Hair Oil with the comb is a ritual I look forward to every week. Less hair fall, more shine.", "name": "Siya Goyal" } }
+        "rev_1": {
+          "type": "review",
+          "settings": {
+            "quote": "Natural, luxurious, and deeply hydrating. The Body Yogurt has become part of my everyday routine.",
+            "name": "Verena Yadav"
+          }
+        },
+        "rev_2": {
+          "type": "review",
+          "settings": {
+            "quote": "The Probiotic Facewash cleared my skin without drying it out. Gentle, honest products that actually work.",
+            "name": "Sakshi Agarwal"
+          }
+        },
+        "rev_3": {
+          "type": "review",
+          "settings": {
+            "quote": "Herbal Hair Oil with the comb is a ritual I look forward to every week. Less hair fall, more shine.",
+            "name": "Siya Goyal"
+          }
+        }
       },
-      "block_order": ["rev_1", "rev_2", "rev_3"],
+      "block_order": [
+        "rev_1",
+        "rev_2",
+        "rev_3"
+      ],
+      "name": "Chic testimonials",
       "settings": {
         "eyebrow": "The Botanical Circle",
         "heading": "What Our Customers Say"
@@ -131,6 +394,7 @@
       "settings": {
         "eyebrow": "From the Journal",
         "heading": "Tips, Rituals & Insights",
+        "blog": "",
         "link_label": "View All Posts"
       }
     }
