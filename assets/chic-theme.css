@@ -344,3 +344,19 @@ html {
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
 }
+
+/* product page: keep the main media at a comfortable size */
+.media-gallery__grid .product-media img,
+.media-gallery__grid .product-media video,
+.media-gallery__grid .product-media iframe {
+  max-height: 72vh;
+  object-fit: contain;
+}
+
+@media screen and (max-width: 749px) {
+  .media-gallery__grid .product-media img,
+  .media-gallery__grid .product-media video,
+  .media-gallery__grid .product-media iframe {
+    max-height: 56vh;
+  }
+}
