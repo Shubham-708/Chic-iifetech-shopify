@@ -8,9 +8,10 @@
 %}
 
 <div class="chic-story">
-  <img class="chic-story__bg" src="{{ bg_url }}" alt="" loading="lazy" width="1600" height="870" aria-hidden="true">
+  <div class="chic-story__frame">
+    <img class="chic-story__bg" src="{{ bg_url }}" alt="" loading="lazy" width="1600" height="870" aria-hidden="true">
 
-  <div class="chic-story__txt">
+    <div class="chic-story__txt">
     {% if s.eyebrow != blank %}<p class="chic-story__kick">{{ s.eyebrow | escape }}</p>{% endif %}
     <h2>{{ s.heading | escape }}</h2>
     {% if s.text != blank %}<p class="chic-story__p">{{ s.text }}</p>{% endif %}
@@ -32,14 +33,24 @@
         {% render 'chic-icon', icon: 'arrow' %}
       </a>
     {% endif %}
+    </div>
   </div>
 </div>
 
 {% stylesheet %}
   .chic-story {
+    background: var(--chic-card, #fff);
+    padding: clamp(20px, 3vw, 48px) 24px;
+  }
+
+  .chic-story__frame {
     position: relative;
-    background: #eff5ea;
+    max-width: 1240px;
+    margin: 0 auto;
+    border-radius: 22px;
     overflow: hidden;
+    background: #eff5ea;
+    container-type: inline-size;
   }
 
   .chic-story__bg {
@@ -57,8 +68,8 @@
   }
 
   .chic-story__kick {
-    margin: 0 0 0.6vw;
-    font-size: clamp(11px, 0.95vw, 16px);
+    margin: 0 0 0.6cqw;
+    font-size: clamp(10px, 1.05cqw, 14px);
     letter-spacing: 0.2em;
     text-transform: uppercase;
     font-weight: 500;
@@ -68,24 +79,24 @@
   .chic-story__txt h2 {
     font-family: var(--chic-serif);
     font-weight: 400;
-    font-size: clamp(24px, 2.65vw, 52px);
+    font-size: clamp(20px, 2.9cqw, 38px);
     line-height: 1.12;
-    margin: 0 0 1.2vw;
+    margin: 0 0 1.2cqw;
     color: #0f3d24;
     white-space: nowrap;
   }
 
   .chic-story__p {
-    font-size: clamp(13px, 1.12vw, 19px);
+    font-size: clamp(11px, 1.25cqw, 16px);
     line-height: 1.6;
-    margin: 0 0 2vw;
+    margin: 0 0 2cqw;
     color: #1d3a28;
     max-width: 42em;
   }
 
   .chic-story__feats {
     list-style: none;
-    margin: 0 0 2.2vw;
+    margin: 0 0 2.2cqw;
     padding: 0;
     display: flex;
     align-items: center;
@@ -94,9 +105,9 @@
   .chic-story__feats li {
     display: flex;
     align-items: center;
-    gap: 0.9vw;
-    padding: 0 1.6vw;
-    font-size: clamp(12px, 1.05vw, 18px);
+    gap: 0.9cqw;
+    padding: 0 1.6cqw;
+    font-size: clamp(10px, 1.15cqw, 15px);
     line-height: 1.35;
     color: #1d3a28;
     max-width: 200px;
@@ -106,7 +117,7 @@
   .chic-story__feats li + li { border-left: 1px solid #c8d6c0; }
 
   .chic-story__feats svg {
-    width: clamp(28px, 2.8vw, 50px);
+    width: clamp(24px, 3cqw, 42px);
     height: auto;
     fill: none;
     stroke: #0f3d24;
@@ -123,8 +134,8 @@
     background: #0f4a2a;
     color: #fff;
     border-radius: 4px;
-    padding: clamp(10px, 0.95vw, 16px) clamp(18px, 2vw, 38px);
-    font-size: clamp(13px, 1.05vw, 18px);
+    padding: clamp(9px, 1cqw, 14px) clamp(16px, 2.2cqw, 32px);
+    font-size: clamp(12px, 1.15cqw, 15px);
     font-weight: 500;
     text-decoration: none;
     transition: background-color 0.2s ease, transform 0.2s ease;
@@ -148,8 +159,13 @@
 
   @media screen and (max-width: 860px) {
     .chic-story {
+      padding: 16px;
+    }
+
+    .chic-story__frame {
       display: flex;
       flex-direction: column-reverse;
+      border-radius: 18px;
     }
 
     .chic-story__bg {
@@ -161,7 +177,7 @@
     .chic-story__txt {
       position: static;
       width: auto;
-      padding: 44px 24px 14px;
+      padding: 36px 22px 10px;
     }
 
     .chic-story__kick { margin-bottom: 10px; }
