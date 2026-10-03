@@ -228,3 +228,49 @@
 .product-card__content {
   padding: 12px 14px 16px;
 }
+
+/* product card hover flip: second image on a 3D flip */
+.chic-prod__pic--flip {
+  perspective: 1200px;
+}
+
+.chic-prod__flip {
+  position: absolute;
+  inset: 0;
+  display: block;
+  transform-style: preserve-3d;
+  transition: transform 0.7s cubic-bezier(0.4, 0.1, 0.2, 1);
+}
+
+.chic-prod:hover .chic-prod__flip,
+.chic-prod__pic--flip:focus-visible .chic-prod__flip {
+  transform: rotateY(180deg);
+}
+
+.chic-prod__face {
+  position: absolute;
+  inset: 0;
+  display: block;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  background: var(--chic-mint-xl);
+}
+
+.chic-prod__face img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.chic-prod__face--back {
+  transform: rotateY(180deg);
+}
+
+/* flipping replaces the zoom effect on these cards */
+.chic-prod:hover .chic-prod__pic--flip img {
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chic-prod__flip { transition: none; }
+}

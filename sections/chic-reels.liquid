@@ -1,0 +1,203 @@
+{% liquid
+  assign s = section.settings
+  assign insta_url = s.instagram_url | default: 'https://www.instagram.com/'
+%}
+
+<div class="chic-section chic-reels" id="chic-reels-{{ section.id }}">
+  <div class="chic-wrap">
+    <div class="chic-sec-head">
+      <div>
+        {% if s.eyebrow != blank %}<p class="chic-eyebrow">{{ s.eyebrow | escape }}</p>{% endif %}
+        <h2>{{ s.heading | escape }}</h2>
+      </div>
+      {% if s.link_label != blank %}
+        <a class="chic-more" href="{{ insta_url }}" target="_blank" rel="noopener">{{ s.link_label | escape }}</a>
+      {% endif %}
+    </div>
+
+    <div class="chic-reels__row">
+      {% for block in section.blocks %}
+        {% liquid
+          assign bs = block.settings
+          assign reel_url = bs.reel_url | strip
+        %}
+        <div class="chic-reels__card" {{ block.shopify_attributes }}>
+          {% if reel_url != blank %}
+            {% liquid
+              assign embed_url = reel_url | split: '?' | first
+              unless embed_url contains 'instagram.com'
+                assign embed_url = blank
+              endunless
+              if embed_url != blank
+                assign last_char = embed_url | slice: -1
+                unless last_char == '/'
+                  assign embed_url = embed_url | append: '/'
+                endunless
+                assign embed_url = embed_url | append: 'embed'
+              endif
+            %}
+            {% if embed_url != blank %}
+              <iframe
+                src="{{ embed_url }}"
+                loading="lazy"
+                allowfullscreen
+                allow="autoplay; encrypted-media"
+                title="Instagram reel"
+                scrolling="no"
+              ></iframe>
+            {% endif %}
+          {% elsif bs.video != blank %}
+            <a href="{{ insta_url }}" target="_blank" rel="noopener" aria-label="Open Instagram">
+              {{ bs.video | video_tag: loop: true, muted: true, controls: false, playsinline: true, preload: 'metadata' }}
+              <span class="chic-reels__play" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M9 6.5v11l9-5.5-9-5.5Z" fill="currentColor"/></svg>
+              </span>
+            </a>
+          {% elsif bs.image != blank or bs.fallback_asset != blank %}
+            <a href="{{ insta_url }}" target="_blank" rel="noopener" aria-label="Open Instagram">
+              {% if bs.image != blank %}
+                {{ bs.image | image_url: width: 540 | image_tag: loading: 'lazy', alt: s.heading }}
+              {% else %}
+                <img src="{{ bs.fallback_asset | asset_url }}" alt="{{ s.heading | escape }}" loading="lazy" width="540" height="960">
+              {% endif %}
+              <span class="chic-reels__play" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M9 6.5v11l9-5.5-9-5.5Z" fill="currentColor"/></svg>
+              </span>
+            </a>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .chic-reels__row {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 4px 4px 14px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--chic-line) transparent;
+  }
+
+  .chic-reels__card {
+    position: relative;
+    flex: 0 0 min(250px, 66vw);
+    aspect-ratio: 9 / 16;
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--chic-mint-xl);
+    border: 1px solid var(--chic-line);
+    scroll-snap-align: start;
+  }
+
+  .chic-reels__card iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+  }
+
+  .chic-reels__card a {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .chic-reels__card video,
+  .chic-reels__card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+  .chic-reels__card a:hover video,
+  .chic-reels__card a:hover img {
+    transform: scale(1.04);
+  }
+
+  .chic-reels__play {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    background: linear-gradient(to top, rgb(0 0 0 / 0.25), transparent 40%);
+    pointer-events: none;
+  }
+
+  .chic-reels__play svg {
+    width: 46px;
+    height: 46px;
+    filter: drop-shadow(0 4px 12px rgb(0 0 0 / 0.4));
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  document.querySelectorAll('.chic-reels').forEach((root) => {
+    if (root.dataset.chicInit) return;
+    root.dataset.chicInit = '1';
+    const videos = root.querySelectorAll('video');
+    if (!videos.length) return;
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const v = entry.target;
+        if (entry.isIntersecting) v.play().catch(() => {});
+        else v.pause();
+      });
+    }, { threshold: 0.4 });
+    videos.forEach((v) => io.observe(v));
+  });
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Chic Instagram reels",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "@chic_the_botanical_beauty" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Fresh From Our Instagram" },
+    { "type": "url", "id": "instagram_url", "label": "Instagram profile link" },
+    { "type": "text", "id": "link_label", "label": "Link label", "default": "Follow Us" }
+  ],
+  "blocks": [
+    {
+      "type": "reel",
+      "name": "Reel",
+      "settings": [
+        {
+          "type": "text",
+          "id": "reel_url",
+          "label": "Instagram reel link",
+          "info": "Paste the reel's link (e.g. https://www.instagram.com/reel/ABC123/) — the live reel embeds automatically"
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Or upload a video",
+          "info": "Used when no reel link is set; autoplays muted"
+        },
+        { "type": "image_picker", "id": "image", "label": "Or an image" },
+        { "type": "text", "id": "fallback_asset", "label": "Fallback asset filename" }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Chic Instagram reels",
+      "category": "Storytelling",
+      "blocks": [
+        { "type": "reel", "settings": { "fallback_asset": "chic-insta-1.jpg" } },
+        { "type": "reel", "settings": { "fallback_asset": "chic-insta-2.jpg" } },
+        { "type": "reel", "settings": { "fallback_asset": "chic-insta-3.jpg" } },
+        { "type": "reel", "settings": { "fallback_asset": "chic-insta-4.jpg" } },
+        { "type": "reel", "settings": { "fallback_asset": "chic-insta-5.jpg" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -423,6 +423,55 @@
         "blog": "",
         "link_label": "View All Posts"
       }
+    },
+    "chic_reels": {
+      "type": "chic-reels",
+      "name": "Chic Instagram reels",
+      "blocks": {
+        "reel_1": {
+          "type": "reel",
+          "settings": {
+            "fallback_asset": "chic-insta-1.jpg"
+          }
+        },
+        "reel_2": {
+          "type": "reel",
+          "settings": {
+            "fallback_asset": "chic-insta-2.jpg"
+          }
+        },
+        "reel_3": {
+          "type": "reel",
+          "settings": {
+            "fallback_asset": "chic-insta-3.jpg"
+          }
+        },
+        "reel_4": {
+          "type": "reel",
+          "settings": {
+            "fallback_asset": "chic-insta-4.jpg"
+          }
+        },
+        "reel_5": {
+          "type": "reel",
+          "settings": {
+            "fallback_asset": "chic-insta-5.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "reel_1",
+        "reel_2",
+        "reel_3",
+        "reel_4",
+        "reel_5"
+      ],
+      "settings": {
+        "eyebrow": "@chic_the_botanical_beauty",
+        "heading": "Fresh From Our Instagram",
+        "instagram_url": "https://www.instagram.com/chic_the_botanical_beauty/",
+        "link_label": "Follow Us"
+      }
     }
   },
   "order": [
@@ -434,6 +483,7 @@
     "chic_products",
     "chic_story",
     "chic_testimonials",
+    "chic_reels",
     "chic_journal"
   ]
 }
