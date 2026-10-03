@@ -1,0 +1,151 @@
+{% liquid
+  assign s = section.settings
+%}
+
+<div
+  class="chic-section chic-recs"
+  data-chic-recs
+  data-url="{{ routes.product_recommendations_url }}?product_id={{ product.id }}&limit={{ s.max_products | default: 8 }}&section_id={{ section.id }}"
+>
+  <div class="chic-recs__inner">
+    {% if recommendations.performed and recommendations.products_count > 0 %}
+      <div class="chic-wrap">
+        <div class="chic-sec-head">
+          <div>
+            {% if s.eyebrow != blank %}<p class="chic-eyebrow">{{ s.eyebrow | escape }}</p>{% endif %}
+            <h2>{{ s.heading | escape }}</h2>
+          </div>
+          {% if s.link_label != blank %}
+            <a class="chic-more" href="{{ routes.all_products_collection_url }}">{{ s.link_label | escape }}</a>
+          {% endif %}
+        </div>
+        <div class="chic-grid chic-grid--recs">
+          {% for rec_product in recommendations.products %}
+            {% render 'chic-product-card', product: rec_product %}
+          {% endfor %}
+        </div>
+      </div>
+      <div class="chic-toast" data-chic-toast aria-live="polite"></div>
+    {% endif %}
+  </div>
+</div>
+
+{% stylesheet %}
+  .chic-grid--recs {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  @media screen and (max-width: 1100px) {
+    .chic-grid--recs { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  @media screen and (max-width: 560px) {
+    .chic-grid--recs { grid-template-columns: 1fr 1fr; }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  document.querySelectorAll('[data-chic-recs]').forEach((root) => {
+    if (root.dataset.chicInit) return;
+    root.dataset.chicInit = '1';
+
+    const bind = () => {
+      const toast = root.querySelector('[data-chic-toast]');
+      let toastTimer;
+      const showToast = (msg) => {
+        if (!toast) return;
+        toast.textContent = msg;
+        toast.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toast.classList.remove('show'), 2400);
+      };
+
+      let wished = [];
+      try { wished = JSON.parse(localStorage.getItem('chic-wishlist') || '[]'); } catch (e) { wished = []; }
+      root.querySelectorAll('[data-chic-wish]').forEach((btn) => {
+        const id = btn.dataset.chicWish;
+        if (wished.includes(id)) btn.classList.add('on');
+        btn.addEventListener('click', (evt) => {
+          evt.preventDefault();
+          evt.stopPropagation();
+          btn.classList.toggle('on');
+          const i = wished.indexOf(id);
+          if (i > -1) wished.splice(i, 1); else wished.push(id);
+          try { localStorage.setItem('chic-wishlist', JSON.stringify(wished)); } catch (e) { /* noop */ }
+        });
+      });
+
+      root.querySelectorAll('[data-chic-add]').forEach((btn) => {
+        btn.addEventListener('click', async () => {
+          btn.disabled = true;
+          try {
+            const res = await fetch((window.Shopify?.routes?.root || '/') + 'cart/add.js', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+              body: JSON.stringify({ id: Number(btn.dataset.chicAdd), quantity: 1 }),
+            });
+            if (!res.ok) throw new Error('add failed');
+            const cart = await (await fetch((window.Shopify?.routes?.root || '/') + 'cart.js')).json();
+            const evt = new Event('shopify:cart:lines-update', { bubbles: true });
+            evt.promise = Promise.resolve({ cart: { totalQuantity: cart.item_count }, detail: { itemCount: cart.item_count } });
+            document.dispatchEvent(evt);
+            btn.classList.add('done');
+            showToast('Added to cart ✓');
+            setTimeout(() => btn.classList.remove('done'), 1600);
+          } catch (e) {
+            showToast('Could not add to cart');
+          } finally {
+            btn.disabled = false;
+          }
+        });
+      });
+    };
+
+    const url = root.dataset.url;
+    if (!url) { bind(); return; }
+
+    fetch(url)
+      .then((res) => res.text())
+      .then((html) => {
+        const doc = new DOMParser().parseFromString(html, 'text/html');
+        const fresh = doc.querySelector('.chic-recs__inner');
+        if (fresh && fresh.children.length) {
+          root.querySelector('.chic-recs__inner').replaceWith(fresh);
+        }
+        bind();
+        if (document.documentElement.classList.contains('chic-anim')) {
+          root.querySelectorAll('.chic-prod').forEach((el) => el.classList.add('chic-reveal', 'chic-in'));
+        }
+      })
+      .catch(() => bind());
+  });
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Chic recommendations",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Picked for you" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Recommended For You" },
+    { "type": "text", "id": "link_label", "label": "Link label", "default": "View All Products" },
+    {
+      "type": "range",
+      "id": "max_products",
+      "label": "Maximum products",
+      "min": 2,
+      "max": 10,
+      "step": 1,
+      "default": 8
+    }
+  ],
+  "enabled_on": {
+    "templates": ["product"]
+  },
+  "presets": [
+    {
+      "name": "Chic recommendations",
+      "category": "Products"
+    }
+  ]
+}
+{% endschema %}
