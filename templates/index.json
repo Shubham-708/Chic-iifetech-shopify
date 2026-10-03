@@ -22,8 +22,34 @@
         "btn1_label": "Shop Now",
         "btn1_link": "shopify://collections/all",
         "btn2_label": "Explore Skincare",
-        "btn2_link": "shopify://collections/all"
-      }
+        "btn2_link": "shopify://collections/all",
+        "slide_duration": 4
+      },
+      "blocks": {
+        "slide_1": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Screenshot_2026-07-10_155338.png"
+          }
+        },
+        "slide_2": {
+          "type": "slide",
+          "settings": {
+            "fallback_asset": "chic-hero.jpg"
+          }
+        },
+        "slide_3": {
+          "type": "slide",
+          "settings": {
+            "fallback_asset": "chic-gift-banner.png"
+          }
+        }
+      },
+      "block_order": [
+        "slide_1",
+        "slide_2",
+        "slide_3"
+      ]
     },
     "chic_features": {
       "type": "chic-features",

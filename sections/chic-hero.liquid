@@ -1,13 +1,22 @@
 {% liquid
   assign s = section.settings
+  assign slides = section.blocks | where: 'type', 'slide'
+
+  # Fallback single image when no slides are added
   if s.image != blank
-    assign image_url = s.image | image_url: width: 1600
+    assign fallback_image_url = s.image | image_url: width: 1600
   else
-    assign image_url = 'chic-hero.jpg' | asset_url
+    assign fallback_image_url = 'chic-hero.jpg' | asset_url
   endif
 %}
 
-<div class="chic-hero" style="--chic-hero-focal: {{ section.settings.focal_x | default: 72 }}%;">
+<div
+  class="chic-hero"
+  id="chic-hero-{{ section.id }}"
+  data-chic-slider
+  data-slide-duration="{{ s.slide_duration | default: 4 | times: 1000 }}"
+  style="--chic-hero-focal: {{ s.focal_x | default: 72 }}%;"
+>
   <div class="chic-hero__wrap chic-wrap">
     <div class="chic-hero__text">
       {% if s.eyebrow != blank %}
@@ -30,19 +39,69 @@
           <a class="chic-btn chic-btn--ghost" href="{{ s.btn2_link | default: routes.all_products_collection_url }}">{{ s.btn2_label | escape }}</a>
         {% endif %}
       </div>
-      <div class="chic-hero__dots" aria-hidden="true">
-        <span class="on"></span><span></span><span></span>
-      </div>
+
+      {% if slides.size > 1 %}
+        <div class="chic-hero__dots" data-chic-dots role="tablist" aria-label="Hero slides">
+          {% for slide in slides %}
+            <button
+              type="button"
+              class="{% if forloop.first %}on{% endif %}"
+              data-chic-dot="{{ forloop.index0 }}"
+              aria-label="Slide {{ forloop.index }}"
+            ></button>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="chic-hero__dots" aria-hidden="true">
+          <span class="on"></span><span></span><span></span>
+        </div>
+      {% endif %}
     </div>
-    <div class="chic-hero__img">
-      <img
-        src="{{ image_url }}"
-        alt="{{ s.heading | escape }}"
-        loading="eager"
-        fetchpriority="high"
-        width="1600"
-        height="900"
-      >
+
+    <div class="chic-hero__img" data-chic-slides>
+      {% if slides.size > 0 %}
+        {% for slide in slides %}
+          {% liquid
+            assign bs = slide.settings
+            if bs.image != blank
+              assign slide_img = bs.image | image_url: width: 1600
+            elsif bs.fallback_asset != blank
+              assign slide_img = bs.fallback_asset | asset_url
+            else
+              assign slide_img = 'chic-hero.jpg' | asset_url
+            endif
+          %}
+          <div
+            class="chic-hero__slide{% if forloop.first %} is-active{% endif %}"
+            data-chic-slide
+            {{ slide.shopify_attributes }}
+          >
+            {% if bs.video != blank %}
+              {{ bs.video | video_tag: autoplay: true, loop: true, muted: true, controls: false, playsinline: true, preload: 'metadata' }}
+            {% else %}
+              <img
+                src="{{ slide_img }}"
+                alt="{{ s.heading | escape }}"
+                loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                {% if forloop.first %}fetchpriority="high"{% endif %}
+                width="1600"
+                height="900"
+              >
+            {% endif %}
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="chic-hero__slide is-active" data-chic-slide>
+          <img
+            src="{{ fallback_image_url }}"
+            alt="{{ s.heading | escape }}"
+            loading="eager"
+            fetchpriority="high"
+            width="1600"
+            height="900"
+          >
+        </div>
+      {% endif %}
     </div>
   </div>
 </div>
@@ -100,15 +159,21 @@
     margin-top: 44px;
   }
 
-  .chic-hero__dots span {
+  .chic-hero__dots span,
+  .chic-hero__dots button {
     width: 9px;
     height: 9px;
     border-radius: 50%;
     border: 1.5px solid var(--chic-navy);
+    background: transparent;
+    padding: 0;
     opacity: 0.6;
+    cursor: pointer;
+    transition: width 0.3s ease, background-color 0.3s ease;
   }
 
-  .chic-hero__dots span.on {
+  .chic-hero__dots span.on,
+  .chic-hero__dots button.on {
     background: var(--chic-green);
     border-color: var(--chic-green);
     width: 24px;
@@ -117,14 +182,28 @@
   }
 
   .chic-hero__img {
-    align-self: stretch;
     position: relative;
+    align-self: stretch;
+    min-height: 560px;
   }
 
-  .chic-hero__img img {
+  .chic-hero__slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.9s ease;
+    pointer-events: none;
+  }
+
+  .chic-hero__slide.is-active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .chic-hero__slide img,
+  .chic-hero__slide video {
     width: 100%;
     height: 100%;
-    min-height: 560px;
     object-fit: cover;
     object-position: var(--chic-hero-focal, 72%) 22%;
     -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 18%);
@@ -140,11 +219,12 @@
 
     .chic-hero__img {
       margin: 0 -24px;
+      min-height: 300px;
+      max-height: 380px;
     }
 
-    .chic-hero__img img {
-      min-height: 280px;
-      max-height: 360px;
+    .chic-hero__slide img,
+    .chic-hero__slide video {
       object-position: var(--chic-hero-focal, 72%) 15%;
       -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 20%);
       mask-image: linear-gradient(180deg, transparent 0, #000 20%);
@@ -154,25 +234,98 @@
   }
 {% endstylesheet %}
 
+{% javascript %}
+  document.querySelectorAll('[data-chic-slider]').forEach((root) => {
+    if (root.dataset.chicInit) return;
+    root.dataset.chicInit = '1';
+
+    const slides = Array.from(root.querySelectorAll('[data-chic-slide]'));
+    if (slides.length < 2) {
+      const v = root.querySelector('video');
+      if (v) v.play().catch(() => {});
+      return;
+    }
+
+    const dots = Array.from(root.querySelectorAll('[data-chic-dot]'));
+    const duration = Number(root.dataset.slideDuration) || 4000;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let current = 0;
+    let timer;
+
+    const show = (i) => {
+      current = (i + slides.length) % slides.length;
+      slides.forEach((slide, n) => {
+        const active = n === current;
+        slide.classList.toggle('is-active', active);
+        const video = slide.querySelector('video');
+        if (video) {
+          if (active) {
+            video.currentTime = 0;
+            video.play().catch(() => {});
+          } else {
+            video.pause();
+          }
+        }
+      });
+      dots.forEach((d, n) => d.classList.toggle('on', n === current));
+    };
+
+    const start = () => {
+      if (reduceMotion) return;
+      clearInterval(timer);
+      timer = setInterval(() => show(current + 1), duration);
+    };
+
+    dots.forEach((dot) => {
+      dot.addEventListener('click', () => {
+        show(Number(dot.dataset.chicDot));
+        start();
+      });
+    });
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) clearInterval(timer);
+      else start();
+    });
+
+    show(0);
+    start();
+  });
+{% endjavascript %}
+
 {% schema %}
 {
   "name": "Chic hero",
   "settings": [
     {
+      "type": "paragraph",
+      "content": "Add 'Slide' blocks for a video/image slider on the right. With no slides, the single image below is used."
+    },
+    {
       "type": "image_picker",
       "id": "image",
-      "label": "Image",
+      "label": "Image (no slides)",
       "info": "Leave empty to use the bundled brand image"
     },
     {
       "type": "range",
       "id": "focal_x",
-      "label": "Image focus (left–right)",
+      "label": "Media focus (left–right)",
       "min": 0,
       "max": 100,
       "step": 2,
       "unit": "%",
       "default": 72
+    },
+    {
+      "type": "range",
+      "id": "slide_duration",
+      "label": "Seconds per slide",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "unit": "s",
+      "default": 4
     },
     {
       "type": "text",
@@ -221,10 +374,38 @@
       "label": "Secondary button link"
     }
   ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video (3–5 sec, autoplays muted)",
+          "info": "If set, the video is shown instead of the image"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "fallback_asset",
+          "label": "Fallback asset filename"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 5,
   "presets": [
     {
       "name": "Chic hero",
-      "category": "Banners"
+      "category": "Banners",
+      "blocks": [
+        { "type": "slide", "settings": { "fallback_asset": "chic-hero.jpg" } }
+      ]
     }
   ]
 }
