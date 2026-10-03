@@ -1,14 +1,35 @@
 {% liquid
   assign s = section.settings
+  assign max = s.max_products | default: 8
+
+  # Prefer Shopify's related products; otherwise fall back to the product's
+  # own collection (or any non-empty collection) so the section always shows.
+  if recommendations.performed and recommendations.products_count > 0
+    assign rec_products = recommendations.products
+  else
+    assign fallback_col = product.collections.first
+    if fallback_col == blank or fallback_col.products.size < 2
+      assign fallback_col = collections['all']
+    endif
+    if fallback_col == blank or fallback_col.products.size < 2
+      for c in collections
+        if c.products.size > 1
+          assign fallback_col = c
+          break
+        endif
+      endfor
+    endif
+    assign rec_products = fallback_col.products
+  endif
 %}
 
 <div
   class="chic-section chic-recs"
   data-chic-recs
-  data-url="{{ routes.product_recommendations_url }}?product_id={{ product.id }}&limit={{ s.max_products | default: 8 }}&section_id={{ section.id }}"
+  data-url="{{ routes.product_recommendations_url }}?product_id={{ product.id }}&limit={{ max }}&section_id={{ section.id }}"
 >
   <div class="chic-recs__inner">
-    {% if recommendations.performed and recommendations.products_count > 0 %}
+    {% if rec_products.size > 0 %}
       <div class="chic-wrap">
         <div class="chic-sec-head">
           <div>
@@ -20,9 +41,19 @@
           {% endif %}
         </div>
         <div class="chic-grid chic-grid--recs">
-          {% for rec_product in recommendations.products %}
-            {% render 'chic-product-card', product: rec_product %}
-          {% endfor %}
+          {% liquid
+            assign shown = 0
+            for rec_product in rec_products
+              if rec_product.id == product.id
+                continue
+              endif
+              if shown >= max
+                break
+              endif
+              render 'chic-product-card', product: rec_product
+              assign shown = shown | plus: 1
+            endfor
+          %}
         </div>
       </div>
       <div class="chic-toast" data-chic-toast aria-live="polite"></div>
