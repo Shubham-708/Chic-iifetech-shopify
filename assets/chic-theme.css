@@ -274,3 +274,73 @@
 @media (prefers-reduced-motion: reduce) {
   .chic-prod__flip { transition: none; }
 }
+
+/* scroll-reveal animations (activated by chic-animations.js) */
+html.chic-anim .chic-reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 0.65, 0.3, 1),
+    transform 0.7s cubic-bezier(0.22, 0.65, 0.3, 1);
+  transition-delay: var(--chic-reveal-delay, 0s);
+  will-change: opacity, transform;
+}
+
+html.chic-anim .chic-reveal.chic-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* keep card flips/zooms snappy after reveal */
+html.chic-anim .chic-prod.chic-in,
+html.chic-anim .chic-rcard.chic-in,
+html.chic-anim .chic-blog.chic-in {
+  transition-delay: 0s;
+}
+
+/* modern hover micro-interactions */
+.chic-prod,
+.chic-rcard,
+.chic-blog,
+.chic-reels__card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.chic-prod:hover,
+.chic-blog:hover,
+.chic-reels__card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 36px rgb(13 74 112 / 0.12);
+}
+
+.chic-rcard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgb(13 74 112 / 0.1);
+}
+
+.chic-btn {
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.chic-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgb(13 74 112 / 0.22);
+}
+
+.chic-promo__btn:hover,
+.chic-story__btn:hover {
+  transform: translateY(-2px);
+}
+
+.chic-promo__btn,
+.chic-story__btn {
+  transition: background-color 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}

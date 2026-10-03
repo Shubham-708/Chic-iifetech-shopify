@@ -12,18 +12,59 @@
         "btn1_label": "Shop Our Rituals",
         "btn1_link": "shopify://collections/all",
         "btn2_label": "Contact Us",
-        "btn2_link": "/pages/contact"
-      }
+        "btn2_link": "/pages/contact",
+        "slide_duration": 5
+      },
+      "blocks": {
+        "sl_1": {
+          "type": "slide",
+          "settings": {
+            "fallback_asset": "chic-hero.jpg"
+          }
+        },
+        "sl_2": {
+          "type": "slide",
+          "settings": {
+            "fallback_asset": "chic-gift-banner.png"
+          }
+        }
+      },
+      "block_order": [
+        "sl_1",
+        "sl_2"
+      ]
     },
     "about_story": {
       "type": "chic-story",
       "name": "Chic our story",
       "blocks": {
-        "sf_natural": { "type": "feature", "settings": { "icon": "leaf", "title": "Natural Ingredients" } },
-        "sf_healthy": { "type": "feature", "settings": { "icon": "heart", "title": "Healthy Skin & Hair" } },
-        "sf_green": { "type": "feature", "settings": { "icon": "lotus", "title": "A Greener Tomorrow" } }
+        "sf_natural": {
+          "type": "feature",
+          "settings": {
+            "icon": "leaf",
+            "title": "Natural Ingredients"
+          }
+        },
+        "sf_healthy": {
+          "type": "feature",
+          "settings": {
+            "icon": "heart",
+            "title": "Healthy Skin & Hair"
+          }
+        },
+        "sf_green": {
+          "type": "feature",
+          "settings": {
+            "icon": "lotus",
+            "title": "A Greener Tomorrow"
+          }
+        }
       },
-      "block_order": ["sf_natural", "sf_healthy", "sf_green"],
+      "block_order": [
+        "sf_natural",
+        "sf_healthy",
+        "sf_green"
+      ],
       "settings": {
         "eyebrow": "Our Story",
         "heading": "Beauty, Inspired by Nature",
@@ -36,24 +77,90 @@
       "type": "chic-features",
       "name": "Chic features strip",
       "blocks": {
-        "av_botanical": { "type": "feature", "settings": { "icon": "leaf", "title": "100% Botanical", "text": "Pure, plant-based ingredients" } },
-        "av_cruelty": { "type": "feature", "settings": { "icon": "rabbit", "title": "Cruelty Free", "text": "Never tested on animals" } },
-        "av_ayurveda": { "type": "feature", "settings": { "icon": "lotus", "title": "Ayurveda Wisdom", "text": "Ancient recipes, modern care" } },
-        "av_india": { "type": "feature", "settings": { "icon": "flag", "title": "Made in India", "text": "Handcrafted in Bhopal, MP" } }
+        "av_botanical": {
+          "type": "feature",
+          "settings": {
+            "icon": "leaf",
+            "title": "100% Botanical",
+            "text": "Pure, plant-based ingredients"
+          }
+        },
+        "av_cruelty": {
+          "type": "feature",
+          "settings": {
+            "icon": "rabbit",
+            "title": "Cruelty Free",
+            "text": "Never tested on animals"
+          }
+        },
+        "av_ayurveda": {
+          "type": "feature",
+          "settings": {
+            "icon": "lotus",
+            "title": "Ayurveda Wisdom",
+            "text": "Ancient recipes, modern care"
+          }
+        },
+        "av_india": {
+          "type": "feature",
+          "settings": {
+            "icon": "flag",
+            "title": "Made in India",
+            "text": "Handcrafted in Bhopal, MP"
+          }
+        }
       },
-      "block_order": ["av_botanical", "av_cruelty", "av_ayurveda", "av_india"],
+      "block_order": [
+        "av_botanical",
+        "av_cruelty",
+        "av_ayurveda",
+        "av_india"
+      ],
       "settings": {}
     },
     "about_mission": {
       "type": "chic-about",
       "name": "Chic about",
       "blocks": {
-        "am_botanical": { "type": "stat", "settings": { "icon": "leaf", "value": "100%", "label": "Botanical Formulas" } },
-        "am_products": { "type": "stat", "settings": { "icon": "drop", "value": "29+", "label": "Products & Rituals" } },
-        "am_customers": { "type": "stat", "settings": { "icon": "users", "value": "10K+", "label": "Happy Customers" } },
-        "am_support": { "type": "stat", "settings": { "icon": "clock", "value": "24/7", "label": "Customer Support" } }
+        "am_botanical": {
+          "type": "stat",
+          "settings": {
+            "icon": "leaf",
+            "value": "100%",
+            "label": "Botanical Formulas"
+          }
+        },
+        "am_products": {
+          "type": "stat",
+          "settings": {
+            "icon": "drop",
+            "value": "29+",
+            "label": "Products & Rituals"
+          }
+        },
+        "am_customers": {
+          "type": "stat",
+          "settings": {
+            "icon": "users",
+            "value": "10K+",
+            "label": "Happy Customers"
+          }
+        },
+        "am_support": {
+          "type": "stat",
+          "settings": {
+            "icon": "clock",
+            "value": "24/7",
+            "label": "Customer Support"
+          }
+        }
       },
-      "block_order": ["am_botanical", "am_products", "am_customers", "am_support"],
+      "block_order": [
+        "am_botanical",
+        "am_products",
+        "am_customers",
+        "am_support"
+      ],
       "settings": {
         "badge_title": "Since Day One",
         "badge_text": "Nature. Science. Ritual.",
@@ -68,12 +175,45 @@
       "type": "chic-ingredients",
       "name": "Chic ingredients",
       "blocks": {
-        "ai_neem": { "type": "ingredient", "settings": { "default_asset": "chic-ing-neem.png", "title": "Neem", "text": "Deeply purifies and soothes skin with natural antibacterial properties." } },
-        "ai_rosehip": { "type": "ingredient", "settings": { "default_asset": "chic-ing-rosehip.png", "title": "Rosehip", "text": "Rich in vitamins and essential fatty acids for regeneration." } },
-        "ai_calendula": { "type": "ingredient", "settings": { "default_asset": "chic-ing-calendula.png", "title": "Calendula", "text": "Calms sensitive skin and promotes healing." } },
-        "ai_primrose": { "type": "ingredient", "settings": { "default_asset": "chic-ing-primrose.png", "title": "Evening Primrose", "text": "Intensely nourishes and improves skin elasticity." } }
+        "ai_neem": {
+          "type": "ingredient",
+          "settings": {
+            "default_asset": "chic-ing-neem.png",
+            "title": "Neem",
+            "text": "Deeply purifies and soothes skin with natural antibacterial properties."
+          }
+        },
+        "ai_rosehip": {
+          "type": "ingredient",
+          "settings": {
+            "default_asset": "chic-ing-rosehip.png",
+            "title": "Rosehip",
+            "text": "Rich in vitamins and essential fatty acids for regeneration."
+          }
+        },
+        "ai_calendula": {
+          "type": "ingredient",
+          "settings": {
+            "default_asset": "chic-ing-calendula.png",
+            "title": "Calendula",
+            "text": "Calms sensitive skin and promotes healing."
+          }
+        },
+        "ai_primrose": {
+          "type": "ingredient",
+          "settings": {
+            "default_asset": "chic-ing-primrose.png",
+            "title": "Evening Primrose",
+            "text": "Intensely nourishes and improves skin elasticity."
+          }
+        }
       },
-      "block_order": ["ai_neem", "ai_rosehip", "ai_calendula", "ai_primrose"],
+      "block_order": [
+        "ai_neem",
+        "ai_rosehip",
+        "ai_calendula",
+        "ai_primrose"
+      ],
       "settings": {
         "subheading": "POWERED BY PLANTS",
         "heading": "The Botanicals Behind Our Rituals",
@@ -85,11 +225,33 @@
       "type": "chic-testimonials",
       "name": "Chic testimonials",
       "blocks": {
-        "at_1": { "type": "review", "settings": { "quote": "Natural, luxurious, and deeply hydrating. The Body Yogurt has become part of my everyday routine.", "name": "Verena Yadav" } },
-        "at_2": { "type": "review", "settings": { "quote": "The Probiotic Facewash cleared my skin without drying it out. Gentle, honest products that actually work.", "name": "Sakshi Agarwal" } },
-        "at_3": { "type": "review", "settings": { "quote": "Herbal Hair Oil with the comb is a ritual I look forward to every week. Less hair fall, more shine.", "name": "Siya Goyal" } }
+        "at_1": {
+          "type": "review",
+          "settings": {
+            "quote": "Natural, luxurious, and deeply hydrating. The Body Yogurt has become part of my everyday routine.",
+            "name": "Verena Yadav"
+          }
+        },
+        "at_2": {
+          "type": "review",
+          "settings": {
+            "quote": "The Probiotic Facewash cleared my skin without drying it out. Gentle, honest products that actually work.",
+            "name": "Sakshi Agarwal"
+          }
+        },
+        "at_3": {
+          "type": "review",
+          "settings": {
+            "quote": "Herbal Hair Oil with the comb is a ritual I look forward to every week. Less hair fall, more shine.",
+            "name": "Siya Goyal"
+          }
+        }
       },
-      "block_order": ["at_1", "at_2", "at_3"],
+      "block_order": [
+        "at_1",
+        "at_2",
+        "at_3"
+      ],
       "settings": {
         "eyebrow": "The Botanical Circle",
         "heading": "Loved By Our Community"
@@ -99,17 +261,81 @@
       "type": "chic-story",
       "name": "Chic our story",
       "blocks": {
-        "cta_phone": { "type": "feature", "settings": { "icon": "users", "title": "+91 88782 80711" } },
-        "cta_mail": { "type": "feature", "settings": { "icon": "heart", "title": "chicthebotanicalbeauty@gmail.com" } },
-        "cta_loc": { "type": "feature", "settings": { "icon": "leaf", "title": "Saket Nagar, Bhopal, MP" } }
+        "cta_phone": {
+          "type": "feature",
+          "settings": {
+            "icon": "users",
+            "title": "+91 88782 80711"
+          }
+        },
+        "cta_mail": {
+          "type": "feature",
+          "settings": {
+            "icon": "heart",
+            "title": "chicthebotanicalbeauty@gmail.com"
+          }
+        },
+        "cta_loc": {
+          "type": "feature",
+          "settings": {
+            "icon": "leaf",
+            "title": "Saket Nagar, Bhopal, MP"
+          }
+        }
       },
-      "block_order": ["cta_phone", "cta_mail", "cta_loc"],
+      "block_order": [
+        "cta_phone",
+        "cta_mail",
+        "cta_loc"
+      ],
       "settings": {
         "eyebrow": "Get In Touch",
         "heading": "Let's Talk Botanical Beauty",
         "text": "Questions about a product, your order, or which ritual suits your skin? Our team is here for you — reach out any time and we'll be happy to help.",
         "btn_label": "Contact Us",
         "btn_link": "/pages/contact"
+      }
+    },
+    "about_reels": {
+      "type": "chic-reels",
+      "name": "Chic Instagram reels",
+      "blocks": {
+        "ar_1": {
+          "type": "reel",
+          "settings": {
+            "fallback_asset": "chic-insta-1.jpg"
+          }
+        },
+        "ar_2": {
+          "type": "reel",
+          "settings": {
+            "fallback_asset": "chic-insta-2.jpg"
+          }
+        },
+        "ar_3": {
+          "type": "reel",
+          "settings": {
+            "fallback_asset": "chic-insta-4.jpg"
+          }
+        },
+        "ar_4": {
+          "type": "reel",
+          "settings": {
+            "fallback_asset": "chic-insta-5.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "ar_1",
+        "ar_2",
+        "ar_3",
+        "ar_4"
+      ],
+      "settings": {
+        "eyebrow": "@chic_the_botanical_beauty",
+        "heading": "Life At CHIC, On Instagram",
+        "instagram_url": "https://www.instagram.com/chic_the_botanical_beauty/",
+        "link_label": "Follow Us"
       }
     }
   },
@@ -120,6 +346,7 @@
     "about_mission",
     "about_ingredients",
     "about_testimonials",
+    "about_reels",
     "about_cta"
   ]
 }
