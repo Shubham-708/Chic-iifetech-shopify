@@ -1,6 +1,172 @@
+{% doc %}
+  @prompt
+    Create a blog listing page layout where the latest/featured blog post is displayed at the top with a large image on the left and title, date, excerpt, and "Read Article" link on the right. Below the featured post, show the remaining blog posts in a 3-column grid layout, each with a thumbnail image, category tag, post title, author name with avatar, and date. The design should be clean, modern, and elegant to match a premium skincare brand.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+{% assign featured_article = block.settings.blog.articles.first %}
+
+{% style %}
+  .ai-blog-layout-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    color: #1d1a22;
+    font-family: var(--font-body-family, sans-serif);
+    padding: 32px 0;
+  }
+  .ai-blog-layout-{{ ai_gen_id }} a { color: inherit; }
+  .ai-blog-layout-{{ ai_gen_id }}__featured {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: clamp(24px, 5vw, 64px);
+    align-items: center;
+    margin-bottom: 64px;
+  }
+  .ai-blog-layout-{{ ai_gen_id }}__featured-media,
+  .ai-blog-layout-{{ ai_gen_id }}__card-media {
+    display: block;
+    overflow: hidden;
+    background: #f3f2ef;
+  }
+  .ai-blog-layout-{{ ai_gen_id }}__featured-media { aspect-ratio: 1.35 / 1; }
+  .ai-blog-layout-{{ ai_gen_id }}__featured-media img,
+  .ai-blog-layout-{{ ai_gen_id }}__card-media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .ai-blog-layout-{{ ai_gen_id }}__placeholder { width: 100%; height: 100%; }
+  .ai-blog-layout-{{ ai_gen_id }}__placeholder svg { display: block; width: 100%; height: 100%; object-fit: cover; color: #8b8882; }
+  .ai-blog-layout-{{ ai_gen_id }}__eyebrow {
+    margin: 0 0 14px;
+    color: #555149;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .14em;
+    line-height: 1.4;
+    text-transform: uppercase;
+  }
+  .ai-blog-layout-{{ ai_gen_id }}__featured-title {
+    margin: 0 0 16px;
+    color: #1d1a22;
+    font-family: var(--font-heading-family, Georgia, serif);
+    font-size: clamp(30px, 4vw, 52px);
+    font-weight: 400;
+    line-height: 1.12;
+  }
+  .ai-blog-layout-{{ ai_gen_id }}__meta,
+  .ai-blog-layout-{{ ai_gen_id }}__card-date {
+    color: #555149;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .ai-blog-layout-{{ ai_gen_id }}__excerpt { margin: 20px 0 24px; color: #403d43; font-size: 15px; line-height: 1.75; }
+  .ai-blog-layout-{{ ai_gen_id }}__read-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #1d1a22;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .ai-blog-layout-{{ ai_gen_id }}__read-link:focus-visible,
+  .ai-blog-layout-{{ ai_gen_id }}__card-title a:focus-visible { outline: 2px solid #0d4a70; outline-offset: 4px; }
+  .ai-blog-layout-{{ ai_gen_id }}__section-heading {
+    margin: 0 0 24px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #dedbd5;
+    color: #1d1a22;
+    font-family: var(--font-heading-family, Georgia, serif);
+    font-size: clamp(24px, 3vw, 34px);
+    font-weight: 400;
+  }
+  .ai-blog-layout-{{ ai_gen_id }}__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 36px 24px; }
+  .ai-blog-layout-{{ ai_gen_id }}__card-media { aspect-ratio: 1.35 / 1; margin-bottom: 18px; }
+  .ai-blog-layout-{{ ai_gen_id }}__category { margin: 0 0 10px; color: #555149; font-size: 10px; font-weight: 600; letter-spacing: .13em; line-height: 1.4; text-transform: uppercase; }
+  .ai-blog-layout-{{ ai_gen_id }}__card-title { margin: 0 0 16px; font-family: var(--font-heading-family, Georgia, serif); font-size: 22px; font-weight: 400; line-height: 1.3; }
+  .ai-blog-layout-{{ ai_gen_id }}__card-title a { text-decoration: none; }
+  .ai-blog-layout-{{ ai_gen_id }}__card-footer { display: flex; align-items: center; gap: 10px; }
+  .ai-blog-layout-{{ ai_gen_id }}__avatar { width: 32px; height: 32px; flex: 0 0 32px; overflow: hidden; border-radius: 50%; background: #e7f0d9; }
+  .ai-blog-layout-{{ ai_gen_id }}__avatar img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .ai-blog-layout-{{ ai_gen_id }}__avatar-fallback { display: flex; width: 100%; height: 100%; align-items: center; justify-content: center; color: #1d1a22; font-size: 12px; font-weight: 600; }
+  .ai-blog-layout-{{ ai_gen_id }}__author-meta { min-width: 0; color: #555149; font-size: 12px; line-height: 1.45; }
+  .ai-blog-layout-{{ ai_gen_id }}__author-name { display: block; color: #1d1a22; font-weight: 600; }
+  .ai-blog-layout-{{ ai_gen_id }}__empty { padding: 36px; background: #f3f2ef; color: #555149; text-align: center; }
+  @media screen and (max-width: 749px) {
+    .ai-blog-layout-{{ ai_gen_id }} { padding: 20px 0; }
+    .ai-blog-layout-{{ ai_gen_id }}__featured { grid-template-columns: 1fr; gap: 24px; margin-bottom: 44px; }
+    .ai-blog-layout-{{ ai_gen_id }}__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 16px; }
+    .ai-blog-layout-{{ ai_gen_id }}__card-title { font-size: 19px; }
+  }
+  @media screen and (max-width: 480px) {
+    .ai-blog-layout-{{ ai_gen_id }}__grid { grid-template-columns: 1fr; }
+  }
+{% endstyle %}
+
+<div class="ai-blog-layout-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  {% if block.settings.blog != blank and featured_article != blank %}
+    <article class="ai-blog-layout-{{ ai_gen_id }}__featured">
+      <a class="ai-blog-layout-{{ ai_gen_id }}__featured-media" href="{{ featured_article.url }}" aria-label="Read {{ featured_article.title | escape }}">
+        {% if featured_article.image %}
+          <img src="{{ featured_article.image | image_url: width: 1400 }}" alt="{{ featured_article.image.alt | default: featured_article.title | escape }}" width="{{ featured_article.image.width }}" height="{{ featured_article.image.height }}" loading="lazy">
+        {% else %}
+          <div class="ai-blog-layout-{{ ai_gen_id }}__placeholder">{{ 'blog-apparel-1' | placeholder_svg_tag }}</div>
+        {% endif %}
+      </a>
+      <div class="ai-blog-layout-{{ ai_gen_id }}__featured-content">
+        <p class="ai-blog-layout-{{ ai_gen_id }}__eyebrow">{{ block.settings.featured_label | escape }}</p>
+        <h2 class="ai-blog-layout-{{ ai_gen_id }}__featured-title">{{ featured_article.title | escape }}</h2>
+        <p class="ai-blog-layout-{{ ai_gen_id }}__meta">{{ featured_article.published_at | date: '%B %d, %Y' }}</p>
+        <div class="ai-blog-layout-{{ ai_gen_id }}__excerpt">{{ featured_article.excerpt_or_content | strip_html | truncatewords: 42 }}</div>
+        <a class="ai-blog-layout-{{ ai_gen_id }}__read-link" href="{{ featured_article.url }}">{{ block.settings.read_label | escape }} <span aria-hidden="true">→</span></a>
+      </div>
+    </article>
+    <div class="ai-blog-layout-{{ ai_gen_id }}__posts">
+      <h2 class="ai-blog-layout-{{ ai_gen_id }}__section-heading">{{ block.settings.posts_heading | escape }}</h2>
+      <div class="ai-blog-layout-{{ ai_gen_id }}__grid">
+        {% for article in block.settings.blog.articles limit: 10 %}
+          {% unless article.id == featured_article.id %}
+            <article class="ai-blog-layout-{{ ai_gen_id }}__card">
+              <a class="ai-blog-layout-{{ ai_gen_id }}__card-media" href="{{ article.url }}" aria-label="Read {{ article.title | escape }}">
+                {% if article.image %}
+                  <img src="{{ article.image | image_url: width: 800 }}" alt="{{ article.image.alt | default: article.title | escape }}" width="{{ article.image.width }}" height="{{ article.image.height }}" loading="lazy">
+                {% else %}
+                  <div class="ai-blog-layout-{{ ai_gen_id }}__placeholder">{{ 'blog-apparel-1' | placeholder_svg_tag }}</div>
+                {% endif %}
+              </a>
+              {% if article.tags.size > 0 %}<p class="ai-blog-layout-{{ ai_gen_id }}__category">{{ article.tags.first | escape }}</p>{% endif %}
+              <h3 class="ai-blog-layout-{{ ai_gen_id }}__card-title"><a href="{{ article.url }}">{{ article.title | escape }}</a></h3>
+              <div class="ai-blog-layout-{{ ai_gen_id }}__card-footer">
+                <div class="ai-blog-layout-{{ ai_gen_id }}__avatar" aria-hidden="true"><span class="ai-blog-layout-{{ ai_gen_id }}__avatar-fallback">{{ article.author | slice: 0 | upcase }}</span></div>
+                <div class="ai-blog-layout-{{ ai_gen_id }}__author-meta"><span class="ai-blog-layout-{{ ai_gen_id }}__author-name">{{ article.author | escape }}</span><time class="ai-blog-layout-{{ ai_gen_id }}__card-date" datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%B %d, %Y' }}</time></div>
+              </div>
+            </article>
+          {% endunless %}
+        {% endfor %}
+      </div>
+    </div>
+  {% else %}
+    <div class="ai-blog-layout-{{ ai_gen_id }}__empty">Choose a blog in the block settings to display its latest articles.</div>
+  {% endif %}
+</div>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Elegant blog listing",
+  "settings": [
+    { "type": "blog", "id": "blog", "label": "Blog" },
+    { "type": "range", "id": "desktop_width_percent", "label": "Desktop width", "min": 50, "max": 100, "step": 5, "unit": "%", "default": 100 },
+    { "type": "text", "id": "featured_label", "label": "Featured label", "default": "Featured story" },
+    { "type": "text", "id": "posts_heading", "label": "Posts heading", "default": "More from the journal" },
+    { "type": "text", "id": "read_label", "label": "Read link label", "default": "Read Article" }
+  ],
+  "presets": [
+    { "name": "Elegant blog listing" }
+  ],
+  "tag": null,
+  "class": "elegant-blog-listing"
+}
 {% endschema %}
