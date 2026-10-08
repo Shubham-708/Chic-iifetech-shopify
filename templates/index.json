@@ -16,7 +16,7 @@
         "autoplay": true,
         "slide_duration": 5,
         "label": "Featured banners",
-        "ratio_desktop": "4.57",
+        "ratio_desktop": "3.6",
         "ratio_mobile": "0.782"
       },
       "blocks": {
@@ -25,7 +25,7 @@
           "settings": {
             "fallback_desktop": "chic-banner-hair-amrut.jpg",
             "desktop_w": 4224,
-            "desktop_h": 924,
+            "desktop_h": 1054,
             "fallback_mobile": "chic-banner-hair-amrut-mobile.jpg",
             "mobile_w": 1500,
             "mobile_h": 1918,
@@ -38,7 +38,7 @@
           "settings": {
             "fallback_desktop": "chic-banner-aloe-neem-scrub.jpg",
             "desktop_w": 4224,
-            "desktop_h": 924,
+            "desktop_h": 1054,
             "fallback_mobile": "chic-banner-aloe-neem-scrub-mobile.jpg",
             "mobile_w": 1500,
             "mobile_h": 1918,
@@ -51,7 +51,7 @@
           "settings": {
             "fallback_desktop": "chic-banner-suryaveda-sunscreen.jpg",
             "desktop_w": 4224,
-            "desktop_h": 924,
+            "desktop_h": 1054,
             "fallback_mobile": "chic-banner-suryaveda-sunscreen-mobile.jpg",
             "mobile_w": 1500,
             "mobile_h": 1918,
@@ -64,7 +64,7 @@
           "settings": {
             "fallback_desktop": "chic-banner-botanical-range.jpg",
             "desktop_w": 4224,
-            "desktop_h": 924,
+            "desktop_h": 1054,
             "fallback_mobile": "chic-banner-botanical-range-mobile.jpg",
             "mobile_w": 1500,
             "mobile_h": 1918,

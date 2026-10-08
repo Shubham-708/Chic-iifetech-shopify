@@ -9,7 +9,7 @@
   data-chic-banners
   data-autoplay="{{ s.autoplay }}"
   data-duration="{{ s.slide_duration | default: 5 | times: 1000 }}"
-  style="--banner-ratio: {{ s.ratio_desktop | default: 4.57 }}; --banner-ratio-mobile: {{ s.ratio_mobile | default: 0.782 }};"
+  style="--banner-ratio: {{ s.ratio_desktop | default: 3.6 }}; --banner-ratio-mobile: {{ s.ratio_mobile | default: 0.782 }};"
   role="region"
   aria-roledescription="carousel"
   aria-label="{{ s.label | default: 'Featured banners' | escape }}"
@@ -140,7 +140,7 @@
   .chic-banners__track {
     position: relative;
     overflow: hidden;
-    aspect-ratio: var(--banner-ratio, 4.57);
+    aspect-ratio: var(--banner-ratio, 3.6);
     touch-action: pan-y;
   }
 
@@ -397,8 +397,8 @@
       "type": "text",
       "id": "ratio_desktop",
       "label": "Desktop frame ratio (width ÷ height)",
-      "info": "All banners show at this shape. 4.57 fits 4224×924 artwork.",
-      "default": "4.57"
+      "info": "All banners show at this shape; wider artwork is trimmed at the sides. 3.6 suits the 4224×1054 artwork.",
+      "default": "3.6"
     },
     {
       "type": "text",

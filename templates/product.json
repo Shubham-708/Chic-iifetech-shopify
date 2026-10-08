@@ -45,9 +45,9 @@
             "thumbnail_position": "right",
             "thumbnail_width": 44,
             "thumbnail_radius": 0,
-            "aspect_ratio": "1/1.25",
-            "constrain_to_viewport": false,
-            "media_fit": "cover",
+            "aspect_ratio": "1",
+            "constrain_to_viewport": true,
+            "media_fit": "contain",
             "media_radius": 0,
             "extend_media": false,
             "zoom": true,
@@ -680,6 +680,17 @@
             "credit_url": "https://commons.wikimedia.org/wiki/File:Zinc_oxide_sample.jpg"
           }
         },
+        "ing_titanium_dioxide": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-titanium-dioxide.jpg",
+            "name": "Titanium Dioxide",
+            "amount": "",
+            "benefit": "Gentle mineral filter that reflects UV rays.",
+            "credit": "Titanium Dioxide: Marco Almbauer, CC BY-SA 3.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Titanwei%C3%9F.JPG"
+          }
+        },
         "ing_aloe_vera": {
           "type": "ingredient",
           "settings": {
@@ -712,13 +723,38 @@
             "credit": "Cocoa Butter: Veganbaking.net from USA, CC BY-SA 2.0, via Wikimedia Commons",
             "credit_url": "https://commons.wikimedia.org/wiki/File:Cocoa_Butter_(8612673294).jpg"
           }
+        },
+        "ing_beeswax": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-beeswax.jpg",
+            "name": "Beeswax",
+            "amount": "",
+            "benefit": "Forms a light protective layer on skin.",
+            "credit": "Beeswax: Algont at Dutch Wikipedia, CC BY-SA 3.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Bijenwas1591.JPG"
+          }
+        },
+        "ing_glycerine": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-glycerine.jpg",
+            "name": "Glycerine",
+            "amount": "",
+            "benefit": "Draws moisture into the skin.",
+            "credit": "Glycerine: Danny S., CC BY-SA 3.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Glycerol_85%25_by_Danny_S._-_001.jpg"
+          }
         }
       },
       "block_order": [
         "ing_zinc_oxide",
+        "ing_titanium_dioxide",
         "ing_aloe_vera",
         "ing_hyaluronic_acid",
-        "ing_cocoa_butter"
+        "ing_cocoa_butter",
+        "ing_beeswax",
+        "ing_glycerine"
       ]
     },
     "ing_scrub": {
@@ -788,6 +824,17 @@
             "credit": "Turmeric: Herusutimbul, CC BY-SA 4.0, via Wikimedia Commons",
             "credit_url": "https://commons.wikimedia.org/wiki/File:Kunyit_Bubuk.jpg"
           }
+        },
+        "ing_glycerine": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-glycerine.jpg",
+            "name": "Glycerine",
+            "amount": "",
+            "benefit": "Keeps skin soft after scrubbing.",
+            "credit": "Glycerine: Danny S., CC BY-SA 3.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Glycerol_85%25_by_Danny_S._-_001.jpg"
+          }
         }
       },
       "block_order": [
@@ -795,7 +842,8 @@
         "ing_neem",
         "ing_walnut_shell",
         "ing_tulsi",
-        "ing_turmeric"
+        "ing_turmeric",
+        "ing_glycerine"
       ]
     },
     "ing_pigmentation": {
@@ -1043,6 +1091,17 @@
             "credit": "Turmeric: Herusutimbul, CC BY-SA 4.0, via Wikimedia Commons",
             "credit_url": "https://commons.wikimedia.org/wiki/File:Kunyit_Bubuk.jpg"
           }
+        },
+        "ing_glycerine": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-glycerine.jpg",
+            "name": "Glycerine",
+            "amount": "",
+            "benefit": "Leaves skin soft, never tight.",
+            "credit": "Glycerine: Danny S., CC BY-SA 3.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Glycerol_85%25_by_Danny_S._-_001.jpg"
+          }
         }
       },
       "block_order": [
@@ -1050,7 +1109,8 @@
         "ing_neem",
         "ing_aloe_vera",
         "ing_tea_tree",
-        "ing_turmeric"
+        "ing_turmeric",
+        "ing_glycerine"
       ]
     },
     "ing_dtan": {
@@ -1120,6 +1180,17 @@
             "credit": "Sandalwood: Nistha.aslp, CC BY-SA 4.0, via Wikimedia Commons",
             "credit_url": "https://commons.wikimedia.org/wiki/File:Sandal_and_tulasi_wood_in_a_pot.jpg"
           }
+        },
+        "ing_rose_petals": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-rose-petals.jpg",
+            "name": "Rose",
+            "amount": "",
+            "benefit": "Refreshes and tones skin.",
+            "credit": "Rose: Ranjithkumar Murugesan, CC0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:DAMASK_ROSE.jpg"
+          }
         }
       },
       "block_order": [
@@ -1127,7 +1198,8 @@
         "ing_kaolin_clay",
         "ing_turmeric",
         "ing_orange_peel",
-        "ing_sandalwood"
+        "ing_sandalwood",
+        "ing_rose_petals"
       ]
     },
     "ing_kajal": {
@@ -1153,10 +1225,46 @@
             "credit": "Almond Oil: Savion6, CC BY-SA 4.0, via Wikimedia Commons",
             "credit_url": "https://commons.wikimedia.org/wiki/File:%D7%A9%D7%9E%D7%9F_%D7%A9%D7%A7%D7%93%D7%99%D7%9D.jpg"
           }
+        },
+        "ing_castor_oil": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-castor-oil.jpg",
+            "name": "Castor Oil",
+            "amount": "",
+            "benefit": "Traditionally used for fuller-looking lashes.",
+            "credit": "Castor Oil: Unknown author, Public domain, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Castor_beans.jpg"
+          }
+        },
+        "ing_camphor": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-camphor.jpg",
+            "name": "Camphor",
+            "amount": "",
+            "benefit": "Gives a cooling, refreshing feel.",
+            "credit": "Camphor: carrotmadman6 from Mauritius, CC BY 2.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Camphor_(4926772724).jpg"
+          }
+        },
+        "ing_ghee": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-ghee.jpg",
+            "name": "Cow Ghee",
+            "amount": "",
+            "benefit": "Soothes and softens — an Ayurvedic classic.",
+            "credit": "Cow Ghee: Rainer Zenz, CC BY-SA 3.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Butterschmalz-3.jpg"
+          }
         }
       },
       "block_order": [
-        "ing_almond_oil"
+        "ing_almond_oil",
+        "ing_castor_oil",
+        "ing_camphor",
+        "ing_ghee"
       ]
     },
     "ing_lipbalm": {
@@ -1172,6 +1280,17 @@
         "list_note": ""
       },
       "blocks": {
+        "ing_beeswax": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-beeswax.jpg",
+            "name": "Beeswax",
+            "amount": "",
+            "benefit": "Seals in moisture and protects.",
+            "credit": "Beeswax: Algont at Dutch Wikipedia, CC BY-SA 3.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Bijenwas1591.JPG"
+          }
+        },
         "ing_cocoa_butter": {
           "type": "ingredient",
           "settings": {
@@ -1204,12 +1323,37 @@
             "credit": "Coconut Oil: deadrat, CC BY-SA 4.0, via Wikimedia Commons",
             "credit_url": "https://commons.wikimedia.org/wiki/File:Coconut_oil_bottle_in_the_background_of_dried_coconuts_from_Kaleeswari_Farm.jpg"
           }
+        },
+        "ing_beetroot": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-beetroot.jpg",
+            "name": "Beetroot",
+            "amount": "",
+            "benefit": "Natural tint for a rosy look.",
+            "credit": "Beetroot: Rawpixel Ltd, CC BY 2.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Round_textured_slices_of_beetroot_on_a_plate_(40640199605).jpg"
+          }
+        },
+        "ing_vitamin_e": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-vitamin-e.jpg",
+            "name": "Vitamin E",
+            "amount": "",
+            "benefit": "Antioxidant care for healthy lips.",
+            "credit": "Vitamin E: Oregon State University, CC BY-SA 2.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Vitamin_E_(31992676570).jpg"
+          }
         }
       },
       "block_order": [
+        "ing_beeswax",
         "ing_cocoa_butter",
         "ing_shea_butter",
-        "ing_coconut_oil"
+        "ing_coconut_oil",
+        "ing_beetroot",
+        "ing_vitamin_e"
       ]
     },
     "ing_rosewater": {
@@ -1225,6 +1369,17 @@
         "list_note": ""
       },
       "blocks": {
+        "ing_rose_petals": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-rose-petals.jpg",
+            "name": "Damask Rose Petals",
+            "amount": "",
+            "benefit": "Tones, hydrates and refreshes.",
+            "credit": "Damask Rose Petals: Ranjithkumar Murugesan, CC0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:DAMASK_ROSE.jpg"
+          }
+        },
         "ing_aloe_vera": {
           "type": "ingredient",
           "settings": {
@@ -1238,6 +1393,7 @@
         }
       },
       "block_order": [
+        "ing_rose_petals",
         "ing_aloe_vera"
       ]
     },
@@ -1254,6 +1410,28 @@
         "list_note": ""
       },
       "blocks": {
+        "ing_keratin": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-keratin.jpg",
+            "name": "Keratin",
+            "amount": "",
+            "benefit": "Repairs and strengthens damaged strands.",
+            "credit": "Keratin: Alex Neman, CC BY-SA 4.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Woman_with_shiny_long_black_hair_from_behind.png"
+          }
+        },
+        "ing_argan_oil": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-argan-oil.jpg",
+            "name": "Argan Oil",
+            "amount": "",
+            "benefit": "Smooths frizz and adds shine.",
+            "credit": "Argan Oil: Roger Culos, CC BY-SA 3.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Argania_spinosa_MHNT.BOT.2010.12.2.jpg"
+          }
+        },
         "ing_bhringraj": {
           "type": "ingredient",
           "settings": {
@@ -1263,6 +1441,17 @@
             "benefit": "Strengthens roots, reduces hair fall.",
             "credit": "Bhringraj: Nativeplants garden, CC BY-SA 4.0, via Wikimedia Commons",
             "credit_url": "https://commons.wikimedia.org/wiki/File:Eclipta_prostrata_(19240).jpg"
+          }
+        },
+        "ing_hibiscus": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-hibiscus.jpg",
+            "name": "Hibiscus",
+            "amount": "",
+            "benefit": "Conditions and adds natural softness.",
+            "credit": "Hibiscus: Saadtitan12, CC BY-SA 4.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Red_Hibiscus_rosa-sinensis_flower_close-up.jpg"
           }
         },
         "ing_amla": {
@@ -1289,7 +1478,10 @@
         }
       },
       "block_order": [
+        "ing_keratin",
+        "ing_argan_oil",
         "ing_bhringraj",
+        "ing_hibiscus",
         "ing_amla",
         "ing_aloe_vera"
       ]
@@ -1383,6 +1575,17 @@
             "credit": "Saffron: Hubertl, CC BY-SA 4.0, via Wikimedia Commons",
             "credit_url": "https://commons.wikimedia.org/wiki/File:Safran-Weinviertel_Niederreiter_2_Gramm_8285.jpg"
           }
+        },
+        "ing_rose_petals": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-rose-petals.jpg",
+            "name": "Rose",
+            "amount": "",
+            "benefit": "Tones and refreshes.",
+            "credit": "Rose: Ranjithkumar Murugesan, CC0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:DAMASK_ROSE.jpg"
+          }
         }
       },
       "block_order": [
@@ -1392,7 +1595,8 @@
         "ing_jojoba",
         "ing_turmeric",
         "ing_licorice",
-        "ing_saffron"
+        "ing_saffron",
+        "ing_rose_petals"
       ]
     },
     "ing_general": {
