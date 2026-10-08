@@ -413,7 +413,7 @@
     },
     "chic_ingredients": {
       "type": "chic-key-ingredients",
-      "name": "Chic key ingredients",
+      "name": "Ingredients · Hair Oil",
       "settings": {
         "match_keywords": "hair-oil, hair oil, hair-amrut, hair amrut",
         "eyebrow": "Infused with 18 herbs",
@@ -655,11 +655,876 @@
         "ing_sesame_oil",
         "ing_mustard_oil"
       ]
+    },
+    "ing_sunscreen": {
+      "type": "chic-key-ingredients",
+      "name": "Ingredients · Sunscreen",
+      "settings": {
+        "match_keywords": "sunscreen, suryaveda",
+        "eyebrow": "Mineral sun protection",
+        "heading": "What's inside SuryaVeda",
+        "intro": "<p>A lightweight Ayurvedic sunscreen with mineral UV filters for broad-spectrum SPF 50 PA++++ protection. Aloe vera and hyaluronic acid keep skin calm and hydrated — and it leaves no white cast.</p>",
+        "show_full_list": false,
+        "list_title": "Full ingredient list",
+        "list_note": ""
+      },
+      "blocks": {
+        "ing_zinc_oxide": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-zinc-oxide.jpg",
+            "name": "Zinc Oxide",
+            "amount": "",
+            "benefit": "Mineral filter for broad-spectrum UVA/UVB protection.",
+            "credit": "Zinc Oxide: Adam Rędzikowski, CC BY-SA 4.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Zinc_oxide_sample.jpg"
+          }
+        },
+        "ing_aloe_vera": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-aloe-vera.jpg",
+            "name": "Aloe Vera",
+            "amount": "",
+            "benefit": "Soothes and cools sun-exposed skin.",
+            "credit": "Aloe Vera: Rae Allen, CC BY 2.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Cut_Aloe_Vera_Leaf.jpg"
+          }
+        },
+        "ing_hyaluronic_acid": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-hyaluronic-acid.jpg",
+            "name": "Hyaluronic Acid",
+            "amount": "",
+            "benefit": "Locks in hydration for a plump, dewy feel.",
+            "credit": "Hyaluronic Acid: Jahra Tasfia Reza, CC0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:A_dropper_sucking_serum.jpg"
+          }
+        },
+        "ing_cocoa_butter": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-cocoa-butter.jpg",
+            "name": "Cocoa Butter",
+            "amount": "",
+            "benefit": "Nourishes and softens without heaviness.",
+            "credit": "Cocoa Butter: Veganbaking.net from USA, CC BY-SA 2.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Cocoa_Butter_(8612673294).jpg"
+          }
+        }
+      },
+      "block_order": [
+        "ing_zinc_oxide",
+        "ing_aloe_vera",
+        "ing_hyaluronic_acid",
+        "ing_cocoa_butter"
+      ]
+    },
+    "ing_scrub": {
+      "type": "chic-key-ingredients",
+      "name": "Ingredients · Face & Body Scrub",
+      "settings": {
+        "match_keywords": "scrub",
+        "eyebrow": "Purifying botanicals",
+        "heading": "What's inside the Aloevera & Neem Scrub",
+        "intro": "<p>A gentle exfoliating scrub that clears dead skin and unclogs pores, leaving skin clear, bright and glowing. Suitable for acne-prone, oily, dry and all skin types.</p>",
+        "show_full_list": false,
+        "list_title": "Full ingredient list",
+        "list_note": ""
+      },
+      "blocks": {
+        "ing_aloe_vera": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-aloe-vera.jpg",
+            "name": "Aloe Vera",
+            "amount": "",
+            "benefit": "Calms and hydrates while you exfoliate.",
+            "credit": "Aloe Vera: Rae Allen, CC BY 2.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Cut_Aloe_Vera_Leaf.jpg"
+          }
+        },
+        "ing_neem": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-neem.jpg",
+            "name": "Neem",
+            "amount": "",
+            "benefit": "Purifies skin and helps fight acne-causing bacteria.",
+            "credit": "Neem: Thendral Muthusami at English Wikipedia, CC BY-SA 3.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Neem_leaves_Neem_Leaves.jpg"
+          }
+        },
+        "ing_walnut_shell": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-walnut-shell.jpg",
+            "name": "Walnut Shell",
+            "amount": "",
+            "benefit": "Fine granules that buff away dead skin.",
+            "credit": "Walnut Shell: Lmbuga (Luis Miguel Bugallo Sánchez), CC BY-SA 4.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Noces_Walnuts_Nueces.jpg"
+          }
+        },
+        "ing_tulsi": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-tulsi.jpg",
+            "name": "Tulsi",
+            "amount": "",
+            "benefit": "Clarifies and keeps breakouts in check.",
+            "credit": "Tulsi: Adityamadhav83, CC BY-SA 3.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:(Ocimum_tenuiflorum)_Tulasi_foliage_02.jpg"
+          }
+        },
+        "ing_turmeric": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-turmeric.jpg",
+            "name": "Turmeric",
+            "amount": "",
+            "benefit": "Brightens dull skin for a natural glow.",
+            "credit": "Turmeric: Herusutimbul, CC BY-SA 4.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Kunyit_Bubuk.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "ing_aloe_vera",
+        "ing_neem",
+        "ing_walnut_shell",
+        "ing_tulsi",
+        "ing_turmeric"
+      ]
+    },
+    "ing_pigmentation": {
+      "type": "chic-key-ingredients",
+      "name": "Ingredients · Pigmentation Cream",
+      "settings": {
+        "match_keywords": "pigmentation, ayurabright",
+        "eyebrow": "Ayurvedic brightening",
+        "heading": "What's inside the Pigmentation Repair Cream",
+        "intro": "<p>An Ayurvedic cream that helps fade dark spots, tanning and uneven skin tone with time-tested herbal extracts — for a lighter, even and radiant complexion.</p>",
+        "show_full_list": false,
+        "list_title": "Full ingredient list",
+        "list_note": ""
+      },
+      "blocks": {
+        "ing_licorice": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-licorice.jpg",
+            "name": "Licorice (Mulethi)",
+            "amount": "",
+            "benefit": "Helps fade dark spots and even out tone.",
+            "credit": "Licorice (Mulethi): Salil Kumar Mukherjee, CC BY-SA 4.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Sections_of_liquorice_root.jpg"
+          }
+        },
+        "ing_saffron": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-saffron.jpg",
+            "name": "Saffron (Kesar)",
+            "amount": "",
+            "benefit": "Adds radiance and brightens dull skin.",
+            "credit": "Saffron (Kesar): Hubertl, CC BY-SA 4.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Safran-Weinviertel_Niederreiter_2_Gramm_8285.jpg"
+          }
+        },
+        "ing_turmeric": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-turmeric.jpg",
+            "name": "Turmeric",
+            "amount": "",
+            "benefit": "Brightens and reduces the look of tanning.",
+            "credit": "Turmeric: Herusutimbul, CC BY-SA 4.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Kunyit_Bubuk.jpg"
+          }
+        },
+        "ing_manjistha": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-manjistha.jpg",
+            "name": "Manjistha",
+            "amount": "",
+            "benefit": "Classic Ayurvedic herb for clear, even skin.",
+            "credit": "Manjistha: Agaath, CC BY-SA 4.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Meekrap_gedroogd.jpg"
+          }
+        },
+        "ing_aloe_vera": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-aloe-vera.jpg",
+            "name": "Aloe Vera",
+            "amount": "",
+            "benefit": "Soothes and hydrates daily.",
+            "credit": "Aloe Vera: Rae Allen, CC BY 2.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Cut_Aloe_Vera_Leaf.jpg"
+          }
+        },
+        "ing_almond_oil": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-almond-oil.jpg",
+            "name": "Almond Oil",
+            "amount": "",
+            "benefit": "Nourishes with vitamin E for supple skin.",
+            "credit": "Almond Oil: Savion6, CC BY-SA 4.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:%D7%A9%D7%9E%D7%9F_%D7%A9%D7%A7%D7%93%D7%99%D7%9D.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "ing_licorice",
+        "ing_saffron",
+        "ing_turmeric",
+        "ing_manjistha",
+        "ing_aloe_vera",
+        "ing_almond_oil"
+      ]
+    },
+    "ing_yogurt": {
+      "type": "chic-key-ingredients",
+      "name": "Ingredients · Body Yogurt",
+      "settings": {
+        "match_keywords": "body-yogurt, yogurt",
+        "eyebrow": "Whipped nourishment",
+        "heading": "What's inside the Body Yogurt",
+        "intro": "<p>A light, whipped body moisturiser with kokum butter and jojoba that absorbs fast and keeps skin soft and supple all day — without feeling sticky.</p>",
+        "show_full_list": false,
+        "list_title": "Full ingredient list",
+        "list_note": ""
+      },
+      "blocks": {
+        "ing_kokum_butter": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-kokum-butter.jpg",
+            "name": "Kokum Butter",
+            "amount": "",
+            "benefit": "Deeply moisturises and restores softness.",
+            "credit": "Kokum Butter: Phadke09, CC BY-SA 4.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Garcinia_indica_fruit.jpg"
+          }
+        },
+        "ing_jojoba": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-jojoba.jpg",
+            "name": "Jojoba Seeds",
+            "amount": "",
+            "benefit": "Balances moisture like skin's natural oils.",
+            "credit": "Jojoba Seeds: Kenneth Bosma, CC BY 2.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Jojoba.jpg"
+          }
+        },
+        "ing_yogurt": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-yogurt.jpg",
+            "name": "Yogurt",
+            "amount": "",
+            "benefit": "Gentle lactic care for smooth skin.",
+            "credit": "Yogurt: Julikalucky, CC0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Yoghurt_and_spoon.jpg"
+          }
+        },
+        "ing_shea_butter": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-shea-butter.jpg",
+            "name": "Shea Butter",
+            "amount": "",
+            "benefit": "Rich, non-greasy nourishment.",
+            "credit": "Shea Butter: Adoscam, CC BY-SA 4.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:M%C3%A9lange_du_Beurre_de_karit%C3%A9_et_huiles_essentielles_dans_une_boite_pour_massage_02.jpg"
+          }
+        },
+        "ing_aloe_vera": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-aloe-vera.jpg",
+            "name": "Aloe Vera",
+            "amount": "",
+            "benefit": "Soothes and hydrates.",
+            "credit": "Aloe Vera: Rae Allen, CC BY 2.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Cut_Aloe_Vera_Leaf.jpg"
+          }
+        },
+        "ing_almond_oil": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-almond-oil.jpg",
+            "name": "Almond Oil",
+            "amount": "",
+            "benefit": "Adds a healthy, natural glow.",
+            "credit": "Almond Oil: Savion6, CC BY-SA 4.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:%D7%A9%D7%9E%D7%9F_%D7%A9%D7%A7%D7%93%D7%99%D7%9D.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "ing_kokum_butter",
+        "ing_jojoba",
+        "ing_yogurt",
+        "ing_shea_butter",
+        "ing_aloe_vera",
+        "ing_almond_oil"
+      ]
+    },
+    "ing_facewash": {
+      "type": "chic-key-ingredients",
+      "name": "Ingredients · Face Wash",
+      "settings": {
+        "match_keywords": "face-wash, facewash",
+        "eyebrow": "Gentle daily cleanse",
+        "heading": "What's inside the Probiotic Face Wash",
+        "intro": "<p>A gentle, soap-free face wash that cleanses without stripping, supporting a healthy skin barrier with probiotics and calming botanicals.</p>",
+        "show_full_list": false,
+        "list_title": "Full ingredient list",
+        "list_note": ""
+      },
+      "blocks": {
+        "ing_yogurt": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-yogurt.jpg",
+            "name": "Probiotics",
+            "amount": "",
+            "benefit": "Support a healthy, balanced skin barrier.",
+            "credit": "Probiotics: Julikalucky, CC0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Yoghurt_and_spoon.jpg"
+          }
+        },
+        "ing_neem": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-neem.jpg",
+            "name": "Neem",
+            "amount": "",
+            "benefit": "Purifies pores and helps prevent breakouts.",
+            "credit": "Neem: Thendral Muthusami at English Wikipedia, CC BY-SA 3.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Neem_leaves_Neem_Leaves.jpg"
+          }
+        },
+        "ing_aloe_vera": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-aloe-vera.jpg",
+            "name": "Aloe Vera",
+            "amount": "",
+            "benefit": "Calms and hydrates.",
+            "credit": "Aloe Vera: Rae Allen, CC BY 2.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Cut_Aloe_Vera_Leaf.jpg"
+          }
+        },
+        "ing_tea_tree": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-tea-tree.jpg",
+            "name": "Tea Tree",
+            "amount": "",
+            "benefit": "Controls excess oil and acne.",
+            "credit": "Tea Tree: Geoff Derrin, CC BY-SA 4.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Melaleuca_alternifolia_flowers.jpg"
+          }
+        },
+        "ing_turmeric": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-turmeric.jpg",
+            "name": "Turmeric",
+            "amount": "",
+            "benefit": "Brightens for fresh-looking skin.",
+            "credit": "Turmeric: Herusutimbul, CC BY-SA 4.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Kunyit_Bubuk.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "ing_yogurt",
+        "ing_neem",
+        "ing_aloe_vera",
+        "ing_tea_tree",
+        "ing_turmeric"
+      ]
+    },
+    "ing_dtan": {
+      "type": "chic-key-ingredients",
+      "name": "Ingredients · D-Tan Pack",
+      "settings": {
+        "match_keywords": "d-tan, clay-pack",
+        "eyebrow": "Detox & de-tan",
+        "heading": "What's inside the D-Tan Pack",
+        "intro": "<p>A purifying clay pack that draws out impurities and helps remove tan, leaving skin fresh, even-toned and glowing.</p>",
+        "show_full_list": false,
+        "list_title": "Full ingredient list",
+        "list_note": ""
+      },
+      "blocks": {
+        "ing_multani_mitti": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-multani-mitti.jpg",
+            "name": "Multani Mitti",
+            "amount": "",
+            "benefit": "Absorbs oil and draws out impurities.",
+            "credit": "Multani Mitti: Khalid Mahmood, CC BY-SA 3.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Multani_Mitti.jpg"
+          }
+        },
+        "ing_kaolin_clay": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-kaolin-clay.jpg",
+            "name": "Kaolin Clay",
+            "amount": "",
+            "benefit": "Gentle clay that refines pores.",
+            "credit": "Kaolin Clay: Shannon Heinle, CC0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Kaolinite_(GeoDIL_number_-_2356).jpg"
+          }
+        },
+        "ing_turmeric": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-turmeric.jpg",
+            "name": "Turmeric",
+            "amount": "",
+            "benefit": "Helps reduce tan and brighten.",
+            "credit": "Turmeric: Herusutimbul, CC BY-SA 4.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Kunyit_Bubuk.jpg"
+          }
+        },
+        "ing_orange_peel": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-orange-peel.jpg",
+            "name": "Orange Peel",
+            "amount": "",
+            "benefit": "Vitamin C for a fresh glow.",
+            "credit": "Orange Peel: Dvortygirl, CC BY-SA 3.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Zesting_an_orange.jpg"
+          }
+        },
+        "ing_sandalwood": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-sandalwood.jpg",
+            "name": "Sandalwood",
+            "amount": "",
+            "benefit": "Cools, calms and evens tone.",
+            "credit": "Sandalwood: Nistha.aslp, CC BY-SA 4.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Sandal_and_tulasi_wood_in_a_pot.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "ing_multani_mitti",
+        "ing_kaolin_clay",
+        "ing_turmeric",
+        "ing_orange_peel",
+        "ing_sandalwood"
+      ]
+    },
+    "ing_kajal": {
+      "type": "chic-key-ingredients",
+      "name": "Ingredients · Kajal",
+      "settings": {
+        "match_keywords": "kajal",
+        "eyebrow": "Handmade the traditional way",
+        "heading": "What's inside the Handmade Kajal",
+        "intro": "<p>A traditional handmade kajal prepared with nourishing oils and natural ingredients for soft, intense, long-lasting definition.</p>",
+        "show_full_list": false,
+        "list_title": "Full ingredient list",
+        "list_note": ""
+      },
+      "blocks": {
+        "ing_almond_oil": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-almond-oil.jpg",
+            "name": "Almond Oil",
+            "amount": "",
+            "benefit": "Nourishes lashes and the delicate eye area.",
+            "credit": "Almond Oil: Savion6, CC BY-SA 4.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:%D7%A9%D7%9E%D7%9F_%D7%A9%D7%A7%D7%93%D7%99%D7%9D.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "ing_almond_oil"
+      ]
+    },
+    "ing_lipbalm": {
+      "type": "chic-key-ingredients",
+      "name": "Ingredients · Lip Balm",
+      "settings": {
+        "match_keywords": "lip-balm, lip balm",
+        "eyebrow": "Soft, nourished lips",
+        "heading": "What's inside the Handmade Lip Balm",
+        "intro": "<p>A handmade lip balm with natural butters and waxes that heals dry, chapped lips and adds a hint of natural tint.</p>",
+        "show_full_list": false,
+        "list_title": "Full ingredient list",
+        "list_note": ""
+      },
+      "blocks": {
+        "ing_cocoa_butter": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-cocoa-butter.jpg",
+            "name": "Cocoa Butter",
+            "amount": "",
+            "benefit": "Softens and smooths lips.",
+            "credit": "Cocoa Butter: Veganbaking.net from USA, CC BY-SA 2.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Cocoa_Butter_(8612673294).jpg"
+          }
+        },
+        "ing_shea_butter": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-shea-butter.jpg",
+            "name": "Shea Butter",
+            "amount": "",
+            "benefit": "Deeply nourishes dry lips.",
+            "credit": "Shea Butter: Adoscam, CC BY-SA 4.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:M%C3%A9lange_du_Beurre_de_karit%C3%A9_et_huiles_essentielles_dans_une_boite_pour_massage_02.jpg"
+          }
+        },
+        "ing_coconut_oil": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-coconut-oil.jpg",
+            "name": "Coconut Oil",
+            "amount": "",
+            "benefit": "Hydrates and conditions.",
+            "credit": "Coconut Oil: deadrat, CC BY-SA 4.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Coconut_oil_bottle_in_the_background_of_dried_coconuts_from_Kaleeswari_Farm.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "ing_cocoa_butter",
+        "ing_shea_butter",
+        "ing_coconut_oil"
+      ]
+    },
+    "ing_rosewater": {
+      "type": "chic-key-ingredients",
+      "name": "Ingredients · Rose Water",
+      "settings": {
+        "match_keywords": "rose-water, rose water",
+        "eyebrow": "Pure & refreshing",
+        "heading": "What's inside the Rose Water",
+        "intro": "<p>Steam-distilled rose water that tones, hydrates and refreshes skin — use it as a toner, a face mist or in your face packs.</p>",
+        "show_full_list": false,
+        "list_title": "Full ingredient list",
+        "list_note": ""
+      },
+      "blocks": {
+        "ing_aloe_vera": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-aloe-vera.jpg",
+            "name": "Aloe Vera",
+            "amount": "",
+            "benefit": "Calms and soothes the skin.",
+            "credit": "Aloe Vera: Rae Allen, CC BY 2.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Cut_Aloe_Vera_Leaf.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "ing_aloe_vera"
+      ]
+    },
+    "ing_haircare": {
+      "type": "chic-key-ingredients",
+      "name": "Ingredients · Shampoo & Conditioner",
+      "settings": {
+        "match_keywords": "shampoo, conditioner, hair-spa",
+        "eyebrow": "Salon-like hair spa",
+        "heading": "What's inside the Hair Spa Ritual",
+        "intro": "<p>A keratin-enriched shampoo and spa conditioner with Ayurvedic herbs that cleanse gently, repair damage and leave hair smooth, strong and shiny.</p>",
+        "show_full_list": false,
+        "list_title": "Full ingredient list",
+        "list_note": ""
+      },
+      "blocks": {
+        "ing_bhringraj": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-bhringraj.jpg",
+            "name": "Bhringraj",
+            "amount": "",
+            "benefit": "Strengthens roots, reduces hair fall.",
+            "credit": "Bhringraj: Nativeplants garden, CC BY-SA 4.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Eclipta_prostrata_(19240).jpg"
+          }
+        },
+        "ing_amla": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-amla.jpg",
+            "name": "Amla",
+            "amount": "",
+            "benefit": "Nourishes and helps prevent greying.",
+            "credit": "Amla: SarKaLay စာကလေး, CC BY-SA 4.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Gooseberries_Amla_Amalaki_ZeePhyuTee.jpg"
+          }
+        },
+        "ing_aloe_vera": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-aloe-vera.jpg",
+            "name": "Aloe Vera",
+            "amount": "",
+            "benefit": "Hydrates the scalp.",
+            "credit": "Aloe Vera: Rae Allen, CC BY 2.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Cut_Aloe_Vera_Leaf.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "ing_bhringraj",
+        "ing_amla",
+        "ing_aloe_vera"
+      ]
+    },
+    "ing_giftset": {
+      "type": "chic-key-ingredients",
+      "name": "Ingredients · Gift Sets & Kits",
+      "settings": {
+        "match_keywords": "glow-box, pamper-kit, hamper, clear-skin-kit, glow-care-kit, clear-skin-defence",
+        "eyebrow": "The CHIC botanicals",
+        "heading": "What's inside this set",
+        "intro": "<p>Every CHIC product is made with time-tested Ayurvedic botanicals — free from parabens, mineral oil and harsh chemicals. Here are some of the key ingredients in this set.</p>",
+        "show_full_list": false,
+        "list_title": "Full ingredient list",
+        "list_note": ""
+      },
+      "blocks": {
+        "ing_aloe_vera": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-aloe-vera.jpg",
+            "name": "Aloe Vera",
+            "amount": "",
+            "benefit": "Soothes and hydrates every skin type.",
+            "credit": "Aloe Vera: Rae Allen, CC BY 2.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Cut_Aloe_Vera_Leaf.jpg"
+          }
+        },
+        "ing_neem": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-neem.jpg",
+            "name": "Neem",
+            "amount": "",
+            "benefit": "Purifies and helps prevent breakouts.",
+            "credit": "Neem: Thendral Muthusami at English Wikipedia, CC BY-SA 3.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Neem_leaves_Neem_Leaves.jpg"
+          }
+        },
+        "ing_kokum_butter": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-kokum-butter.jpg",
+            "name": "Kokum Butter",
+            "amount": "",
+            "benefit": "Deep, non-greasy moisture.",
+            "credit": "Kokum Butter: Phadke09, CC BY-SA 4.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Garcinia_indica_fruit.jpg"
+          }
+        },
+        "ing_jojoba": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-jojoba.jpg",
+            "name": "Jojoba",
+            "amount": "",
+            "benefit": "Balances skin's natural oils.",
+            "credit": "Jojoba: Kenneth Bosma, CC BY 2.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Jojoba.jpg"
+          }
+        },
+        "ing_turmeric": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-turmeric.jpg",
+            "name": "Turmeric",
+            "amount": "",
+            "benefit": "Brightens for a natural glow.",
+            "credit": "Turmeric: Herusutimbul, CC BY-SA 4.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Kunyit_Bubuk.jpg"
+          }
+        },
+        "ing_licorice": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-licorice.jpg",
+            "name": "Licorice",
+            "amount": "",
+            "benefit": "Helps even out skin tone.",
+            "credit": "Licorice: Salil Kumar Mukherjee, CC BY-SA 4.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Sections_of_liquorice_root.jpg"
+          }
+        },
+        "ing_saffron": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-saffron.jpg",
+            "name": "Saffron",
+            "amount": "",
+            "benefit": "Adds radiance.",
+            "credit": "Saffron: Hubertl, CC BY-SA 4.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Safran-Weinviertel_Niederreiter_2_Gramm_8285.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "ing_aloe_vera",
+        "ing_neem",
+        "ing_kokum_butter",
+        "ing_jojoba",
+        "ing_turmeric",
+        "ing_licorice",
+        "ing_saffron"
+      ]
+    },
+    "ing_general": {
+      "type": "chic-key-ingredients",
+      "name": "Ingredients · All other products",
+      "settings": {
+        "match_keywords": "",
+        "exclude_keywords": "hair-oil, hair oil, hair-amrut, hair amrut, massager, comb-only, sunscreen, suryaveda, scrub, pigmentation, ayurabright, body-yogurt, yogurt, face-wash, facewash, d-tan, clay-pack, kajal, lip-balm, lip balm, rose-water, rose water, shampoo, conditioner, hair-spa, glow-box, pamper-kit, hamper, clear-skin-kit, glow-care-kit, clear-skin-defence",
+        "eyebrow": "The CHIC botanicals",
+        "heading": "Backed by the Right Ingredients",
+        "intro": "<p>Every CHIC product is made with time-tested Ayurvedic botanicals — free from parabens, mineral oil and harsh chemicals.</p>",
+        "show_full_list": false,
+        "list_title": "Full ingredient list",
+        "list_note": ""
+      },
+      "blocks": {
+        "ing_aloe_vera": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-aloe-vera.jpg",
+            "name": "Aloe Vera",
+            "amount": "",
+            "benefit": "Soothes and hydrates every skin type.",
+            "credit": "Aloe Vera: Rae Allen, CC BY 2.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Cut_Aloe_Vera_Leaf.jpg"
+          }
+        },
+        "ing_neem": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-neem.jpg",
+            "name": "Neem",
+            "amount": "",
+            "benefit": "Purifies and helps prevent breakouts.",
+            "credit": "Neem: Thendral Muthusami at English Wikipedia, CC BY-SA 3.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Neem_leaves_Neem_Leaves.jpg"
+          }
+        },
+        "ing_turmeric": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-turmeric.jpg",
+            "name": "Turmeric",
+            "amount": "",
+            "benefit": "Brightens for a natural glow.",
+            "credit": "Turmeric: Herusutimbul, CC BY-SA 4.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Kunyit_Bubuk.jpg"
+          }
+        },
+        "ing_tulsi": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-tulsi.jpg",
+            "name": "Tulsi",
+            "amount": "",
+            "benefit": "Keeps skin clear and healthy.",
+            "credit": "Tulsi: Adityamadhav83, CC BY-SA 3.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:(Ocimum_tenuiflorum)_Tulasi_foliage_02.jpg"
+          }
+        },
+        "ing_kokum_butter": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-kokum-butter.jpg",
+            "name": "Kokum Butter",
+            "amount": "",
+            "benefit": "Deep, non-greasy moisture.",
+            "credit": "Kokum Butter: Phadke09, CC BY-SA 4.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Garcinia_indica_fruit.jpg"
+          }
+        },
+        "ing_almond_oil": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-almond-oil.jpg",
+            "name": "Almond Oil",
+            "amount": "",
+            "benefit": "Nourishes and softens.",
+            "credit": "Almond Oil: Savion6, CC BY-SA 4.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:%D7%A9%D7%9E%D7%9F_%D7%A9%D7%A7%D7%93%D7%99%D7%9D.jpg"
+          }
+        },
+        "ing_saffron": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-saffron.jpg",
+            "name": "Saffron",
+            "amount": "",
+            "benefit": "Adds radiance.",
+            "credit": "Saffron: Hubertl, CC BY-SA 4.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Safran-Weinviertel_Niederreiter_2_Gramm_8285.jpg"
+          }
+        },
+        "ing_coconut_oil": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-coconut-oil.jpg",
+            "name": "Coconut Oil",
+            "amount": "",
+            "benefit": "Conditions and protects.",
+            "credit": "Coconut Oil: deadrat, CC BY-SA 4.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Coconut_oil_bottle_in_the_background_of_dried_coconuts_from_Kaleeswari_Farm.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "ing_aloe_vera",
+        "ing_neem",
+        "ing_turmeric",
+        "ing_tulsi",
+        "ing_kokum_butter",
+        "ing_almond_oil",
+        "ing_saffron",
+        "ing_coconut_oil"
+      ]
     }
   },
   "order": [
     "main",
     "chic_ingredients",
+    "ing_sunscreen",
+    "ing_scrub",
+    "ing_pigmentation",
+    "ing_yogurt",
+    "ing_facewash",
+    "ing_dtan",
+    "ing_kajal",
+    "ing_lipbalm",
+    "ing_rosewater",
+    "ing_haircare",
+    "ing_giftset",
+    "ing_general",
     "chic_recs"
   ]
 }
