@@ -29,6 +29,7 @@
     {%- render 'color-palette' -%}
     {{ 'chic-theme.css' | asset_url | stylesheet_tag }}
     <script src="{{ 'chic-animations.js' | asset_url }}" defer></script>
+    <script src="{{ 'chic-cards.js' | asset_url }}" defer></script>
 
     {% if request.design_mode %}
       {%- render 'theme-editor' -%}
