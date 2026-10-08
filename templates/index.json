@@ -9,6 +9,61 @@
  */
 {
   "sections": {
+    "chic_banners": {
+      "type": "chic-banner-slider",
+      "name": "Chic banner slider",
+      "settings": {
+        "autoplay": true,
+        "slide_duration": 5,
+        "label": "Featured banners"
+      },
+      "blocks": {
+        "banner_hair": {
+          "type": "banner",
+          "settings": {
+            "fallback_desktop": "chic-banner-hair-amrut.jpg",
+            "desktop_w": 4224,
+            "desktop_h": 924,
+            "fallback_mobile": "chic-banner-hair-amrut-mobile.jpg",
+            "mobile_w": 1500,
+            "mobile_h": 1918,
+            "link": "shopify://collections/hair-care",
+            "alt": "CHIC Hair Amrut hair oil — infused with 18 herbs for stronger, healthier hair"
+          }
+        },
+        "banner_scrub": {
+          "type": "banner",
+          "settings": {
+            "fallback_desktop": "chic-banner-aloe-neem-scrub.jpg",
+            "desktop_w": 4224,
+            "desktop_h": 764,
+            "fallback_mobile": "chic-banner-aloe-neem-scrub-mobile.jpg",
+            "mobile_w": 1500,
+            "mobile_h": 1588,
+            "link": "shopify://collections/skin-care",
+            "alt": "CHIC Aloevera & Neem Face & Body Scrub — clear, bright, glowing skin"
+          }
+        },
+        "banner_sun": {
+          "type": "banner",
+          "settings": {
+            "fallback_desktop": "chic-banner-suryaveda-sunscreen.jpg",
+            "desktop_w": 4224,
+            "desktop_h": 640,
+            "fallback_mobile": "chic-banner-suryaveda-sunscreen-mobile.jpg",
+            "mobile_w": 1500,
+            "mobile_h": 1558,
+            "link": "shopify://collections/skin-care",
+            "alt": "CHIC SuryaVeda Sunscreen SPF 50 PA++++ — leaves no white cast"
+          }
+        }
+      },
+      "block_order": [
+        "banner_hair",
+        "banner_scrub",
+        "banner_sun"
+      ]
+    },
     "chic_hero": {
       "type": "chic-hero",
       "name": "Chic hero",
@@ -49,7 +104,8 @@
         "slide_1",
         "slide_2",
         "slide_3"
-      ]
+      ],
+      "disabled": true
     },
     "chic_features": {
       "type": "chic-features",
@@ -475,6 +531,7 @@
     }
   },
   "order": [
+    "chic_banners",
     "chic_hero",
     "chic_features",
     "chic_categories",

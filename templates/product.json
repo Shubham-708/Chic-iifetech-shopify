@@ -92,7 +92,7 @@
               "name": "t:names.title",
               "settings": {
                 "text": "<h6>{{ closest.product.title }}</h6>",
-                "width": "fit-content",
+                "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "h2",
@@ -264,7 +264,7 @@
                       "name": "t:names.product_description",
                       "settings": {
                         "text": "{{ closest.product.description }}<p></p>",
-                        "width": "fit-content",
+                        "width": "100%",
                         "max_width": "normal",
                         "alignment": "left",
                         "type_preset": "rte",
@@ -293,7 +293,7 @@
                 "accordion_row_HUWbDi": {
                   "type": "_accordion-row",
                   "settings": {
-                    "heading": "Materials + Care",
+                    "heading": "Ingredients + Care",
                     "open_by_default": false,
                     "icon": "none",
                     "width": 20
@@ -302,7 +302,7 @@
                     "text_wMFRAi": {
                       "type": "text",
                       "settings": {
-                        "text": "<p>We prioritize quality in selecting the materials for our items, choosing premium fabrics and finishings that ensure durability, comfort, and timeless appeal.</p>",
+                        "text": "<p>Made with plant-based Ayurvedic ingredients — no parabens, mineral oil or silicones. Store in a cool, dry place away from direct sunlight and close the cap after use. For external use only; do a patch test before first use.</p>",
                         "width": "100%",
                         "max_width": "normal",
                         "alignment": "left",
@@ -410,10 +410,219 @@
         "link_label": "View All Products",
         "max_products": 8
       }
+    },
+    "chic_ingredients": {
+      "type": "chic-key-ingredients",
+      "name": "Chic key ingredients",
+      "settings": {
+        "match_keywords": "hair-oil, hair oil, hair-amrut, hair amrut",
+        "eyebrow": "Infused with 18 herbs",
+        "heading": "Backed by the Right Ingredients",
+        "intro": "<p><strong>Hair Amrut Hair Oil</strong> is an all-rounder Ayurvedic hair tonic. Its blend of 18 herbs in cold-pressed oils revitalises hair follicles and promotes natural hair growth by improving blood circulation in the scalp.</p><p>It helps reduce premature greying, hair fall and dandruff, and makes the roots stronger for healthier, nourished hair. Free from parabens, mineral oil and silicones.</p>",
+        "show_full_list": true,
+        "list_title": "Full ingredient list",
+        "list_note": "Percentages as printed on the Hair Amrut label."
+      },
+      "blocks": {
+        "ing_bhringraj": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-bhringraj.jpg",
+            "name": "Bhringraj",
+            "amount": "1.5%",
+            "benefit": "The ‘king of hair’ herb — supports growth and reduces hair fall."
+          }
+        },
+        "ing_rosemary": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-rosemary.jpg",
+            "name": "Rosemary",
+            "amount": "1%",
+            "benefit": "Stimulates scalp circulation for thicker-looking hair."
+          }
+        },
+        "ing_mint": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-mint.jpg",
+            "name": "Mint",
+            "amount": "0.5%",
+            "benefit": "Cools and refreshes an itchy, tired scalp."
+          }
+        },
+        "ing_garlic": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-garlic.jpg",
+            "name": "Garlic",
+            "amount": "1%",
+            "benefit": "Sulphur-rich to strengthen roots and reduce breakage."
+          }
+        },
+        "ing_clove": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-clove.jpg",
+            "name": "Clove",
+            "amount": "0.5%",
+            "benefit": "Warming and antimicrobial for a healthy scalp."
+          }
+        },
+        "ing_amla": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-amla.jpg",
+            "name": "Amla",
+            "amount": "1%",
+            "benefit": "Vitamin C-rich; helps prevent premature greying."
+          }
+        },
+        "ing_aloe_vera": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-aloe-vera.jpg",
+            "name": "Aloe Vera",
+            "amount": "1%",
+            "benefit": "Soothes and hydrates the scalp, adds softness."
+          }
+        },
+        "ing_shikakai": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-shikakai.jpg",
+            "name": "Shikakai",
+            "amount": "1%",
+            "benefit": "Traditional gentle cleanser for shine and smoothness."
+          }
+        },
+        "ing_ashwagandha": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-ashwagandha.jpg",
+            "name": "Ashwagandha",
+            "amount": "0.8%",
+            "benefit": "Adaptogen that helps with stress-related hair fall."
+          }
+        },
+        "ing_jatamansi": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-jatamansi.jpg",
+            "name": "Jatamansi",
+            "amount": "0.5%",
+            "benefit": "Calms the scalp and nourishes hair roots."
+          }
+        },
+        "ing_reetha": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-reetha.jpg",
+            "name": "Reetha",
+            "amount": "1%",
+            "benefit": "Natural soapnut that helps fight dandruff."
+          }
+        },
+        "ing_methi": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-methi.jpg",
+            "name": "Methi",
+            "amount": "0.5%",
+            "benefit": "Protein-rich fenugreek that softens and fights flakes."
+          }
+        },
+        "ing_onion_seeds": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-onion-seeds.jpg",
+            "name": "Onion Seeds",
+            "amount": "1%",
+            "benefit": "Kalonji to strengthen strands and reduce breakage."
+          }
+        },
+        "ing_tulsi": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-tulsi.jpg",
+            "name": "Tulsi",
+            "amount": "0.5%",
+            "benefit": "Holy basil keeps the scalp clean and itch-free."
+          }
+        },
+        "ing_khas_khas": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-khas-khas.jpg",
+            "name": "Khas-Khas Root",
+            "amount": "0.5%",
+            "benefit": "Cooling vetiver root that relaxes the scalp."
+          }
+        },
+        "ing_lavender": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-lavender.jpg",
+            "name": "Lavender",
+            "amount": "5%",
+            "benefit": "Calming aroma that supports scalp health."
+          }
+        },
+        "ing_coconut_oil": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-coconut-oil.jpg",
+            "name": "Coconut Oil",
+            "amount": "10%",
+            "benefit": "Deep conditioning that reduces protein loss."
+          }
+        },
+        "ing_sesame_oil": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-sesame-oil.jpg",
+            "name": "Sesame Oil",
+            "amount": "15%",
+            "benefit": "Nourishes and protects hair from dryness."
+          }
+        },
+        "ing_mustard_oil": {
+          "type": "ingredient",
+          "settings": {
+            "asset": "chic-ing-mustard-oil.jpg",
+            "name": "Mustard Oil",
+            "amount": "15% Q.S.",
+            "benefit": "Warms the scalp and boosts circulation."
+          }
+        }
+      },
+      "block_order": [
+        "ing_bhringraj",
+        "ing_rosemary",
+        "ing_mint",
+        "ing_garlic",
+        "ing_clove",
+        "ing_amla",
+        "ing_aloe_vera",
+        "ing_shikakai",
+        "ing_ashwagandha",
+        "ing_jatamansi",
+        "ing_reetha",
+        "ing_methi",
+        "ing_onion_seeds",
+        "ing_tulsi",
+        "ing_khas_khas",
+        "ing_lavender",
+        "ing_coconut_oil",
+        "ing_sesame_oil",
+        "ing_mustard_oil"
+      ],
+      "disabled": true
     }
   },
   "order": [
     "main",
+    "chic_ingredients",
     "chic_recs"
   ]
 }

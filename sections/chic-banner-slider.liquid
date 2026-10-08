@@ -1,0 +1,440 @@
+{% liquid
+  assign s = section.settings
+  assign banners = section.blocks | where: 'type', 'banner'
+%}
+
+<div
+  class="chic-banners"
+  id="chic-banners-{{ section.id }}"
+  data-chic-banners
+  data-autoplay="{{ s.autoplay }}"
+  data-duration="{{ s.slide_duration | default: 5 | times: 1000 }}"
+  role="region"
+  aria-roledescription="carousel"
+  aria-label="{{ s.label | default: 'Featured banners' | escape }}"
+>
+  <div class="chic-banners__track" data-chic-banners-track>
+    {% for block in banners %}
+      {% liquid
+        assign bs = block.settings
+        assign alt = bs.alt | default: bs.fallback_desktop | escape
+        assign is_first = forloop.first
+      %}
+      <div
+        class="chic-banners__slide{% if is_first %} is-active{% endif %}"
+        data-chic-banner
+        role="group"
+        aria-roledescription="slide"
+        aria-label="{{ forloop.index }} / {{ banners.size }}"
+        {% unless is_first %}aria-hidden="true"{% endunless %}
+        {{ block.shopify_attributes }}
+      >
+        {% if bs.link != blank %}<a class="chic-banners__link" href="{{ bs.link }}" {% unless is_first %}tabindex="-1"{% endunless %}>{% endif %}
+        <picture>
+          {%- comment -%} Mobile: portrait artwork {%- endcomment -%}
+          {% if bs.image_mobile != blank %}
+            <source
+              media="(max-width: 749px)"
+              srcset="{{ bs.image_mobile | image_url: width: 750 }} 750w, {{ bs.image_mobile | image_url: width: 1125 }} 1125w, {{ bs.image_mobile | image_url: width: 1500 }} 1500w"
+              sizes="100vw"
+              width="{{ bs.image_mobile.width }}"
+              height="{{ bs.image_mobile.height }}"
+            >
+          {% elsif bs.fallback_mobile != blank %}
+            <source
+              media="(max-width: 749px)"
+              srcset="{{ bs.fallback_mobile | asset_img_url: '750x' }} 750w, {{ bs.fallback_mobile | asset_img_url: '1125x' }} 1125w, {{ bs.fallback_mobile | asset_url }} 1500w"
+              sizes="100vw"
+              width="{{ bs.mobile_w }}"
+              height="{{ bs.mobile_h }}"
+            >
+          {% endif %}
+
+          {%- comment -%} Desktop: wide artwork, up to 4K {%- endcomment -%}
+          {% if bs.image != blank %}
+            {% liquid
+              assign w = bs.image.width
+              assign h = bs.image.height
+              capture srcset
+                echo bs.image | image_url: width: 1280
+                echo ' 1280w, '
+                echo bs.image | image_url: width: 1920
+                echo ' 1920w, '
+                echo bs.image | image_url: width: 2880
+                echo ' 2880w, '
+                echo bs.image | image_url: width: 3840
+                echo ' 3840w'
+              endcapture
+              assign src = bs.image | image_url: width: 1920
+            %}
+          {% else %}
+            {% liquid
+              assign w = bs.desktop_w
+              assign h = bs.desktop_h
+              capture srcset
+                echo bs.fallback_desktop | asset_img_url: '1280x'
+                echo ' 1280w, '
+                echo bs.fallback_desktop | asset_img_url: '1920x'
+                echo ' 1920w, '
+                echo bs.fallback_desktop | asset_img_url: '2880x'
+                echo ' 2880w, '
+                echo bs.fallback_desktop | asset_url
+                echo ' 4224w'
+              endcapture
+              assign src = bs.fallback_desktop | asset_img_url: '1920x'
+            %}
+          {% endif %}
+          <img
+            class="chic-banners__img"
+            src="{{ src }}"
+            srcset="{{ srcset }}"
+            sizes="100vw"
+            alt="{{ alt }}"
+            width="{{ w }}"
+            height="{{ h }}"
+            {% if is_first %}
+              loading="eager" fetchpriority="high"
+            {% else %}
+              loading="lazy"
+            {% endif %}
+            decoding="async"
+            draggable="false"
+          >
+        </picture>
+        {% if bs.link != blank %}</a>{% endif %}
+      </div>
+    {% endfor %}
+  </div>
+
+  {% if banners.size > 1 %}
+    <button type="button" class="chic-banners__arrow chic-banners__arrow--prev" data-chic-banners-prev aria-label="Previous banner">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+    </button>
+    <button type="button" class="chic-banners__arrow chic-banners__arrow--next" data-chic-banners-next aria-label="Next banner">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+    </button>
+    <div class="chic-banners__dots" role="tablist" aria-label="Choose banner">
+      {% for block in banners %}
+        <button
+          type="button"
+          class="chic-banners__dot{% if forloop.first %} is-active{% endif %}"
+          data-chic-banners-dot="{{ forloop.index0 }}"
+          aria-label="Banner {{ forloop.index }}"
+          {% if forloop.first %}aria-current="true"{% endif %}
+        ></button>
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>
+
+{% stylesheet %}
+  .chic-banners {
+    position: relative;
+    overflow: hidden;
+    background: #0f1a12;
+    user-select: none;
+  }
+
+  .chic-banners__track {
+    position: relative;
+    overflow: hidden;
+    transition: height 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+    touch-action: pan-y;
+  }
+
+  .chic-banners__slide {
+    position: absolute;
+    inset: 0 0 auto 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(1.015);
+    transition: opacity 0.9s ease, transform 1.4s ease, visibility 0s linear 0.9s;
+  }
+
+  .chic-banners__slide.is-active {
+    position: relative;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition: opacity 0.9s ease, transform 1.4s ease, visibility 0s;
+    z-index: 1;
+  }
+
+  .chic-banners__slide.is-leaving {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition: none;
+    z-index: 0;
+  }
+
+  .chic-banners__link {
+    display: block;
+  }
+
+  .chic-banners__img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .chic-banners__arrow {
+    position: absolute;
+    top: 50%;
+    z-index: 3;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    margin-top: -22px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.82);
+    color: var(--chic-ink, #1d1a22);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.14);
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+  }
+
+  .chic-banners:hover .chic-banners__arrow,
+  .chic-banners__arrow:focus-visible {
+    opacity: 1;
+  }
+
+  .chic-banners__arrow:hover {
+    background: #fff;
+    transform: scale(1.06);
+  }
+
+  .chic-banners__arrow svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .chic-banners__arrow--prev { left: clamp(12px, 2vw, 28px); }
+  .chic-banners__arrow--next { right: clamp(12px, 2vw, 28px); }
+
+  .chic-banners__dots {
+    position: absolute;
+    right: clamp(16px, 3vw, 40px);
+    bottom: clamp(12px, 1.6vw, 24px);
+    z-index: 3;
+    display: flex;
+    gap: 8px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.18);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+
+  .chic-banners__dot {
+    width: 9px;
+    height: 9px;
+    padding: 0;
+    border: 1.5px solid #fff;
+    border-radius: 999px;
+    background: transparent;
+    cursor: pointer;
+    transition: width 0.35s ease, background-color 0.35s ease;
+  }
+
+  .chic-banners__dot.is-active {
+    width: 24px;
+    background: #fff;
+  }
+
+  @media screen and (max-width: 749px) {
+    .chic-banners__arrow { display: none; }
+
+    .chic-banners__dots {
+      left: 50%;
+      right: auto;
+      bottom: 12px;
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .chic-banners__track,
+    .chic-banners__slide,
+    .chic-banners__slide.is-active {
+      transition: none;
+      transform: none;
+    }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  (() => {
+    const init = (root) => {
+      if (root.dataset.chicInit) return;
+      root.dataset.chicInit = '1';
+
+      const track = root.querySelector('[data-chic-banners-track]');
+      const slides = Array.from(root.querySelectorAll('[data-chic-banner]'));
+      if (slides.length < 2) return;
+
+      const dots = Array.from(root.querySelectorAll('[data-chic-banners-dot]'));
+      const duration = Number(root.dataset.duration) || 5000;
+      const autoplay = root.dataset.autoplay !== 'false';
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      let current = 0;
+      let timer;
+
+      const show = (next) => {
+        next = (next + slides.length) % slides.length;
+        if (next === current) return;
+        const from = slides[current];
+        const to = slides[next];
+
+        // Lock the height, swap slides, then animate to the new slide's height
+        track.style.height = `${from.offsetHeight}px`;
+        from.classList.remove('is-active');
+        from.classList.add('is-leaving');
+        from.setAttribute('aria-hidden', 'true');
+        to.classList.add('is-active');
+        to.removeAttribute('aria-hidden');
+        slides.forEach((s) => s.querySelector('a')?.setAttribute('tabindex', s === to ? '0' : '-1'));
+        requestAnimationFrame(() => {
+          const h = to.offsetHeight;
+          if (Math.abs(h - from.offsetHeight) < 1 || reduceMotion) track.style.height = '';
+          else track.style.height = `${h}px`;
+        });
+        setTimeout(() => from.classList.remove('is-leaving'), 900);
+
+        dots.forEach((d, n) => {
+          d.classList.toggle('is-active', n === next);
+          if (n === next) d.setAttribute('aria-current', 'true');
+          else d.removeAttribute('aria-current');
+        });
+        current = next;
+      };
+
+      track.addEventListener('transitionend', (e) => {
+        if (e.target === track && e.propertyName === 'height') track.style.height = '';
+      });
+
+      window.addEventListener('resize', () => { track.style.height = ''; });
+
+      const stop = () => clearInterval(timer);
+      const start = () => {
+        stop();
+        if (!autoplay || reduceMotion) return;
+        timer = setInterval(() => show(current + 1), duration);
+      };
+
+      root.querySelector('[data-chic-banners-prev]')?.addEventListener('click', () => { show(current - 1); start(); });
+      root.querySelector('[data-chic-banners-next]')?.addEventListener('click', () => { show(current + 1); start(); });
+      dots.forEach((dot) => dot.addEventListener('click', () => { show(Number(dot.dataset.chicBannersDot)); start(); }));
+
+      // Swipe
+      let x0 = null;
+      let y0 = null;
+      let swiped = false;
+      track.addEventListener('pointerdown', (e) => { x0 = e.clientX; y0 = e.clientY; swiped = false; });
+      track.addEventListener('pointerup', (e) => {
+        if (x0 === null) return;
+        const dx = e.clientX - x0;
+        const dy = e.clientY - y0;
+        x0 = null;
+        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+          swiped = true;
+          show(current + (dx < 0 ? 1 : -1));
+          start();
+        }
+      });
+      track.addEventListener('click', (e) => {
+        if (swiped) { e.preventDefault(); swiped = false; }
+      }, true);
+
+      root.addEventListener('mouseenter', stop);
+      root.addEventListener('mouseleave', start);
+      root.addEventListener('focusin', stop);
+      root.addEventListener('focusout', start);
+      root.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') { show(current - 1); start(); }
+        if (e.key === 'ArrowRight') { show(current + 1); start(); }
+      });
+      document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
+
+      start();
+    };
+
+    const boot = () => document.querySelectorAll('[data-chic-banners]').forEach(init);
+    boot();
+    document.addEventListener('shopify:section:load', boot);
+  })();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Chic banner slider",
+  "tag": "section",
+  "class": "chic-banners-section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Full-width banner slider. Upload a wide desktop image (3840px+ wide for 4K screens) and a portrait mobile image for each banner."
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Autoplay",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "slide_duration",
+      "label": "Seconds per banner",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "default": 5
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Accessible label",
+      "default": "Featured banners"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "banner",
+      "name": "Banner",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Desktop image" },
+        { "type": "image_picker", "id": "image_mobile", "label": "Mobile image (portrait)" },
+        { "type": "url", "id": "link", "label": "Link" },
+        { "type": "text", "id": "alt", "label": "Alt text" },
+        { "type": "header", "content": "Bundled artwork (used when no image is uploaded)" },
+        { "type": "text", "id": "fallback_desktop", "label": "Desktop asset filename" },
+        { "type": "number", "id": "desktop_w", "label": "Desktop asset width", "default": 4224 },
+        { "type": "number", "id": "desktop_h", "label": "Desktop asset height", "default": 924 },
+        { "type": "text", "id": "fallback_mobile", "label": "Mobile asset filename" },
+        { "type": "number", "id": "mobile_w", "label": "Mobile asset width", "default": 1500 },
+        { "type": "number", "id": "mobile_h", "label": "Mobile asset height", "default": 1918 }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Chic banner slider",
+      "category": "Banners",
+      "blocks": [
+        { "type": "banner", "settings": { "fallback_desktop": "chic-banner-hair-amrut.jpg", "fallback_mobile": "chic-banner-hair-amrut-mobile.jpg", "alt": "CHIC Hair Amrut — infused with 18 herbs" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

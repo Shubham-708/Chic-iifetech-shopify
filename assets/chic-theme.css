@@ -360,3 +360,93 @@ html {
     max-height: 56vh;
   }
 }
+
+/* product images: always sit on the same white as the product photography */
+.chic-prod__pic,
+.card-gallery,
+.media-gallery .product-media,
+.media-gallery .product-media-container {
+  background-color: #fff;
+}
+
+/* ------------------------------------------------------------------
+   Product page: one modern type family + one text colour everywhere
+   ------------------------------------------------------------------ */
+body.template-product {
+  --pdp-font: var(--chic-sans);
+  --pdp-ink: var(--chic-ink, #1d1a22);
+}
+
+body.template-product main :is(h1, h2, h3, h4, h5, h6, p, li, a, span, strong, em, small, s, summary, label, input, button, select, td, th, div, .h1, .h2, .h3, .h4, .h5, .h6, .rte) {
+  font-family: var(--pdp-font);
+}
+
+body.template-product .product-details :is(h1, h2, h3, h4, h5, h6, p, li, strong, summary, .details__header, .text-block, .price, .compare-at-price, .tax-note, .installments) {
+  color: var(--pdp-ink);
+}
+
+/* Title */
+body.template-product .product-details .text-block--text_WE3K4w,
+body.template-product .product-details .text-block--text_WE3K4w :is(h1, h2, h3, h4, h5, h6, p) {
+  font-family: var(--pdp-font);
+  font-size: clamp(24px, 2.3vw, 32px);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  color: var(--pdp-ink);
+}
+
+/* Price */
+body.template-product .product-details .price {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+body.template-product .product-details .compare-at-price {
+  font-size: 15px;
+  font-weight: 400;
+  opacity: 0.55;
+}
+
+body.template-product .product-details :is(.tax-note, .installments) {
+  font-size: 12px;
+  opacity: 0.65;
+}
+
+/* Accordion headings */
+body.template-product .product-details .details__header {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* Description content */
+body.template-product .product-details .details-content :is(h1, h2, h3, h4, h5, h6) {
+  margin: 1.2em 0 0.45em;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+body.template-product .product-details .details-content > :first-child :is(h1, h2, h3):first-child,
+body.template-product .product-details .details-content .rte > :is(h1, h2, h3):first-child {
+  margin-top: 0.2em;
+  font-size: 21px;
+}
+
+body.template-product .product-details .details-content :is(p, li) {
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+body.template-product .product-details .details-content ul {
+  padding-left: 1.2em;
+}
+
+body.template-product .product-details .details-content li::marker {
+  color: var(--chic-green, #4f8455);
+}
