@@ -94,7 +94,7 @@
       <nav class="chic-footer__col" aria-label="{{ s.support_heading | escape }}">
         <h3 class="chic-footer__heading">{{ s.support_heading | escape }}</h3>
         <ul role="list">
-          <li><a href="{{ routes.root_url }}pages/contact">Contact Us</a></li>
+          <li><a href="{% render 'chic-link', url: '/pages/contact', fallback: routes.root_url %}">Contact Us</a></li>
           {% if shop.shipping_policy %}<li><a href="{{ shop.shipping_policy.url }}">Shipping Policy</a></li>{% endif %}
           {% if shop.refund_policy %}<li><a href="{{ shop.refund_policy.url }}">Return &amp; Refund</a></li>{% endif %}
           {% if shop.privacy_policy %}<li><a href="{{ shop.privacy_policy.url }}">Privacy Policy</a></li>{% endif %}

@@ -360,12 +360,19 @@ body.template-product .product-details :is(h1, h2, h3, h4, h5, h6, p, li, strong
 body.template-product .product-details .text-block--text_WE3K4w,
 body.template-product .product-details .text-block--text_WE3K4w :is(h1, h2, h3, h4, h5, h6, p) {
   font-family: var(--pdp-font);
-  font-size: clamp(24px, 2.3vw, 32px);
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.25;
   letter-spacing: -0.01em;
   text-transform: none;
   color: var(--pdp-ink);
+}
+
+/* Title size comes from the block's "Size" setting; keep it compact on phones */
+@media screen and (max-width: 749px) {
+  body.template-product .product-details .text-block--text_WE3K4w,
+  body.template-product .product-details .text-block--text_WE3K4w :is(h1, h2, h3, h4, h5, h6, p) {
+    font-size: 24px;
+  }
 }
 
 /* Price */
@@ -446,4 +453,91 @@ body.template-product .product-details .details-content li::marker {
     max-height: none;
     object-fit: contain;
   }
+}
+
+/* ------------------------------------------------------------------
+   Modern polish (same CHIC colours): smoother type, softer corners,
+   gentle hover motion on buttons, links and cards
+   ------------------------------------------------------------------ */
+html { scroll-behavior: smooth; }
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+::selection { background: var(--chic-mint); color: var(--chic-navy); }
+
+:focus-visible { outline: 2px solid var(--chic-navy); outline-offset: 3px; }
+
+/* Buttons */
+.chic-btn {
+  border-radius: 999px;
+  transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.chic-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px -14px rgba(13, 74, 112, 0.7);
+}
+
+:is(.button, .button-secondary, button.add-to-cart-button, .shopify-payment-button__button) {
+  transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+:is(.button, button.add-to-cart-button, .shopify-payment-button__button):hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 24px -16px rgba(13, 74, 112, 0.75);
+}
+
+/* "View all" links become pills with an arrow */
+.chic-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border: 1px solid var(--chic-line);
+  border-radius: 999px;
+  background: #fff;
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+.chic-more::after {
+  content: '\2192';
+  transition: transform 0.25s ease;
+}
+
+.chic-more:hover {
+  background: var(--chic-navy);
+  border-color: var(--chic-navy);
+  color: #fff;
+  text-decoration: none;
+}
+
+.chic-more:hover::after { transform: translateX(3px); }
+
+/* Section headings: a little tighter and crisper */
+.chic-sec-head h2 { letter-spacing: -0.01em; }
+
+/* Cards: softer radius + lift on hover */
+:is(.chic-prod, .product-card, .chic-blog, .chic-rcard, .chic-promo, .chic-ingredients__card) {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+:is(.chic-prod, .product-card, .chic-blog, .chic-rcard):hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 36px -22px rgba(13, 74, 112, 0.45);
+}
+
+.product-card { border-radius: 16px; }
+
+/* Images inside cards zoom gently */
+:is(.chic-prod__pic, .chic-blog, .product-card) img { transition: transform 0.6s ease; }
+:is(.chic-blog, .product-card):hover img { transform: scale(1.03); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  :is(.chic-btn, .chic-prod, .product-card, .chic-blog, .chic-rcard, .button, button.add-to-cart-button):hover { transform: none; }
+  :is(.chic-blog, .product-card):hover img { transform: none; }
 }

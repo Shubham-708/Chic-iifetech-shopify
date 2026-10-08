@@ -23,7 +23,7 @@
               </h3>
               {% if bs.text != blank %}<p>{{ bs.text | escape }}</p>{% endif %}
               {% if bs.btn_label != blank %}
-                <a class="chic-promo__btn" href="{{ bs.btn_link | default: routes.all_products_collection_url }}">
+                <a class="chic-promo__btn" href="{% render 'chic-link', url: bs.btn_link %}">
                   {{ bs.btn_label | escape }}
                   {% render 'chic-icon', icon: 'arrow' %}
                 </a>

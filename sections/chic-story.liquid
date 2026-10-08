@@ -28,7 +28,8 @@
     {% endif %}
 
     {% if s.btn_label != blank %}
-      <a class="chic-story__btn" href="{{ s.btn_link | default: '/pages/about-us' }}">
+      {%- assign story_link = s.btn_link | default: '/pages/about-us' -%}
+      <a class="chic-story__btn" href="{% render 'chic-link', url: story_link, fallback: routes.root_url %}">
         {{ s.btn_label | escape }}
         {% render 'chic-icon', icon: 'arrow' %}
       </a>

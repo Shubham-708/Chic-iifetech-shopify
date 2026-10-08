@@ -2,6 +2,8 @@
   assign s = section.settings
   assign blog = s.blog | default: blogs['news']
 %}
+{%- comment -%} Sample cards only show in the theme editor; the live store hides the section until a post exists {%- endcomment -%}
+{%- if blog.articles_count > 0 or request.design_mode -%}
 
 <div class="chic-section">
   <div class="chic-wrap">
@@ -47,6 +49,8 @@
     </div>
   </div>
 </div>
+
+{%- endif -%}
 
 {% stylesheet %}
   .chic-blogs {

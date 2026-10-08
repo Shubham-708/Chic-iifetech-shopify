@@ -1,0 +1,52 @@
+{%- doc -%}
+  Outputs a URL that never leads to a 404: links to a collection, page,
+  product or blog that does not exist fall back to a working page.
+
+  @param {string} [url] - link from a url setting
+  @param {string} [fallback] - used when the link is empty or broken (default: all products)
+{%- enddoc -%}
+{%- liquid
+  assign out = url
+  assign fb = fallback | default: routes.all_products_collection_url
+
+  if out == blank
+    assign out = fb
+  elsif out contains '/collections/'
+    assign handle = out | split: '/collections/' | last | split: '?' | first | split: '/' | first | split: '#' | first
+    unless handle == 'all' or out contains '/products/'
+      if collections[handle].id == blank
+        assign out = fb
+      endif
+    endunless
+  elsif out contains '/pages/'
+    assign handle = out | split: '/pages/' | last | split: '?' | first | split: '#' | first
+    if pages[handle].id == blank
+      assign out = routes.root_url
+      if handle contains 'about'
+        if pages['about-us'].id != blank
+          assign out = pages['about-us'].url
+        elsif pages['about'].id != blank
+          assign out = pages['about'].url
+        endif
+      elsif handle contains 'contact'
+        if pages['contact'].id != blank
+          assign out = pages['contact'].url
+        elsif pages['contact-us'].id != blank
+          assign out = pages['contact-us'].url
+        endif
+      endif
+    endif
+  elsif out contains '/products/'
+    assign handle = out | split: '/products/' | last | split: '?' | first | split: '#' | first
+    if all_products[handle].id == blank
+      assign out = fb
+    endif
+  elsif out contains '/blogs/'
+    assign handle = out | split: '/blogs/' | last | split: '/' | first | split: '?' | first
+    if blogs[handle].id == blank
+      assign out = routes.root_url
+    endif
+  endif
+
+  echo out
+-%}

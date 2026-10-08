@@ -33,10 +33,10 @@
       {% endif %}
       <div class="chic-hero__btns">
         {% if s.btn1_label != blank %}
-          <a class="chic-btn chic-btn--solid" href="{{ s.btn1_link | default: routes.all_products_collection_url }}">{{ s.btn1_label | escape }}</a>
+          <a class="chic-btn chic-btn--solid" href="{% render 'chic-link', url: s.btn1_link %}">{{ s.btn1_label | escape }}</a>
         {% endif %}
         {% if s.btn2_label != blank %}
-          <a class="chic-btn chic-btn--ghost" href="{{ s.btn2_link | default: routes.all_products_collection_url }}">{{ s.btn2_label | escape }}</a>
+          <a class="chic-btn chic-btn--ghost" href="{% render 'chic-link', url: s.btn2_link %}">{{ s.btn2_label | escape }}</a>
         {% endif %}
       </div>
 

@@ -24,7 +24,7 @@
         <h2>{{ s.heading | escape }}</h2>
       </div>
       {% if s.link_label != blank %}
-        <a class="chic-more" href="{{ s.link | default: routes.all_products_collection_url }}">{{ s.link_label | escape }}</a>
+        <a class="chic-more" href="{% render 'chic-link', url: s.link %}">{{ s.link_label | escape }}</a>
       {% endif %}
     </div>
 
