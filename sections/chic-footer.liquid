@@ -1,0 +1,484 @@
+{% liquid
+  assign s = section.settings
+  assign menu_1 = linklists[s.menu_1]
+  assign menu_2 = linklists[s.menu_2]
+%}
+
+<footer class="chic-footer" style="--cf-bg: {{ s.background }}; --cf-accent: {{ s.accent }};">
+  <div class="chic-footer__inner">
+    {%- comment -%} Newsletter card {%- endcomment -%}
+    {% if s.show_newsletter %}
+      <div class="chic-footer__news">
+        <div class="chic-footer__news-copy">
+          <p class="chic-footer__eyebrow">{{ s.news_eyebrow | escape }}</p>
+          <h2 class="chic-footer__news-title">{{ s.news_heading | escape }}</h2>
+          {% if s.news_text != blank %}<p class="chic-footer__news-text">{{ s.news_text | escape }}</p>{% endif %}
+        </div>
+        {% form 'customer', id: 'ChicFooterNewsletter', class: 'chic-footer__form' %}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          {% if form.posted_successfully? %}
+            <p class="chic-footer__form-msg" role="status">Thank you for joining the Botanical Circle!</p>
+          {% else %}
+            <label class="visually-hidden" for="ChicFooterEmail">Email address</label>
+            <input
+              id="ChicFooterEmail"
+              class="chic-footer__input"
+              type="email"
+              name="contact[email]"
+              placeholder="Enter your email"
+              autocomplete="email"
+              required
+            >
+            <button type="submit" class="chic-footer__submit">
+              Subscribe
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+            </button>
+            {% if form.errors %}<p class="chic-footer__form-msg chic-footer__form-msg--error" role="alert">{{ form.errors | default_errors }}</p>{% endif %}
+          {% endif %}
+        {% endform %}
+      </div>
+    {% endif %}
+
+    <div class="chic-footer__grid">
+      {%- comment -%} Brand {%- endcomment -%}
+      <div class="chic-footer__brand">
+        <a href="{{ routes.root_url }}" class="chic-footer__logo" aria-label="{{ shop.name | escape }}">
+          {% if s.logo != blank %}
+            {{ s.logo | image_url: width: 480 | image_tag: loading: 'lazy', alt: shop.name, sizes: '170px' }}
+          {% else %}
+            <img src="{{ 'chic-logo.png' | asset_url }}" width="604" height="400" loading="lazy" alt="{{ shop.name | escape }}">
+          {% endif %}
+        </a>
+        {% if s.tagline != blank %}<p class="chic-footer__tagline">{{ s.tagline | escape }}</p>{% endif %}
+
+        {% if s.facebook != blank or s.instagram != blank or s.youtube != blank %}
+          <ul class="chic-footer__social" role="list">
+            {% if s.instagram != blank %}
+              <li><a href="{{ s.instagram }}" target="_blank" rel="noopener" aria-label="Instagram">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.4" cy="6.6" r="1.2" fill="currentColor"/></svg>
+              </a></li>
+            {% endif %}
+            {% if s.facebook != blank %}
+              <li><a href="{{ s.facebook }}" target="_blank" rel="noopener" aria-label="Facebook">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.6-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H7.9v3h2.6V21h3z"/></svg>
+              </a></li>
+            {% endif %}
+            {% if s.youtube != blank %}
+              <li><a href="{{ s.youtube }}" target="_blank" rel="noopener" aria-label="YouTube">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8zM10 15V9l5.2 3L10 15z"/></svg>
+              </a></li>
+            {% endif %}
+          </ul>
+        {% endif %}
+      </div>
+
+      {%- comment -%} Link columns {%- endcomment -%}
+      {% if menu_1.links.size > 0 %}
+        <nav class="chic-footer__col" aria-label="{{ s.menu_1_heading | escape }}">
+          <h3 class="chic-footer__heading">{{ s.menu_1_heading | escape }}</h3>
+          <ul role="list">
+            {% for link in menu_1.links %}<li><a href="{{ link.url }}">{{ link.title | escape }}</a></li>{% endfor %}
+          </ul>
+        </nav>
+      {% endif %}
+
+      {% if menu_2.links.size > 0 %}
+        <nav class="chic-footer__col" aria-label="{{ s.menu_2_heading | escape }}">
+          <h3 class="chic-footer__heading">{{ s.menu_2_heading | escape }}</h3>
+          <ul role="list">
+            {% for link in menu_2.links %}<li><a href="{{ link.url }}">{{ link.title | escape }}</a></li>{% endfor %}
+          </ul>
+        </nav>
+      {% endif %}
+
+      <nav class="chic-footer__col" aria-label="{{ s.support_heading | escape }}">
+        <h3 class="chic-footer__heading">{{ s.support_heading | escape }}</h3>
+        <ul role="list">
+          <li><a href="{{ routes.root_url }}pages/contact">Contact Us</a></li>
+          {% if shop.shipping_policy %}<li><a href="{{ shop.shipping_policy.url }}">Shipping Policy</a></li>{% endif %}
+          {% if shop.refund_policy %}<li><a href="{{ shop.refund_policy.url }}">Return &amp; Refund</a></li>{% endif %}
+          {% if shop.privacy_policy %}<li><a href="{{ shop.privacy_policy.url }}">Privacy Policy</a></li>{% endif %}
+          {% if shop.terms_of_service %}<li><a href="{{ shop.terms_of_service.url }}">Terms of Service</a></li>{% endif %}
+        </ul>
+      </nav>
+
+      {%- comment -%} Contact {%- endcomment -%}
+      <div class="chic-footer__col chic-footer__contact">
+        <h3 class="chic-footer__heading">{{ s.contact_heading | escape }}</h3>
+        <ul role="list">
+          {% if s.address != blank %}
+            <li>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+              <span>{{ s.address | escape | newline_to_br }}</span>
+            </li>
+          {% endif %}
+          {% if s.phone != blank %}
+            <li>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>
+              <a href="tel:{{ s.phone | remove: ' ' }}">{{ s.phone | escape }}</a>
+            </li>
+          {% endif %}
+          {% if s.email != blank %}
+            <li>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+              <a href="mailto:{{ s.email }}">{{ s.email | escape }}</a>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+
+    <div class="chic-footer__bottom">
+      <p class="chic-footer__copy">&copy; {{ 'now' | date: '%Y' }} {{ shop.name | escape }}. All rights reserved.</p>
+      {% if s.show_payment and shop.enabled_payment_types.size > 0 %}
+        <ul class="chic-footer__pay" role="list" aria-label="Payment methods">
+          {% for type in shop.enabled_payment_types %}<li>{{ type | payment_type_svg_tag }}</li>{% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+  </div>
+</footer>
+
+{% stylesheet %}
+  .chic-footer {
+    --cf-ink: #0d4a70;
+    --cf-text: #3c4a55;
+    --cf-line: rgba(13, 74, 112, 0.12);
+    position: relative;
+    background:
+      radial-gradient(1200px 400px at 100% 0%, rgba(79, 132, 85, 0.12), transparent 60%),
+      radial-gradient(900px 380px at 0% 100%, rgba(13, 74, 112, 0.08), transparent 60%),
+      var(--cf-bg, #f5f9ee);
+    color: var(--cf-text);
+    font-family: var(--font-body--family, 'Poppins', system-ui, sans-serif);
+    overflow: hidden;
+  }
+
+  .chic-footer__inner {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: clamp(40px, 6vw, 72px) clamp(16px, 4vw, 40px) 0;
+  }
+
+  /* Newsletter */
+  .chic-footer__news {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    align-items: center;
+    gap: clamp(20px, 4vw, 56px);
+    padding: clamp(28px, 4vw, 48px) clamp(24px, 4.5vw, 56px);
+    border-radius: 28px;
+    background: linear-gradient(135deg, #0d4a70 0%, #0b3d5c 55%, #2d5a36 140%);
+    color: #fff;
+    box-shadow: 0 24px 50px -24px rgba(13, 74, 112, 0.55);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .chic-footer__news::after {
+    content: '';
+    position: absolute;
+    right: -80px;
+    top: -80px;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(238, 245, 200, 0.18), transparent 70%);
+    pointer-events: none;
+  }
+
+  .chic-footer__eyebrow {
+    margin: 0 0 8px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #cfe6a8;
+  }
+
+  .chic-footer__news-title {
+    margin: 0;
+    font-family: var(--font-heading--family, Georgia, serif);
+    font-size: clamp(24px, 3vw, 34px);
+    line-height: 1.2;
+    color: #fff;
+  }
+
+  .chic-footer__news-text {
+    margin: 10px 0 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.78);
+  }
+
+  .chic-footer__form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 6px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    position: relative;
+    z-index: 1;
+  }
+
+  .chic-footer__input {
+    flex: 1 1 180px;
+    min-width: 0;
+    height: 50px;
+    padding: 0 20px;
+    border: 0;
+    border-radius: 999px;
+    background: #fff;
+    color: #1d1a22;
+    font: inherit;
+    font-size: 15px;
+    outline: none;
+  }
+
+  .chic-footer__input:focus-visible { box-shadow: 0 0 0 3px rgba(207, 230, 168, 0.7); }
+
+  .chic-footer__submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 50px;
+    padding: 0 26px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--cf-accent, #4f8455);
+    color: #fff;
+    font: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.25s ease, background-color 0.25s ease;
+  }
+
+  .chic-footer__submit:hover { background: #2d5a36; transform: translateY(-1px); }
+
+  .chic-footer__submit svg {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: transform 0.25s ease;
+  }
+
+  .chic-footer__submit:hover svg { transform: translateX(3px); }
+
+  .chic-footer__form-msg {
+    flex-basis: 100%;
+    margin: 4px 16px;
+    font-size: 14px;
+    color: #eef5c8;
+  }
+
+  .chic-footer__form-msg--error { color: #ffd5d5; }
+
+  /* Main grid */
+  .chic-footer__grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr 1.5fr;
+    gap: clamp(28px, 4vw, 48px);
+    padding: clamp(48px, 6vw, 72px) 0 clamp(36px, 5vw, 56px);
+  }
+
+  .chic-footer__logo { display: inline-block; }
+
+  .chic-footer__logo img {
+    display: block;
+    width: 170px;
+    height: auto;
+  }
+
+  .chic-footer__tagline {
+    max-width: 280px;
+    margin: 18px 0 22px;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .chic-footer__social {
+    display: flex;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .chic-footer__social a {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #fff;
+    color: var(--cf-ink);
+    border: 1px solid var(--cf-line);
+    box-shadow: 0 6px 16px -10px rgba(13, 74, 112, 0.5);
+    transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
+  }
+
+  .chic-footer__social a:hover {
+    background: var(--cf-ink);
+    color: #fff;
+    transform: translateY(-2px);
+  }
+
+  .chic-footer__social svg { width: 18px; height: 18px; }
+
+  .chic-footer__heading {
+    margin: 6px 0 18px;
+    font-family: var(--font-body--family, 'Poppins', sans-serif);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--cf-ink);
+  }
+
+  .chic-footer__col ul {
+    display: grid;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .chic-footer__col a {
+    position: relative;
+    color: var(--cf-text);
+    font-size: 14px;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .chic-footer__col a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 100%;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s ease;
+  }
+
+  .chic-footer__col a:hover { color: var(--cf-ink); }
+  .chic-footer__col a:hover::after { transform: scaleX(1); }
+
+  .chic-footer__contact li {
+    display: grid;
+    grid-template-columns: 34px 1fr;
+    align-items: start;
+    gap: 10px;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .chic-footer__contact svg {
+    width: 34px;
+    height: 34px;
+    padding: 8px;
+    border-radius: 10px;
+    background: #e7f0d9;
+    fill: none;
+    stroke: var(--cf-ink);
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .chic-footer__contact a,
+  .chic-footer__contact span { align-self: center; word-break: break-word; }
+
+  /* Bottom bar */
+  .chic-footer__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 22px 0 28px;
+    border-top: 1px solid var(--cf-line);
+  }
+
+  .chic-footer__copy {
+    margin: 0;
+    font-size: 13px;
+    color: #6b6576;
+  }
+
+  .chic-footer__pay {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .chic-footer__pay svg { display: block; width: 38px; height: 24px; }
+
+  @media screen and (max-width: 989px) {
+    .chic-footer__grid { grid-template-columns: repeat(3, 1fr); }
+    .chic-footer__brand { grid-column: 1 / -1; }
+    .chic-footer__contact { grid-column: 1 / -1; }
+  }
+
+  @media screen and (max-width: 749px) {
+    .chic-footer__news { grid-template-columns: 1fr; border-radius: 22px; text-align: center; }
+    .chic-footer__form { border-radius: 22px; }
+    .chic-footer__submit { flex: 1 1 100%; }
+    .chic-footer__grid { grid-template-columns: 1fr 1fr; gap: 32px 20px; }
+    .chic-footer__brand { text-align: center; }
+    .chic-footer__tagline { margin-inline: auto; }
+    .chic-footer__social { justify-content: center; }
+    .chic-footer__bottom { flex-direction: column; text-align: center; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Chic footer",
+  "tag": "section",
+  "class": "chic-footer-section",
+  "settings": [
+    { "type": "color", "id": "background", "label": "Background", "default": "#f5f9ee" },
+    { "type": "color", "id": "accent", "label": "Button colour", "default": "#4f8455" },
+    { "type": "image_picker", "id": "logo", "label": "Logo", "info": "Leave empty to use the bundled CHIC logo." },
+    { "type": "textarea", "id": "tagline", "label": "Tagline", "default": "Ayurvedic, botanical skin and hair care, made with love in Bhopal." },
+    { "type": "header", "content": "Newsletter" },
+    { "type": "checkbox", "id": "show_newsletter", "label": "Show newsletter", "default": true },
+    { "type": "text", "id": "news_eyebrow", "label": "Eyebrow", "default": "Stay glowing" },
+    { "type": "text", "id": "news_heading", "label": "Heading", "default": "Join our Botanical Circle" },
+    { "type": "text", "id": "news_text", "label": "Text", "default": "Skincare tips, offers and early access to new collections." },
+    { "type": "header", "content": "Links" },
+    { "type": "link_list", "id": "menu_1", "label": "Menu 1", "default": "main-menu" },
+    { "type": "text", "id": "menu_1_heading", "label": "Menu 1 heading", "default": "Explore" },
+    { "type": "link_list", "id": "menu_2", "label": "Menu 2", "default": "footer" },
+    { "type": "text", "id": "menu_2_heading", "label": "Menu 2 heading", "default": "Company" },
+    { "type": "text", "id": "support_heading", "label": "Support heading", "default": "Support" },
+    { "type": "header", "content": "Contact" },
+    { "type": "text", "id": "contact_heading", "label": "Heading", "default": "Get in touch" },
+    { "type": "textarea", "id": "address", "label": "Address" },
+    { "type": "text", "id": "phone", "label": "Phone" },
+    { "type": "text", "id": "email", "label": "Email" },
+    { "type": "header", "content": "Social" },
+    { "type": "url", "id": "instagram", "label": "Instagram" },
+    { "type": "url", "id": "facebook", "label": "Facebook" },
+    { "type": "url", "id": "youtube", "label": "YouTube" },
+    { "type": "checkbox", "id": "show_payment", "label": "Show payment icons", "default": true }
+  ],
+  "enabled_on": { "groups": ["footer"] },
+  "presets": [{ "name": "Chic footer" }]
+}
+{% endschema %}

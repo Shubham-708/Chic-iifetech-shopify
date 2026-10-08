@@ -43,8 +43,8 @@
   {{ block.shopify_attributes }}
 >
   {% liquid
-    # Fall back to the bundled CHIC logo asset (300x193) when no logo is set in theme settings
-    assign logo_aspect_ratio = settings.logo.aspect_ratio | default: 1.5544
+    # Fall back to the bundled CHIC logo asset (604x400) when no logo is set in theme settings
+    assign logo_aspect_ratio = settings.logo.aspect_ratio | default: 1.51
     assign logo_width = settings.logo_height | times: logo_aspect_ratio | ceil
     assign logo_width_mobile = settings.logo_height_mobile | times: logo_aspect_ratio | ceil
     assign inverse_logo_width = settings.logo_height | times: inverse_logo.aspect_ratio | ceil
