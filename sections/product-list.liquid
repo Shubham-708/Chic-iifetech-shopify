@@ -36,12 +36,7 @@
         <div
           class="resource-list__item"
         >
-            {% content_for 'block',
-              type: '_product-card',
-              id: 'static-product-card',
-              closest.product: product,
-              product_view_context: 'collection'
-            %}
+            {% render 'chic-product-card', product: product %}
           </div>
 
           {% unless forloop.last %}

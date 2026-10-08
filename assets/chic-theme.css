@@ -677,3 +677,4 @@ body {
 /* Collection pages use the shared CHIC card: equal-height cards in the grid */
 .product-grid__item > .chic-prod { height: 100%; }
 .product-grid__item .chic-prod__info h4 { font-size: 14px; }
+.resource-list__item > .chic-prod { height: 100%; }
