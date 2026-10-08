@@ -9,6 +9,7 @@
   data-chic-banners
   data-autoplay="{{ s.autoplay }}"
   data-duration="{{ s.slide_duration | default: 5 | times: 1000 }}"
+  style="--banner-ratio: {{ s.ratio_desktop | default: 4.57 }}; --banner-ratio-mobile: {{ s.ratio_mobile | default: 0.782 }};"
   role="region"
   aria-roledescription="carousel"
   aria-label="{{ s.label | default: 'Featured banners' | escape }}"
@@ -135,16 +136,17 @@
     user-select: none;
   }
 
+  /* Fixed frame: every slide shows at the same size, so the page never jumps */
   .chic-banners__track {
     position: relative;
     overflow: hidden;
-    transition: height 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+    aspect-ratio: var(--banner-ratio, 4.57);
     touch-action: pan-y;
   }
 
   .chic-banners__slide {
     position: absolute;
-    inset: 0 0 auto 0;
+    inset: 0;
     opacity: 0;
     visibility: hidden;
     transform: scale(1.015);
@@ -152,7 +154,6 @@
   }
 
   .chic-banners__slide.is-active {
-    position: relative;
     opacity: 1;
     visibility: visible;
     transform: none;
@@ -168,14 +169,18 @@
     z-index: 0;
   }
 
-  .chic-banners__link {
+  .chic-banners__link,
+  .chic-banners__slide picture {
     display: block;
+    width: 100%;
+    height: 100%;
   }
 
   .chic-banners__img {
     display: block;
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
   }
 
   .chic-banners__arrow {
@@ -252,6 +257,8 @@
   }
 
   @media screen and (max-width: 749px) {
+    .chic-banners__track { aspect-ratio: var(--banner-ratio-mobile, 0.782); }
+
     .chic-banners__arrow { display: none; }
 
     .chic-banners__dots {
@@ -263,7 +270,6 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .chic-banners__track,
     .chic-banners__slide,
     .chic-banners__slide.is-active {
       transition: none;
@@ -295,19 +301,12 @@
         const from = slides[current];
         const to = slides[next];
 
-        // Lock the height, swap slides, then animate to the new slide's height
-        track.style.height = `${from.offsetHeight}px`;
         from.classList.remove('is-active');
         from.classList.add('is-leaving');
         from.setAttribute('aria-hidden', 'true');
         to.classList.add('is-active');
         to.removeAttribute('aria-hidden');
         slides.forEach((s) => s.querySelector('a')?.setAttribute('tabindex', s === to ? '0' : '-1'));
-        requestAnimationFrame(() => {
-          const h = to.offsetHeight;
-          if (Math.abs(h - from.offsetHeight) < 1 || reduceMotion) track.style.height = '';
-          else track.style.height = `${h}px`;
-        });
         setTimeout(() => from.classList.remove('is-leaving'), 900);
 
         dots.forEach((d, n) => {
@@ -317,12 +316,6 @@
         });
         current = next;
       };
-
-      track.addEventListener('transitionend', (e) => {
-        if (e.target === track && e.propertyName === 'height') track.style.height = '';
-      });
-
-      window.addEventListener('resize', () => { track.style.height = ''; });
 
       const stop = () => clearInterval(timer);
       const start = () => {
@@ -399,6 +392,20 @@
       "step": 1,
       "unit": "s",
       "default": 5
+    },
+    {
+      "type": "text",
+      "id": "ratio_desktop",
+      "label": "Desktop frame ratio (width ÷ height)",
+      "info": "All banners show at this shape. 4.57 fits 4224×924 artwork.",
+      "default": "4.57"
+    },
+    {
+      "type": "text",
+      "id": "ratio_mobile",
+      "label": "Mobile frame ratio (width ÷ height)",
+      "info": "0.782 fits 1500×1918 artwork.",
+      "default": "0.782"
     },
     {
       "type": "text",

@@ -19,7 +19,7 @@
 %}
 
 {% if show %}
-  <div class="chic-ki" id="chic-ki-{{ section.id }}" data-chic-ki>
+  <div class="chic-ki{% if section.blocks.size <= 4 %} chic-ki--few{% endif %}" id="chic-ki-{{ section.id }}" data-chic-ki>
     <div class="chic-ki__inner">
       <header class="chic-ki__head">
         {% if s.eyebrow != blank %}<p class="chic-ki__eyebrow">{{ s.eyebrow | escape }}</p>{% endif %}
@@ -71,33 +71,35 @@
             {%- endfor -%}
           </p>
           {% if s.list_note != blank %}<p class="chic-ki__note">{{ s.list_note | escape }}</p>{% endif %}
-          {% liquid
-            assign has_credits = false
-            for block in section.blocks
-              if block.settings.credit != blank
-                assign has_credits = true
-                break
-              endif
-            endfor
-          %}
-          {% if has_credits %}
-            <details class="chic-ki__credits">
-              <summary>Photo credits</summary>
-              <p>
-                {%- for block in section.blocks -%}
-                  {%- if block.settings.credit != blank -%}
-                    {%- if block.settings.credit_url != blank -%}
-                      <a href="{{ block.settings.credit_url }}" target="_blank" rel="noopener nofollow">{{ block.settings.credit | escape }}</a>
-                    {%- else -%}
-                      <span>{{ block.settings.credit | escape }}</span>
-                    {%- endif -%}
-                    {%- unless forloop.last %} · {% endunless -%}
-                  {%- endif -%}
-                {%- endfor -%}
-              </p>
-            </details>
-          {% endif %}
+
         </div>
+      {% endif %}
+
+      {% liquid
+        assign has_credits = false
+        for block in section.blocks
+          if block.settings.credit != blank
+            assign has_credits = true
+            break
+          endif
+        endfor
+      %}
+      {% if has_credits %}
+        <details class="chic-ki__credits">
+          <summary>Photo credits</summary>
+          <p>
+            {%- for block in section.blocks -%}
+              {%- if block.settings.credit != blank -%}
+                {%- if block.settings.credit_url != blank -%}
+                  <a href="{{ block.settings.credit_url }}" target="_blank" rel="noopener nofollow">{{ block.settings.credit | escape }}</a>
+                {%- else -%}
+                  <span>{{ block.settings.credit | escape }}</span>
+                {%- endif -%}
+                {%- unless forloop.last %} · {% endunless -%}
+              {%- endif -%}
+            {%- endfor -%}
+          </p>
+        </details>
       {% endif %}
     </div>
   </div>
@@ -315,7 +317,9 @@
   }
 
   .chic-ki__credits {
-    margin-top: 12px;
+    max-width: 920px;
+    margin: 16px auto 0;
+    text-align: center;
     font-size: 11px;
     opacity: 0.6;
   }
@@ -323,6 +327,10 @@
   .chic-ki__credits summary { cursor: pointer; }
   .chic-ki__credits p { margin: 6px 0 0; line-height: 1.6; }
   .chic-ki__credits a { color: inherit; }
+
+  @media screen and (min-width: 990px) {
+    .chic-ki--few .chic-ki__track { justify-content: center; }
+  }
 
   @media screen and (max-width: 989px) {
     .chic-ki__track { grid-auto-columns: calc((100% - 2 * 14px) / 3.2); gap: 14px; }
