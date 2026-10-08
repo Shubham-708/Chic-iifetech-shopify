@@ -430,7 +430,9 @@
             "asset": "chic-ing-bhringraj.jpg",
             "name": "Bhringraj",
             "amount": "1.5%",
-            "benefit": "The ‘king of hair’ herb — supports growth and reduces hair fall."
+            "benefit": "The ‘king of hair’ herb — supports growth and reduces hair fall.",
+            "credit": "Bhringraj: Nativeplants garden, CC BY-SA 4.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Eclipta_prostrata_(19240).jpg"
           }
         },
         "ing_rosemary": {
@@ -439,7 +441,9 @@
             "asset": "chic-ing-rosemary.jpg",
             "name": "Rosemary",
             "amount": "1%",
-            "benefit": "Stimulates scalp circulation for thicker-looking hair."
+            "benefit": "Stimulates scalp circulation for thicker-looking hair.",
+            "credit": "Rosemary: HaJunkiyada, CC BY-SA 4.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Liat_Portal_for_Foodie_Disorder_-_Rosemary.jpg"
           }
         },
         "ing_mint": {
@@ -448,7 +452,9 @@
             "asset": "chic-ing-mint.jpg",
             "name": "Mint",
             "amount": "0.5%",
-            "benefit": "Cools and refreshes an itchy, tired scalp."
+            "benefit": "Cools and refreshes an itchy, tired scalp.",
+            "credit": "Mint: Kızıl, CC BY-SA 4.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Mentha_%C3%97_piperita%E2%80%93IMG_6075.jpg"
           }
         },
         "ing_garlic": {
@@ -457,7 +463,9 @@
             "asset": "chic-ing-garlic.jpg",
             "name": "Garlic",
             "amount": "1%",
-            "benefit": "Sulphur-rich to strengthen roots and reduce breakage."
+            "benefit": "Sulphur-rich to strengthen roots and reduce breakage.",
+            "credit": "Garlic: Ivar Leidus, CC BY-SA 4.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Garlic_bulbs_and_cloves.jpg"
           }
         },
         "ing_clove": {
@@ -466,7 +474,9 @@
             "asset": "chic-ing-clove.jpg",
             "name": "Clove",
             "amount": "0.5%",
-            "benefit": "Warming and antimicrobial for a healthy scalp."
+            "benefit": "Warming and antimicrobial for a healthy scalp.",
+            "credit": "Clove: Jacek Halicki, CC BY-SA 4.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:2023_Go%C5%BAdziki.jpg"
           }
         },
         "ing_amla": {
@@ -475,7 +485,9 @@
             "asset": "chic-ing-amla.jpg",
             "name": "Amla",
             "amount": "1%",
-            "benefit": "Vitamin C-rich; helps prevent premature greying."
+            "benefit": "Vitamin C-rich; helps prevent premature greying.",
+            "credit": "Amla: SarKaLay စာကလေး, CC BY-SA 4.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Gooseberries_Amla_Amalaki_ZeePhyuTee.jpg"
           }
         },
         "ing_aloe_vera": {
@@ -484,7 +496,9 @@
             "asset": "chic-ing-aloe-vera.jpg",
             "name": "Aloe Vera",
             "amount": "1%",
-            "benefit": "Soothes and hydrates the scalp, adds softness."
+            "benefit": "Soothes and hydrates the scalp, adds softness.",
+            "credit": "Aloe Vera: Rae Allen, CC BY 2.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Cut_Aloe_Vera_Leaf.jpg"
           }
         },
         "ing_shikakai": {
@@ -493,7 +507,9 @@
             "asset": "chic-ing-shikakai.jpg",
             "name": "Shikakai",
             "amount": "1%",
-            "benefit": "Traditional gentle cleanser for shine and smoothness."
+            "benefit": "Traditional gentle cleanser for shine and smoothness.",
+            "credit": "Shikakai: Salil Kumar Mukherjee, CC BY-SA 4.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Shikakai_(Senegalia_rugata)_seed_pods.jpg"
           }
         },
         "ing_ashwagandha": {
@@ -502,7 +518,9 @@
             "asset": "chic-ing-ashwagandha.jpg",
             "name": "Ashwagandha",
             "amount": "0.8%",
-            "benefit": "Adaptogen that helps with stress-related hair fall."
+            "benefit": "Adaptogen that helps with stress-related hair fall.",
+            "credit": "Ashwagandha: formulatehealth, CC BY 2.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Ashwagandha_Powder_and_Root_on_Spoons_-_50191697031.jpg"
           }
         },
         "ing_jatamansi": {
@@ -511,7 +529,9 @@
             "asset": "chic-ing-jatamansi.jpg",
             "name": "Jatamansi",
             "amount": "0.5%",
-            "benefit": "Calms the scalp and nourishes hair roots."
+            "benefit": "Calms the scalp and nourishes hair roots.",
+            "credit": "Jatamansi: Plantagenet, CC BY-SA 4.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Nardostachys_jatamansi_cultivated_outdoors_in_Yaroslavl_Oblast_with_developing_inflorescence.jpg"
           }
         },
         "ing_reetha": {
@@ -520,7 +540,9 @@
             "asset": "chic-ing-reetha.jpg",
             "name": "Reetha",
             "amount": "1%",
-            "benefit": "Natural soapnut that helps fight dandruff."
+            "benefit": "Natural soapnut that helps fight dandruff.",
+            "credit": "Reetha: Salil Kumar Mukherjee, CC BY-SA 4.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Ritha_(Sapindus_mukorossi)_fruits.jpg"
           }
         },
         "ing_methi": {
@@ -529,7 +551,9 @@
             "asset": "chic-ing-methi.jpg",
             "name": "Methi",
             "amount": "0.5%",
-            "benefit": "Protein-rich fenugreek that softens and fights flakes."
+            "benefit": "Protein-rich fenugreek that softens and fights flakes.",
+            "credit": "Methi: Atudu, CC BY-SA 4.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Fenugreek_seeds(%E0%A6%AE%E0%A7%87%E0%A6%A5%E0%A6%BF).JPG"
           }
         },
         "ing_onion_seeds": {
@@ -538,7 +562,9 @@
             "asset": "chic-ing-onion-seeds.jpg",
             "name": "Onion Seeds",
             "amount": "1%",
-            "benefit": "Kalonji to strengthen strands and reduce breakage."
+            "benefit": "Kalonji to strengthen strands and reduce breakage.",
+            "credit": "Onion Seeds: Miansari66, Public domain, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Kalaungi.JPG"
           }
         },
         "ing_tulsi": {
@@ -547,7 +573,9 @@
             "asset": "chic-ing-tulsi.jpg",
             "name": "Tulsi",
             "amount": "0.5%",
-            "benefit": "Holy basil keeps the scalp clean and itch-free."
+            "benefit": "Holy basil keeps the scalp clean and itch-free.",
+            "credit": "Tulsi: Adityamadhav83, CC BY-SA 3.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:(Ocimum_tenuiflorum)_Tulasi_foliage_02.jpg"
           }
         },
         "ing_khas_khas": {
@@ -556,7 +584,9 @@
             "asset": "chic-ing-khas-khas.jpg",
             "name": "Khas-Khas Root",
             "amount": "0.5%",
-            "benefit": "Cooling vetiver root that relaxes the scalp."
+            "benefit": "Cooling vetiver root that relaxes the scalp.",
+            "credit": "Khas-Khas Root: Copyright © 2005 David Monniaux, CC BY-SA 3.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Vetiveria_zizanoides_dsc07810.jpg"
           }
         },
         "ing_lavender": {
@@ -565,7 +595,9 @@
             "asset": "chic-ing-lavender.jpg",
             "name": "Lavender",
             "amount": "5%",
-            "benefit": "Calming aroma that supports scalp health."
+            "benefit": "Calming aroma that supports scalp health.",
+            "credit": "Lavender: icetsarina from United States, CC0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Lavender_flowers_in_bloom,_Oregon_(35764444215).jpg"
           }
         },
         "ing_coconut_oil": {
@@ -574,7 +606,9 @@
             "asset": "chic-ing-coconut-oil.jpg",
             "name": "Coconut Oil",
             "amount": "10%",
-            "benefit": "Deep conditioning that reduces protein loss."
+            "benefit": "Deep conditioning that reduces protein loss.",
+            "credit": "Coconut Oil: deadrat, CC BY-SA 4.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Coconut_oil_bottle_in_the_background_of_dried_coconuts_from_Kaleeswari_Farm.jpg"
           }
         },
         "ing_sesame_oil": {
@@ -583,7 +617,9 @@
             "asset": "chic-ing-sesame-oil.jpg",
             "name": "Sesame Oil",
             "amount": "15%",
-            "benefit": "Nourishes and protects hair from dryness."
+            "benefit": "Nourishes and protects hair from dryness.",
+            "credit": "Sesame Oil: Dr. Satish Upalkar, CC BY-SA 4.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Sesame_oil_photo.jpg"
           }
         },
         "ing_mustard_oil": {
@@ -592,7 +628,9 @@
             "asset": "chic-ing-mustard-oil.jpg",
             "name": "Mustard Oil",
             "amount": "15% Q.S.",
-            "benefit": "Warms the scalp and boosts circulation."
+            "benefit": "Warms the scalp and boosts circulation.",
+            "credit": "Mustard Oil: Biswarup Ganguly, CC BY 3.0, via Wikimedia Commons",
+            "credit_url": "https://commons.wikimedia.org/wiki/File:Mustard_Oil_%26_Seeds_-_Kolkata_2003-10-31_00537.JPG"
           }
         }
       },
@@ -616,8 +654,7 @@
         "ing_coconut_oil",
         "ing_sesame_oil",
         "ing_mustard_oil"
-      ],
-      "disabled": true
+      ]
     }
   },
   "order": [
