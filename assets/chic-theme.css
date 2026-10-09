@@ -678,3 +678,18 @@ body {
 .product-grid__item > .chic-prod { height: 100%; }
 .product-grid__item .chic-prod__info h4 { font-size: 14px; }
 .resource-list__item > .chic-prod { height: 100%; }
+
+
+
+/* Product page — 40% image / 60% details */
+@media screen and (min-width: 750px) {
+  .product-information__media {
+    flex: 0 0 40% !important;
+    max-width: 40% !important;
+  }
+
+  .product-information__details {
+    flex: 0 0 60% !important;
+    max-width: 60% !important;
+  }
+}
