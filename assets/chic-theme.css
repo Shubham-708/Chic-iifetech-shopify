@@ -703,19 +703,19 @@ body {
   z-index: 100;
   background: #0d4a70;
   border-top: none;
-  padding: 6px 24px;
+  padding: 6px 10px;
   margin: 0;
   display: flex !important;
   align-items: center;
   justify-content: center !important;
   flex-direction: row;
   text-align: center;
-  min-height: 30px;
+  min-height: 10px;
 }
 
 .chic-footer__copy {
   color: rgba(255, 255, 255, 0.85) !important;
-  font-size: 11px !important;
+  font-size: 15px !important;
   margin: 0 auto !important;
   text-align: center !important;
   width: 100%;
@@ -726,5 +726,5 @@ body {
 }
 
 body {
-  padding-bottom: 30px;
+  padding-bottom: 10px;
 }
