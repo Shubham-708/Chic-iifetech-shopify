@@ -41,14 +41,16 @@
 {% stylesheet %}
   .chic-story {
     background: var(--chic-card, #fff);
-    padding: clamp(20px, 3vw, 48px) 24px;
+    padding: 0;
+    margin: 0;
   }
 
   .chic-story__frame {
     position: relative;
-    max-width: 1240px;
-    margin: 0 auto;
-    border-radius: 22px;
+    max-width: 100%;
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
     overflow: hidden;
     background: #eff5ea;
     container-type: inline-size;
@@ -160,13 +162,13 @@
 
   @media screen and (max-width: 860px) {
     .chic-story {
-      padding: 16px;
+      padding: 0;
     }
 
     .chic-story__frame {
       display: flex;
       flex-direction: column-reverse;
-      border-radius: 18px;
+      border-radius: 0;
     }
 
     .chic-story__bg {
