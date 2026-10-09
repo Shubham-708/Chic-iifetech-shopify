@@ -700,13 +700,31 @@ body {
   left: 0;
   right: 0;
   z-index: 100;
-  background: #f5f9ee;
-  border-top: 1px solid #e3ead8;
-  padding: 20px 10px;
+  background: #0d4a70;
+  border-top: none;
+  padding: 8px 24px;
   margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
 }
 
-/* Page ke content ko bottom bar ke upar rakhne ke liye */
-body {
-  padding-bottom: 10px;
+.chic-footer__copy {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 12px;
+  margin: 0;
+  text-align: center;
 }
+
+.chic-footer__pay {
+  display: flex;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  padding-bottom: 38px;
+}
+
