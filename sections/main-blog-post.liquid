@@ -1,58 +1,75 @@
-
-
 {% liquid
   if section.settings.background_color != blank
     render 'contrast-override', background_color: section.settings.background_color, section_id: section.id
   endif
 %}
 
-<div
-  class="section-background{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"
-></div>
+<div class="section-background{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"></div>
+
 <div class="section{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}">
-  <div
-    class="
-      spacing-style
-      layout-panel-flex
-      layout-panel-flex--column
-      section-content-wrapper
-      mobile-column
-    "
-    style="
-      {% render 'layout-panel-style', settings: section.settings %}
-      {% render 'spacing-style', settings: section.settings %}
-    "
-  >
-    {% content_for 'blocks' %}
+  <div class="blog-post-hero">
+    <div class="blog-post-hero__image">
+      {% if article.image %}
+        {{ article.image | image_url: width: 1200 | image_tag: loading: 'eager', widths: '600, 900, 1200', class: 'blog-post-hero__img' }}
+      {% endif %}
+    </div>
+    <div class="blog-post-hero__content">
+      <p class="blog-post-hero__date">{{ article.published_at | date: '%B %d, %Y' }}</p>
+      <h1 class="blog-post-hero__title">{{ article.title }}</h1>
+      <div class="blog-post-hero__excerpt">{{ article.excerpt_or_content | strip_html | truncate: 300 }}</div>
+    </div>
+  </div>
 
-    {% if blog.comments_enabled? %}
-      <div class="blog-post-comments-container">
-        <h2 class="h3">{{- 'blogs.article.comments_heading' | t: count: article.comments_count -}}</h2>
+  <div class="blog-post-body">
+    <div class="blog-post-body__content">
+      {{ article.content }}
+    </div>
+  </div>
 
-        <div class="blog-post-comments">
-          {% paginate article.comments by 10 %}
-            {% for comment in article.comments %}
-              <div class="blog-post-comment">
-                {{ comment.content }}
-                <div class="blog-post-comment__author">
-                  <span class="blog-post-comment__author-name">{{- comment.author -}}</span>
-                  <span>{{- 'blogs.article.comment_author_separator' | t -}}</span>
-                  <span class="blog-post-comment__date">
-                    {{- comment.created_at | time_tag: format: 'date' -}}
-                  </span>
-                </div>
+  {% if blog.comments_enabled? %}
+    <div class="blog-post-comments-container">
+      <h2 class="h3">{{- 'blogs.article.comments_heading' | t: count: article.comments_count -}}</h2>
+      <div class="blog-post-comments">
+        {% paginate article.comments by 10 %}
+          {% for comment in article.comments %}
+            <div class="blog-post-comment">
+              {{ comment.content }}
+              <div class="blog-post-comment__author">
+                <span class="blog-post-comment__author-name">{{- comment.author -}}</span>
+                <span>{{- 'blogs.article.comment_author_separator' | t -}}</span>
+                <span class="blog-post-comment__date">{{- comment.created_at | time_tag: format: 'date' -}}</span>
               </div>
-            {% endfor %}
-
-            <div class="blog-post-comments-pagination">
-              {{- paginate | default_pagination -}}
             </div>
-          {% endpaginate %}
-        </div>
-
-        {% render 'blog-comment-form', article: article, section_id: section.id %}
+          {% endfor %}
+          <div class="blog-post-comments-pagination">{{- paginate | default_pagination -}}</div>
+        {% endpaginate %}
       </div>
-    {% endif %}
+      {% render 'blog-comment-form', article: article, section_id: section.id %}
+    </div>
+  {% endif %}
+
+  {% assign related_articles = blog.articles | where: 'id', article.id %}
+  <div class="blog-post-related">
+    <h2 class="blog-post-related__heading">More from the Journal</h2>
+    <div class="blog-post-related__grid">
+      {% assign count = 0 %}
+      {% for related in blog.articles %}
+        {% if related.id != article.id and count < 3 %}
+          {% assign count = count | plus: 1 %}
+          <a href="{{ related.url }}" class="blog-post-related__card">
+            {% if related.image %}
+              {{ related.image | image_url: width: 600 | image_tag: loading: 'lazy', class: 'blog-post-related__img' }}
+            {% endif %}
+            <div class="blog-post-related__card-content">
+              <p class="blog-post-related__card-date">{{ related.published_at | date: '%B %d, %Y' }}</p>
+              <h3 class="blog-post-related__card-title">{{ related.title }}</h3>
+              <p class="blog-post-related__card-excerpt">{{ related.excerpt_or_content | strip_html | truncate: 100 }}</p>
+              <span class="blog-post-related__read-more">Read more →</span>
+            </div>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
   </div>
 </div>
 
@@ -61,10 +78,138 @@
 </script>
 
 {% stylesheet %}
+  /* 50/50 Hero Layout */
+  .blog-post-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    max-width: 1400px;
+    margin: 0 auto 60px;
+    padding: 40px var(--page-margin);
+    align-items: center;
+  }
+
+  .blog-post-hero__img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    display: block;
+  }
+
+  .blog-post-hero__content {
+    padding: 20px 0;
+  }
+
+  .blog-post-hero__date {
+    font-size: 0.85rem;
+    color: rgb(var(--color-foreground-rgb) / 0.5);
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .blog-post-hero__title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 24px;
+    color: var(--color-foreground);
+  }
+
+  .blog-post-hero__excerpt {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: rgb(var(--color-foreground-rgb) / 0.75);
+  }
+
+  /* Full width body content */
+  .blog-post-body {
+    max-width: 860px;
+    margin: 0 auto 80px;
+    padding: 0 var(--page-margin);
+  }
+
+  .blog-post-body__content {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--color-foreground);
+  }
+
+  /* Related posts */
+  .blog-post-related {
+    background: #faf8f5;
+    padding: 60px var(--page-margin);
+    margin-top: 60px;
+  }
+
+  .blog-post-related__heading {
+    text-align: center;
+    font-size: 1.6rem;
+    margin-bottom: 40px;
+    font-weight: 600;
+  }
+
+  .blog-post-related__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .blog-post-related__card {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: transform 0.2s ease;
+  }
+
+  .blog-post-related__card:hover {
+    transform: translateY(-4px);
+  }
+
+  .blog-post-related__img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    display: block;
+    margin-bottom: 16px;
+  }
+
+  .blog-post-related__card-date {
+    font-size: 0.8rem;
+    color: rgb(var(--color-foreground-rgb) / 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+  }
+
+  .blog-post-related__card-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+
+  .blog-post-related__card-excerpt {
+    font-size: 0.875rem;
+    color: rgb(var(--color-foreground-rgb) / 0.7);
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+
+  .blog-post-related__read-more {
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: underline;
+  }
+
+  /* Comments */
   .blog-post-comments-container {
     width: 100%;
     max-width: var(--normal-content-width);
-    margin: 0 auto;
+    margin: 0 auto 60px;
+    padding: 0 var(--page-margin);
   }
 
   .blog-post-comments {
@@ -82,30 +227,29 @@
     color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text));
   }
 
-  .blog-post-comments-pagination {
-    display: flex;
-    justify-content: center;
-    gap: var(--gap-2xs);
-  }
+  /* Mobile responsive */
+  @media screen and (max-width: 749px) {
+    .blog-post-hero {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      padding: 24px 16px;
+    }
 
-  .blog-post-comments-pagination,
-  .blog-post-comments-pagination a {
-    color: var(--color-foreground);
-  }
+    .blog-post-hero__img {
+      height: 280px;
+    }
 
-  .blog-post-comments-pagination .current {
-    color: var(--color-foreground);
-  }
+    .blog-post-hero__title {
+      font-size: 1.5rem;
+    }
 
-  .blog-post-comments-pagination .current,
-  .blog-post-comments-pagination a {
-    display: block;
-    padding: var(--padding-2xs) var(--padding-xs);
-  }
+    .blog-post-related__grid {
+      grid-template-columns: 1fr;
+    }
 
-  .blog-post-comments-pagination .current,
-  .blog-post-comments-pagination a:hover {
-    border-bottom: 1px solid var(--color-foreground);
+    .blog-post-body {
+      padding: 0 16px;
+    }
   }
 {% endstylesheet %}
 
@@ -113,50 +257,15 @@
 {
   "name": "t:names.blog_post",
   "blocks": [
-    {
-      "type": "@theme"
-    },
-    {
-      "type": "@app"
-    },
-    {
-      "type": "_blog-post-title"
-    },
-    {
-      "type": "_blog-post-info-text"
-    },
-    {
-      "type": "_blog-post-featured-image"
-    },
-    {
-      "type": "_blog-post-content"
-    }
+    { "type": "@theme" },
+    { "type": "@app" },
+    { "type": "_blog-post-title" },
+    { "type": "_blog-post-info-text" },
+    { "type": "_blog-post-featured-image" },
+    { "type": "_blog-post-content" }
   ],
   "class": "section-wrapper",
   "settings": [
-    {
-      "type": "select",
-      "id": "content_direction",
-      "label": "t:settings.direction",
-      "options": [
-        {
-          "value": "column",
-          "label": "t:options.vertical"
-        }
-      ],
-      "default": "column",
-      "visible_if": "{{ section.settings.gap < 0 }}"
-    },
-    {
-      "type": "range",
-      "id": "gap",
-      "label": "t:settings.gap",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "px",
-      "default": 12
-    },
     {
       "type": "color",
       "id": "background_color",
