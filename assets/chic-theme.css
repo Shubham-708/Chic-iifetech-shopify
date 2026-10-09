@@ -695,7 +695,7 @@ body {
 }
 /* Sticky footer bottom bar */
 /* Sticky footer bottom bar */
-.chic-footer__bottom {
+/* .chic-footer__bottom {
   position: fixed;
   bottom: 0;
   left: 0;
@@ -726,5 +726,43 @@ body {
 
 body {
   padding-bottom: 22px;
+} */
+
+
+.chic-footer__bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: #0d4a70;
+  border-top: none;
+  padding: 2px 12px !important;
+  margin: 0 !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center !important;
+  text-align: center;
+  height: 28px !important;
+  min-height: 28px !important;
+  box-sizing: border-box;
+}
+
+.chic-footer__copy {
+  color: rgba(255, 255, 255, 0.85) !important;
+  font-size: 10px !important;
+  line-height: 14px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  text-align: center !important;
+  width: 100%;
+}
+
+.chic-footer__pay {
+  display: none;
+}
+
+body {
+  padding-bottom: 28px !important;
 }
 
