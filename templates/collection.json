@@ -115,10 +115,21 @@
         "padding-block-start": 32,
         "padding-block-end": 32
       }
+    },
+    "chic_journal_p8gPw8": {
+      "type": "chic-journal",
+      "name": "Chic journal",
+      "settings": {
+        "eyebrow": "From the Journal",
+        "heading": "Tips, Rituals & Insights",
+        "blog": "",
+        "link_label": "View All Posts"
+      }
     }
   },
   "order": [
     "section",
-    "main"
+    "main",
+    "chic_journal_p8gPw8"
   ]
 }
