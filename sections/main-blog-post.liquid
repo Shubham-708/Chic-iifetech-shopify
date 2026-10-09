@@ -48,7 +48,6 @@
     </div>
   {% endif %}
 
-  {% assign related_articles = blog.articles | where: 'id', article.id %}
   <div class="blog-post-related">
     <h2 class="blog-post-related__heading">More from the Journal</h2>
     <div class="blog-post-related__grid">
@@ -78,14 +77,13 @@
 </script>
 
 {% stylesheet %}
-  /* 50/50 Hero Layout */
   .blog-post-hero {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 40px;
     max-width: 1400px;
     margin: 0 auto 60px;
-    padding: 40px var(--page-margin);
+    padding: 40px 40px;
     align-items: center;
   }
 
@@ -122,11 +120,10 @@
     color: rgb(var(--color-foreground-rgb) / 0.75);
   }
 
-  /* Full width body content */
   .blog-post-body {
     max-width: 860px;
     margin: 0 auto 80px;
-    padding: 0 var(--page-margin);
+    padding: 0 40px;
   }
 
   .blog-post-body__content {
@@ -135,10 +132,9 @@
     color: var(--color-foreground);
   }
 
-  /* Related posts */
   .blog-post-related {
     background: #faf8f5;
-    padding: 60px var(--page-margin);
+    padding: 60px 40px;
     margin-top: 60px;
   }
 
@@ -204,12 +200,11 @@
     text-decoration: underline;
   }
 
-  /* Comments */
   .blog-post-comments-container {
     width: 100%;
     max-width: var(--normal-content-width);
     margin: 0 auto 60px;
-    padding: 0 var(--page-margin);
+    padding: 0 40px;
   }
 
   .blog-post-comments {
@@ -227,7 +222,32 @@
     color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text));
   }
 
-  /* Mobile responsive */
+  .blog-post-comments-pagination {
+    display: flex;
+    justify-content: center;
+    gap: var(--gap-2xs);
+  }
+
+  .blog-post-comments-pagination,
+  .blog-post-comments-pagination a {
+    color: var(--color-foreground);
+  }
+
+  .blog-post-comments-pagination .current {
+    color: var(--color-foreground);
+  }
+
+  .blog-post-comments-pagination .current,
+  .blog-post-comments-pagination a {
+    display: block;
+    padding: var(--padding-2xs) var(--padding-xs);
+  }
+
+  .blog-post-comments-pagination .current,
+  .blog-post-comments-pagination a:hover {
+    border-bottom: 1px solid var(--color-foreground);
+  }
+
   @media screen and (max-width: 749px) {
     .blog-post-hero {
       grid-template-columns: 1fr;
@@ -243,11 +263,19 @@
       font-size: 1.5rem;
     }
 
+    .blog-post-related {
+      padding: 40px 16px;
+    }
+
     .blog-post-related__grid {
       grid-template-columns: 1fr;
     }
 
     .blog-post-body {
+      padding: 0 16px;
+    }
+
+    .blog-post-comments-container {
       padding: 0 16px;
     }
   }
