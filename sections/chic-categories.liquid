@@ -10,7 +10,7 @@
         <h2>{{ s.heading | escape }}</h2>
       </div>
       {% if s.link_label != blank %}
-        <a class="chic-more" href="{% render 'chic-link', url: s.link, fallback: routes.collections_url %}">{{ s.link_label | escape }}</a>
+        <a class="chic-more" href="{{ s.link | default: routes.collections_url }}">{{ s.link_label | escape }}</a>
       {% endif %}
     </div>
 
@@ -18,7 +18,7 @@
       {% for block in section.blocks %}
         <a
           class="chic-cat"
-          href="{% render 'chic-link', url: block.settings.link %}"
+          href="{{ block.settings.link | default: routes.all_products_collection_url }}"
           style="--chic-cat-bg: {{ block.settings.bg_color }};"
           {{ block.shopify_attributes }}
         >
@@ -27,6 +27,18 @@
           {% if block.settings.text != blank %}
             <p>{{ block.settings.text | escape }}</p>
           {% endif %}
+
+          {% comment %} ✅ NEW: Card image added here {% endcomment %}
+          {% if block.settings.card_image != blank %}
+            <div class="chic-cat__image">
+              {{ block.settings.card_image | image_url: width: 160 | image_tag:
+                loading: 'lazy',
+                class: 'chic-cat__img',
+                alt: block.settings.title
+              }}
+            </div>
+          {% endif %}
+
           <span class="chic-cat__go">{% render 'chic-icon', icon: 'arrow' %}</span>
         </a>
       {% endfor %}
@@ -114,6 +126,23 @@
     stroke-linejoin: round;
   }
 
+  {% comment %} ✅ NEW: Image styles {% endcomment %}
+  .chic-cat__image {
+    margin-top: auto;
+    text-align: right;
+    margin-bottom: -20px;
+    margin-right: -20px;
+    overflow: hidden;
+  }
+
+  .chic-cat__img {
+    width: 110px;
+    height: 110px;
+    object-fit: contain;
+    display: block;
+    margin-left: auto;
+  }
+
   @media screen and (max-width: 1100px) {
     .chic-cats { grid-template-columns: repeat(3, 1fr); }
   }
@@ -161,7 +190,8 @@
         { "type": "text", "id": "title", "label": "Title", "default": "Skincare" },
         { "type": "text", "id": "text", "label": "Text", "default": "Nourish & Glow" },
         { "type": "url", "id": "link", "label": "Link" },
-        { "type": "color", "id": "bg_color", "label": "Card color", "default": "#e7f0d9" }
+        { "type": "color", "id": "bg_color", "label": "Card color", "default": "#e7f0d9" },
+        { "type": "image_picker", "id": "card_image", "label": "Card Image" }
       ]
     }
   ],
