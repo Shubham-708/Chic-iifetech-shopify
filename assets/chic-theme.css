@@ -24,7 +24,7 @@
 .chic-wrap {
   max-width: 1240px;
   margin: 0 auto;
-  padding-inline: 30px;
+  padding-inline: 20px;
 }
 
 @media screen and (max-width: 749px) {
