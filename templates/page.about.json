@@ -355,6 +355,16 @@
         "btn_label": "Contact Us",
         "btn_link": "/pages/contact"
       }
+    },
+    "chic_journal_r33MJN": {
+      "type": "chic-journal",
+      "name": "Chic journal",
+      "settings": {
+        "eyebrow": "From the Journal",
+        "heading": "Tips, Rituals & Insights",
+        "blog": "",
+        "link_label": "View All Posts"
+      }
     }
   },
   "order": [
@@ -365,6 +375,7 @@
     "about_ingredients",
     "about_testimonials",
     "about_reels",
-    "about_cta"
+    "about_cta",
+    "chic_journal_r33MJN"
   ]
 }
