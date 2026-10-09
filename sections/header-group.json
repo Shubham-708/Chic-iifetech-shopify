@@ -21,8 +21,10 @@
             "link": "shopify://collections/all",
             "font": "var(--font-accent--family)",
             "font_size": "0.75rem",
+            "weight": "",
             "letter_spacing": "loose",
-            "case": "uppercase"
+            "case": "uppercase",
+            "text_color": ""
           },
           "blocks": {}
         },
@@ -33,8 +35,10 @@
             "link": "shopify://collections/all",
             "font": "var(--font-accent--family)",
             "font_size": "0.75rem",
+            "weight": "",
             "letter_spacing": "loose",
-            "case": "uppercase"
+            "case": "uppercase",
+            "text_color": ""
           },
           "blocks": {}
         }
@@ -49,6 +53,7 @@
         "section_width": "full-width",
         "background_color": "{{ settings.color_palette.color1 }}",
         "divider_width": 0,
+        "divider_color": "",
         "padding-block-start": 15,
         "padding-block-end": 15
       }
@@ -71,6 +76,8 @@
           "static": true,
           "settings": {
             "menu": "main-menu",
+            "background_color": "{{ settings.color_palette.background }}",
+            "text_color": "",
             "type_font_primary_size": "1rem",
             "menu_font_style": "inverse",
             "type_font_primary_link": "subheading",
@@ -80,6 +87,8 @@
             "featured_collections_aspect_ratio": "16 / 9",
             "image_border_radius": 0,
             "navigation_bar": false,
+            "background_color_navigation_bar": "{{ settings.color_palette.background }}",
+            "text_color_navigation_bar": "",
             "drawer_accordion": false,
             "drawer_accordion_expand_first": false,
             "drawer_dividers": false
@@ -91,6 +100,7 @@
         "logo_position": "left",
         "menu_position": "center",
         "menu_row": "top",
+        "customer_account_menu": "customer-account-main-menu",
         "show_search": true,
         "search_position": "right",
         "search_row": "top",
@@ -109,15 +119,81 @@
         "divider_color": "{{ settings.color_palette.color3 }}",
         "border_width": 1,
         "bottom_border_color": "{{ settings.color_palette.color3 }}",
+        "actions_display_style": "icon",
+        "actions_font_size": "0.875rem",
+        "actions_font": "body",
+        "actions_text_case": "none",
         "background_color_top": "{{ settings.color_palette.background }}",
+        "text_color_top": "",
+        "background_color_bottom": "",
+        "text_color_bottom": "",
+        "bubble_style": "default",
+        "bubble_background_color": "",
+        "bubble_text_color": "",
         "enable_transparent_header_home": false,
+        "home_inverse_logo": false,
+        "text_color_transparent_home": "",
         "enable_transparent_header_product": false,
-        "enable_transparent_header_collection": false
+        "product_inverse_logo": false,
+        "text_color_transparent_product": "",
+        "enable_transparent_header_collection": false,
+        "collection_inverse_logo": false,
+        "text_color_transparent_collection": ""
+      }
+    },
+    "chic_products_D9VPRH": {
+      "type": "chic-products",
+      "blocks": {
+        "tab_Jm4gkL": {
+          "type": "tab",
+          "settings": {
+            "label": "Skincare",
+            "match": "skin care"
+          }
+        },
+        "tab_BHnx6m": {
+          "type": "tab",
+          "settings": {
+            "label": "Haircare",
+            "match": "hair"
+          }
+        },
+        "tab_GGwxQb": {
+          "type": "tab",
+          "settings": {
+            "label": "Bodycare",
+            "match": "body"
+          }
+        },
+        "tab_xDewca": {
+          "type": "tab",
+          "settings": {
+            "label": "Gift Sets & Combos",
+            "match": "gift"
+          }
+        }
+      },
+      "block_order": [
+        "tab_Jm4gkL",
+        "tab_BHnx6m",
+        "tab_GGwxQb",
+        "tab_xDewca"
+      ],
+      "disabled": true,
+      "name": "Chic products",
+      "settings": {
+        "eyebrow": "Our bestsellers",
+        "heading": "Loved By Thousands",
+        "collection": "",
+        "max_products": 10,
+        "link_label": "View All Products",
+        "link": ""
       }
     }
   },
   "order": [
     "header_announcements_pbXTDf",
-    "header_section"
+    "header_section",
+    "chic_products_D9VPRH"
   ]
 }
