@@ -1,6 +1,138 @@
+{% doc %}
+  @prompt
+    Create a custom blog post layout block for individual blog post pages with this design:
+    - Top section: 50% width featured image on the LEFT and 50% width article title + date + first paragraph of content on the RIGHT, displayed side by side
+    - The right side should have: large bold article title, date in a subtle color, and a strong intro paragraph
+    - Below the 50/50 section: full width article body content
+    - Below the full content: a "More from the Journal" section showing 3 related blog posts from the same blog in a 3-column grid
+    - Each related post card: featured image, title, excerpt, Read more link
+    - Clean premium botanical skincare brand aesthetic, white background, dark text
+    - Fully responsive: stack to single column on mobile
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-journal-layout-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 36px 0 56px;
+    color: #1d1a22;
+    background: #ffffff;
+  }
+  .ai-journal-layout-{{ ai_gen_id }} img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .ai-journal-layout-{{ ai_gen_id }}__hero { display: grid; grid-template-columns: 1fr 1fr; align-items: stretch; gap: 40px; }
+  .ai-journal-layout-{{ ai_gen_id }}__hero-media { min-height: 420px; overflow: hidden; background: #f1f3ee; }
+  .ai-journal-layout-{{ ai_gen_id }}__hero-media img { aspect-ratio: 4 / 3; }
+  .ai-journal-layout-{{ ai_gen_id }}__placeholder { min-height: 420px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 12px; color: #4d5947; }
+  .ai-journal-layout-{{ ai_gen_id }}__placeholder svg { width: 100%; height: 100%; max-height: 420px; }
+  .ai-journal-layout-{{ ai_gen_id }}__placeholder span { padding: 0 16px 18px; font-size: 14px; }
+  .ai-journal-layout-{{ ai_gen_id }}__intro { display: flex; flex-direction: column; justify-content: center; padding: 28px 0; }
+  .ai-journal-layout-{{ ai_gen_id }}__date { margin: 0 0 18px; color: #53614e; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; }
+  .ai-journal-layout-{{ ai_gen_id }}__title { margin: 0 0 24px; color: #1d1a22; font-family: {{ settings.type_heading_font.family }}, {{ settings.type_heading_font.fallback_families }}; font-size: clamp(34px, 4vw, 58px); font-weight: 700; line-height: 1.12; }
+  .ai-journal-layout-{{ ai_gen_id }}__lead { color: #27272a; font-size: 18px; line-height: 1.7; }
+  .ai-journal-layout-{{ ai_gen_id }}__body { max-width: 820px; margin: 64px auto 0; font-size: 16px; line-height: 1.8; }
+  .ai-journal-layout-{{ ai_gen_id }}__body img { height: auto; }
+  .ai-journal-layout-{{ ai_gen_id }}__related { margin-top: 76px; }
+  .ai-journal-layout-{{ ai_gen_id }}__related-heading { margin: 0 0 28px; font-family: {{ settings.type_heading_font.family }}, {{ settings.type_heading_font.fallback_families }}; font-size: 32px; line-height: 1.2; }
+  .ai-journal-layout-{{ ai_gen_id }}__cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+  .ai-journal-layout-{{ ai_gen_id }}__card { min-width: 0; }
+  .ai-journal-layout-{{ ai_gen_id }}__card-media { aspect-ratio: 4 / 3; overflow: hidden; background: #f1f3ee; margin-bottom: 16px; }
+  .ai-journal-layout-{{ ai_gen_id }}__card-media svg { width: 100%; height: 100%; }
+  .ai-journal-layout-{{ ai_gen_id }}__card-title { color: #1d1a22; font-size: 19px; line-height: 1.35; margin: 0 0 9px; }
+  .ai-journal-layout-{{ ai_gen_id }}__excerpt { color: #393a36; margin: 0 0 12px; font-size: 14px; line-height: 1.6; }
+  .ai-journal-layout-{{ ai_gen_id }}__link { color: #1d1a22; text-decoration: underline; text-underline-offset: 3px; font-weight: 600; }
+  .ai-journal-layout-{{ ai_gen_id }}__link:focus-visible { outline: 2px solid #1d1a22; outline-offset: 4px; }
+  @media screen and (max-width: 749px) {
+    .ai-journal-layout-{{ ai_gen_id }} { padding: 20px 0 40px; }
+    .ai-journal-layout-{{ ai_gen_id }}__hero { grid-template-columns: 1fr; gap: 22px; }
+    .ai-journal-layout-{{ ai_gen_id }}__hero-media, .ai-journal-layout-{{ ai_gen_id }}__placeholder { min-height: 0; }
+    .ai-journal-layout-{{ ai_gen_id }}__hero-media img { aspect-ratio: 4 / 3; }
+    .ai-journal-layout-{{ ai_gen_id }}__intro { padding: 4px 0; }
+    .ai-journal-layout-{{ ai_gen_id }}__title { font-size: 36px; }
+    .ai-journal-layout-{{ ai_gen_id }}__lead { font-size: 16px; }
+    .ai-journal-layout-{{ ai_gen_id }}__body { margin-top: 40px; }
+    .ai-journal-layout-{{ ai_gen_id }}__related { margin-top: 52px; }
+    .ai-journal-layout-{{ ai_gen_id }}__cards { grid-template-columns: 1fr; gap: 30px; }
+  }
+{% endstyle %}
+
+<div class="ai-journal-layout-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-journal-layout-{{ ai_gen_id }}__hero">
+    <div class="ai-journal-layout-{{ ai_gen_id }}__hero-media">
+      {% if article.image %}
+        <img src="{{ article.image | image_url: width: 1600 }}" alt="{{ article.image.alt | default: article.title | escape }}" width="{{ article.image.width }}" height="{{ article.image.height }}" loading="eager">
+      {% else %}
+        <div class="ai-journal-layout-{{ ai_gen_id }}__placeholder">
+          {{ 'blog-apparel-1' | placeholder_svg_tag }}
+          <span>Add a featured image to this article</span>
+        </div>
+      {% endif %}
+    </div>
+    <div class="ai-journal-layout-{{ ai_gen_id }}__intro">
+      <p class="ai-journal-layout-{{ ai_gen_id }}__date"><time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%B %d, %Y' }}</time></p>
+      <h1 class="ai-journal-layout-{{ ai_gen_id }}__title">{{ article.title | escape }}</h1>
+      <div class="ai-journal-layout-{{ ai_gen_id }}__lead">{{ article.excerpt_or_content | strip_html | truncatewords: 55 | escape }}</div>
+    </div>
+  </div>
+  <div class="ai-journal-layout-{{ ai_gen_id }}__body rte">{{ article.content }}</div>
+  {% if blog != blank %}
+    <section class="ai-journal-layout-{{ ai_gen_id }}__related" aria-labelledby="ai-journal-related-heading-{{ ai_gen_id }}">
+      <h2 class="ai-journal-layout-{{ ai_gen_id }}__related-heading" id="ai-journal-related-heading-{{ ai_gen_id }}">{{ block.settings.related_heading | escape }}</h2>
+      <div class="ai-journal-layout-{{ ai_gen_id }}__cards">
+        {% assign related_count = 0 %}
+        {% for related_article in blog.articles %}
+          {% if related_article.id != article.id and related_count < 3 %}
+            {% assign related_count = related_count | plus: 1 %}
+            <article class="ai-journal-layout-{{ ai_gen_id }}__card">
+              <a href="{{ related_article.url }}" aria-label="Read {{ related_article.title | escape }}">
+                <div class="ai-journal-layout-{{ ai_gen_id }}__card-media">
+                  {% if related_article.image %}
+                    <img src="{{ related_article.image | image_url: width: 800 }}" alt="{{ related_article.image.alt | default: related_article.title | escape }}" width="{{ related_article.image.width }}" height="{{ related_article.image.height }}" loading="lazy">
+                  {% else %}
+                    {{ 'blog-apparel-1' | placeholder_svg_tag }}
+                  {% endif %}
+                </div>
+              </a>
+              <h3 class="ai-journal-layout-{{ ai_gen_id }}__card-title"><a class="ai-journal-layout-{{ ai_gen_id }}__link" href="{{ related_article.url }}">{{ related_article.title | escape }}</a></h3>
+              <p class="ai-journal-layout-{{ ai_gen_id }}__excerpt">{{ related_article.excerpt_or_content | strip_html | truncatewords: 22 | escape }}</p>
+              <a class="ai-journal-layout-{{ ai_gen_id }}__link" href="{{ related_article.url }}">Read more</a>
+            </article>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </section>
+  {% endif %}
+</div>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Journal article layout",
+  "settings": [
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "text",
+      "id": "related_heading",
+      "label": "Related section heading",
+      "default": "More from the Journal"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Journal article layout"
+    }
+  ],
+  "tag": null,
+  "class": "journal-article-layout"
+}
 {% endschema %}
