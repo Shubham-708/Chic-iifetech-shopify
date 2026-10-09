@@ -10,25 +10,59 @@
           {% if s.eyebrow != blank %}<p class="chic-eyebrow">{{ s.eyebrow | escape }}</p>{% endif %}
           <h2>{{ s.heading | escape }}</h2>
         </div>
+        <div class="chic-carousel-arrows">
+          <button class="chic-arrow chic-arrow--prev" aria-label="Previous">
+            <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button class="chic-arrow chic-arrow--next" aria-label="Next">
+            <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
+          </button>
+        </div>
       </div>
-      <div class="chic-rgrid">
-        {% for block in section.blocks %}
-          <div class="chic-rcard" {{ block.shopify_attributes }}>
-            <div class="chic-stars chic-rcard__stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-            <p class="chic-rcard__text">{{ block.settings.quote | escape }}</p>
-            <div class="chic-rcard__who">
-              <span class="chic-rcard__avatar" aria-hidden="true">{{ block.settings.name | slice: 0 | upcase }}</span>
-              <div>
-                <b>{{ block.settings.name | escape }}</b>
-                <small>{% render 'chic-icon', icon: 'check' %} Verified Buyer</small>
+
+      <div class="chic-rgrid-wrapper">
+        <div class="chic-rgrid">
+          {% for block in section.blocks %}
+            <div class="chic-rcard" {{ block.shopify_attributes }}>
+              <div class="chic-stars chic-rcard__stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+              <p class="chic-rcard__text">{{ block.settings.quote | escape }}</p>
+              <div class="chic-rcard__who">
+                <span class="chic-rcard__avatar" aria-hidden="true">{{ block.settings.name | slice: 0 | upcase }}</span>
+                <div>
+                  <b>{{ block.settings.name | escape }}</b>
+                  <small>{% render 'chic-icon', icon: 'check' %} Verified Buyer</small>
+                </div>
               </div>
             </div>
-          </div>
-        {% endfor %}
+          {% endfor %}
+        </div>
       </div>
+
     </div>
   </div>
 </div>
+
+<script>
+  (function() {
+    const grid = document.querySelector('.chic-rgrid');
+    const prevBtn = document.querySelector('.chic-arrow--prev');
+    const nextBtn = document.querySelector('.chic-arrow--next');
+    if (!grid || !prevBtn || !nextBtn) return;
+
+    const scrollAmount = () => {
+      const card = grid.querySelector('.chic-rcard');
+      return card ? card.offsetWidth + 20 : 320;
+    };
+
+    prevBtn.addEventListener('click', () => {
+      grid.scrollBy({ left: -scrollAmount(), behavior: 'smooth' });
+    });
+
+    nextBtn.addEventListener('click', () => {
+      grid.scrollBy({ left: scrollAmount(), behavior: 'smooth' });
+    });
+  })();
+</script>
 
 {% stylesheet %}
   .chic-reviews {
@@ -38,11 +72,61 @@
     padding: clamp(28px, 4vw, 48px);
   }
 
-  .chic-rgrid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+  /* Arrow buttons */
+  .chic-carousel-arrows {
+    display: flex;
+    gap: 10px;
+    align-items: center;
   }
+
+  .chic-arrow {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1.5px solid var(--chic-line);
+    background: #fff;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+    flex: none;
+  }
+
+  .chic-arrow:hover {
+    background: var(--chic-navy);
+    border-color: var(--chic-navy);
+  }
+
+  .chic-arrow svg {
+    width: 18px;
+    height: 18px;
+    stroke: var(--chic-navy);
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: stroke 0.2s ease;
+  }
+
+  .chic-arrow:hover svg {
+    stroke: #fff;
+  }
+
+  /* Grid wrapper */
+  .chic-rgrid-wrapper {
+    overflow: hidden;
+  }
+
+  .chic-rgrid {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    padding-bottom: 4px;
+  }
+
+  .chic-rgrid::-webkit-scrollbar { display: none; }
 
   .chic-rcard {
     background: var(--chic-card);
@@ -52,6 +136,9 @@
     display: flex;
     flex-direction: column;
     transition: border-color 0.25s ease;
+    flex: 0 0 calc(33.33% - 14px);
+    scroll-snap-align: start;
+    min-width: 280px;
   }
 
   .chic-rcard:hover { border-color: #c9d8b8; }
@@ -116,21 +203,8 @@
   }
 
   @media screen and (max-width: 860px) {
-    .chic-rgrid {
-      display: flex;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      gap: 14px;
-      margin: 0 -16px;
-      padding: 4px 16px 8px;
-      scrollbar-width: none;
-    }
-
-    .chic-rgrid::-webkit-scrollbar { display: none; }
-
     .chic-rcard {
       flex: 0 0 84%;
-      scroll-snap-align: center;
     }
   }
 {% endstylesheet %}
@@ -157,7 +231,7 @@
       ]
     }
   ],
-  "max_blocks": 6,
+  "max_blocks": 12,
   "presets": [
     {
       "name": "Chic testimonials",
