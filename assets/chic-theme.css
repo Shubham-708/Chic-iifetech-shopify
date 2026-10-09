@@ -694,6 +694,7 @@ body {
   }
 }
 /* Sticky footer bottom bar */
+/* Sticky footer bottom bar */
 .chic-footer__bottom {
   position: fixed;
   bottom: 0;
@@ -702,29 +703,28 @@ body {
   z-index: 100;
   background: #0d4a70;
   border-top: none;
-  padding: 8px 24px;
+  padding: 6px 24px;
   margin: 0;
-  display: flex;
+  display: flex !important;
   align-items: center;
-  justify-content: center;
-  gap: 24px;
+  justify-content: center !important;
+  flex-direction: row;
+  text-align: center;
+  min-height: 30px;
 }
 
 .chic-footer__copy {
-  color: rgba(255, 255, 255, 0.85);
-  font-size: 12px;
-  margin: 0;
-  text-align: center;
+  color: rgba(255, 255, 255, 0.85) !important;
+  font-size: 11px !important;
+  margin: 0 auto !important;
+  text-align: center !important;
+  width: 100%;
 }
 
 .chic-footer__pay {
-  display: flex;
-  gap: 6px;
-  margin: 0;
-  padding: 0;
+  display: none;
 }
 
 body {
-  padding-bottom: 38px;
+  padding-bottom: 30px;
 }
-
