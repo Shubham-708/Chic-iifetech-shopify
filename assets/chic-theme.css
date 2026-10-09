@@ -693,3 +693,20 @@ body {
     max-width: 60% !important;
   }
 }
+/* Sticky footer bottom bar */
+.chic-footer__bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: #f5f9ee;
+  border-top: 1px solid #e3ead8;
+  padding: 12px 40px;
+  margin: 0;
+}
+
+/* Page ke content ko bottom bar ke upar rakhne ke liye */
+body {
+  padding-bottom: 60px;
+}
