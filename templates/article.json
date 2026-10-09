@@ -6,7 +6,8 @@
  * or related systems. Please exercise caution as any changes
  * made to this file may be overwritten.
  * ------------------------------------------------------------
- */{
+ */
+{
   "sections": {
     "section": {
       "type": "main-blog-post",
@@ -26,6 +27,7 @@
             "letter_spacing": "normal",
             "case": "none",
             "wrap": "pretty",
+            "text_color": "",
             "background": false,
             "background_color": "#00000026",
             "corner_radius": 0,
@@ -42,10 +44,14 @@
           "settings": {
             "show_date": true,
             "show_author": false,
+            "type_preset": "",
             "alignment": "center",
+            "text_color": "",
             "show_alignment": true,
             "padding-block-start": 0,
-            "padding-block-end": 0
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
           },
           "blocks": {}
         },
@@ -54,6 +60,7 @@
           "name": "t:names.featured_image",
           "settings": {
             "image": "{{ article.image }}",
+            "link": "",
             "image_ratio": "adapt",
             "width": "fill",
             "custom_width": 100,
@@ -63,6 +70,7 @@
             "border": "none",
             "border_width": 1,
             "border_opacity": 100,
+            "border_color": "",
             "border_radius": 0,
             "padding-block-start": 0,
             "padding-block-end": 0,
@@ -73,7 +81,9 @@
         },
         "blog-post-content": {
           "type": "_blog-post-content",
-          "settings": {},
+          "settings": {
+            "text_color": ""
+          },
           "blocks": {}
         }
       },
@@ -84,15 +94,59 @@
         "blog-post-content"
       ],
       "settings": {
-        "content_direction": "column",
-        "gap": 32,
         "background_color": "{{ settings.color_palette.background }}",
-        "padding-block-start": 40,
-        "padding-block-end": 80
+        "padding-block-start": 20,
+        "padding-block-end": 40
+      }
+    },
+    "1791546533f1ffdcf9": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_83b86a0_n3PaqL": {
+          "type": "ai_gen_block_83b86a0",
+          "disabled": true,
+          "settings": {
+            "desktop_width_percent": 100,
+            "related_heading": "More from the Journal"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_83b86a0_n3PaqL"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "background_media": "none",
+        "background_color": "",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 0,
+        "padding-block-end": 0
       }
     }
   },
   "order": [
-    "section"
+    "section",
+    "1791546533f1ffdcf9"
   ]
 }
