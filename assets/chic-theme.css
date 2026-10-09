@@ -678,3 +678,101 @@ body {
 .product-grid__item > .chic-prod { height: 100%; }
 .product-grid__item .chic-prod__info h4 { font-size: 14px; }
 .resource-list__item > .chic-prod { height: 100%; }
+
+/* ------------------------------------------------------------------
+   Modern refresh — same palette, cleaner type, softer surfaces
+   ------------------------------------------------------------------ */
+:root {
+  --chic-radius: 16px;
+  --chic-shadow: 0 10px 30px rgb(13 74 112 / 0.08);
+  --chic-shadow-hover: 0 18px 44px rgb(13 74 112 / 0.14);
+}
+
+/* section headings: modern sans, tighter tracking */
+.chic-sec-head h2 {
+  font-family: var(--chic-sans);
+  font-weight: 600;
+  font-size: clamp(24px, 2.8vw, 36px);
+  letter-spacing: -0.015em;
+}
+
+.chic-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 0.16em;
+}
+
+.chic-eyebrow::before {
+  content: "";
+  width: 18px;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+}
+
+/* pill buttons with a gentle lift */
+.chic-btn {
+  border-radius: 999px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.chic-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgb(13 74 112 / 0.18);
+}
+
+.chic-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border: 1px solid var(--chic-line);
+  border-radius: 999px;
+  background: #fff;
+  font-weight: 600;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.chic-more:hover {
+  background: var(--chic-navy);
+  border-color: var(--chic-navy);
+  color: #fff;
+  text-decoration: none;
+}
+
+/* product cards: rounder, floating on hover */
+.chic-prod {
+  border-radius: var(--chic-radius);
+  border-color: #edf1e7;
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.chic-prod:hover {
+  transform: translateY(-5px);
+  border-color: transparent;
+  box-shadow: var(--chic-shadow-hover);
+}
+
+.chic-prod__info h4,
+.chic-prod__info h4 a {
+  font-family: var(--chic-sans);
+  font-weight: 600;
+  letter-spacing: -0.005em;
+}
+
+/* testimonial and journal cards share the same soft surface */
+.chic-rcard {
+  border-radius: var(--chic-radius);
+  box-shadow: var(--chic-shadow);
+}
+
+/* smoother page feel */
+::selection { background: var(--chic-mint); color: var(--chic-ink); }
+
+:focus-visible {
+  outline: 2px solid var(--chic-green);
+  outline-offset: 3px;
+}

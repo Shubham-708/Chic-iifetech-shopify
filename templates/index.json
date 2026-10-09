@@ -499,35 +499,48 @@
           "type": "reel",
           "settings": {
             "reel_url": "",
-            "fallback_asset": "chic-insta-1.jpg"
+            "fallback_asset": "chic-insta-1.jpg",
+            "product": "hebral-hair-oil-combe"
           }
         },
         "reel_2": {
           "type": "reel",
           "settings": {
             "reel_url": "",
-            "fallback_asset": "chic-insta-2.jpg"
+            "fallback_asset": "chic-insta-2.jpg",
+            "product": "aloe-vera-and-neem-face-and-body-scrub"
           }
         },
         "reel_3": {
           "type": "reel",
           "settings": {
             "reel_url": "",
-            "fallback_asset": "chic-insta-3.jpg"
+            "fallback_asset": "chic-insta-3.jpg",
+            "product": "suryaveda-ayurvedic-sunscreen-spf-50-pa-no-white-cast-hyaluronic-acid-aloe-vera-mineral-uv-filters-for-tweens-teenagers-all-skin-types"
           }
         },
         "reel_4": {
           "type": "reel",
           "settings": {
             "reel_url": "",
-            "fallback_asset": "chic-insta-4.jpg"
+            "fallback_asset": "chic-insta-4.jpg",
+            "product": "natural-pigmentation-repair-cream"
           }
         },
         "reel_5": {
           "type": "reel",
           "settings": {
             "reel_url": "",
-            "fallback_asset": "chic-insta-5.jpg"
+            "fallback_asset": "chic-insta-5.jpg",
+            "product": "body-yogurt-moisturizer-with-kokum-and-jojoba-seeds"
+          }
+        },
+        "reel_6": {
+          "type": "reel",
+          "settings": {
+            "reel_url": "",
+            "fallback_asset": "chic-insta-6.jpg",
+            "product": "ayurabright-ayurvedic-pigmentation-correcting-cream-reduces-dark-spots-tanning-uneven-skin-tone-herbal-extracts-for-all-skin-types-daily-use"
           }
         }
       },
@@ -536,14 +549,16 @@
         "reel_2",
         "reel_3",
         "reel_4",
-        "reel_5"
+        "reel_5",
+        "reel_6"
       ],
       "name": "Chic Instagram reels",
       "settings": {
         "eyebrow": "@chic_the_botanical_beauty",
         "heading": "Fresh From Our Instagram",
         "instagram_url": "https://www.instagram.com/chic_the_botanical_beauty/",
-        "link_label": "Follow Us"
+        "link_label": "Follow us on Instagram",
+        "subheading": "Real routines, real results — tap a product to shop the look."
       }
     },
     "chic_journal": {
