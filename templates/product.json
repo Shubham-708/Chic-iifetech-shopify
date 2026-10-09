@@ -401,28 +401,8 @@
         "padding-block-end": 0
       }
     },
-    "chic_recs": {
-      "type": "chic-recommendations",
-      "name": "Chic recommendations",
-      "settings": {
-        "eyebrow": "Picked for you",
-        "heading": "Recommended For You",
-        "link_label": "View All Products",
-        "max_products": 8
-      }
-    },
     "chic_ingredients": {
       "type": "chic-key-ingredients",
-      "name": "Ingredients · Hair Oil",
-      "settings": {
-        "match_keywords": "hair-oil, hair oil, hair-amrut, hair amrut",
-        "eyebrow": "Infused with 18 herbs",
-        "heading": "Backed by the Right Ingredients",
-        "intro": "<p><strong>Hair Amrut Hair Oil</strong> is an all-rounder Ayurvedic hair tonic. Its blend of 18 herbs in cold-pressed oils revitalises hair follicles and promotes natural hair growth by improving blood circulation in the scalp.</p><p>It helps reduce premature greying, hair fall and dandruff, and makes the roots stronger for healthier, nourished hair. Free from parabens, mineral oil and silicones.</p>",
-        "show_full_list": true,
-        "list_title": "Full ingredient list",
-        "list_note": "Percentages as printed on the Hair Amrut label."
-      },
       "blocks": {
         "ing_bhringraj": {
           "type": "ingredient",
@@ -654,20 +634,21 @@
         "ing_coconut_oil",
         "ing_sesame_oil",
         "ing_mustard_oil"
-      ]
+      ],
+      "name": "Ingredients · Hair Oil",
+      "settings": {
+        "match_keywords": "hair-oil, hair oil, hair-amrut, hair amrut",
+        "exclude_keywords": "",
+        "eyebrow": "Infused with 18 herbs",
+        "heading": "Backed by the Right Ingredients",
+        "intro": "<p><strong>Hair Amrut Hair Oil</strong> is an all-rounder Ayurvedic hair tonic. Its blend of 18 herbs in cold-pressed oils revitalises hair follicles and promotes natural hair growth by improving blood circulation in the scalp.</p><p>It helps reduce premature greying, hair fall and dandruff, and makes the roots stronger for healthier, nourished hair. Free from parabens, mineral oil and silicones.</p>",
+        "show_full_list": true,
+        "list_title": "Full ingredient list",
+        "list_note": "Percentages as printed on the Hair Amrut label."
+      }
     },
     "ing_sunscreen": {
       "type": "chic-key-ingredients",
-      "name": "Ingredients · Sunscreen",
-      "settings": {
-        "match_keywords": "sunscreen, suryaveda",
-        "eyebrow": "Mineral sun protection",
-        "heading": "What's inside SuryaVeda",
-        "intro": "<p>A lightweight Ayurvedic sunscreen with mineral UV filters for broad-spectrum SPF 50 PA++++ protection. Aloe vera and hyaluronic acid keep skin calm and hydrated — and it leaves no white cast.</p>",
-        "show_full_list": false,
-        "list_title": "Full ingredient list",
-        "list_note": ""
-      },
       "blocks": {
         "ing_zinc_oxide": {
           "type": "ingredient",
@@ -755,20 +736,21 @@
         "ing_cocoa_butter",
         "ing_beeswax",
         "ing_glycerine"
-      ]
-    },
-    "ing_scrub": {
-      "type": "chic-key-ingredients",
-      "name": "Ingredients · Face & Body Scrub",
+      ],
+      "name": "Ingredients · Sunscreen",
       "settings": {
-        "match_keywords": "scrub",
-        "eyebrow": "Purifying botanicals",
-        "heading": "What's inside the Aloevera & Neem Scrub",
-        "intro": "<p>A gentle exfoliating scrub that clears dead skin and unclogs pores, leaving skin clear, bright and glowing. Suitable for acne-prone, oily, dry and all skin types.</p>",
+        "match_keywords": "sunscreen, suryaveda",
+        "exclude_keywords": "",
+        "eyebrow": "Mineral sun protection",
+        "heading": "What's inside SuryaVeda",
+        "intro": "<p>A lightweight Ayurvedic sunscreen with mineral UV filters for broad-spectrum SPF 50 PA++++ protection. Aloe vera and hyaluronic acid keep skin calm and hydrated — and it leaves no white cast.</p>",
         "show_full_list": false,
         "list_title": "Full ingredient list",
         "list_note": ""
-      },
+      }
+    },
+    "ing_scrub": {
+      "type": "chic-key-ingredients",
       "blocks": {
         "ing_aloe_vera": {
           "type": "ingredient",
@@ -844,20 +826,21 @@
         "ing_tulsi",
         "ing_turmeric",
         "ing_glycerine"
-      ]
-    },
-    "ing_pigmentation": {
-      "type": "chic-key-ingredients",
-      "name": "Ingredients · Pigmentation Cream",
+      ],
+      "name": "Ingredients · Face & Body Scrub",
       "settings": {
-        "match_keywords": "pigmentation, ayurabright",
-        "eyebrow": "Ayurvedic brightening",
-        "heading": "What's inside the Pigmentation Repair Cream",
-        "intro": "<p>An Ayurvedic cream that helps fade dark spots, tanning and uneven skin tone with time-tested herbal extracts — for a lighter, even and radiant complexion.</p>",
+        "match_keywords": "scrub",
+        "exclude_keywords": "",
+        "eyebrow": "Purifying botanicals",
+        "heading": "What's inside the Aloevera & Neem Scrub",
+        "intro": "<p>A gentle exfoliating scrub that clears dead skin and unclogs pores, leaving skin clear, bright and glowing. Suitable for acne-prone, oily, dry and all skin types.</p>",
         "show_full_list": false,
         "list_title": "Full ingredient list",
         "list_note": ""
-      },
+      }
+    },
+    "ing_pigmentation": {
+      "type": "chic-key-ingredients",
       "blocks": {
         "ing_licorice": {
           "type": "ingredient",
@@ -933,20 +916,21 @@
         "ing_manjistha",
         "ing_aloe_vera",
         "ing_almond_oil"
-      ]
-    },
-    "ing_yogurt": {
-      "type": "chic-key-ingredients",
-      "name": "Ingredients · Body Yogurt",
+      ],
+      "name": "Ingredients · Pigmentation Cream",
       "settings": {
-        "match_keywords": "body-yogurt, yogurt",
-        "eyebrow": "Whipped nourishment",
-        "heading": "What's inside the Body Yogurt",
-        "intro": "<p>A light, whipped body moisturiser with kokum butter and jojoba that absorbs fast and keeps skin soft and supple all day — without feeling sticky.</p>",
+        "match_keywords": "pigmentation, ayurabright",
+        "exclude_keywords": "",
+        "eyebrow": "Ayurvedic brightening",
+        "heading": "What's inside the Pigmentation Repair Cream",
+        "intro": "<p>An Ayurvedic cream that helps fade dark spots, tanning and uneven skin tone with time-tested herbal extracts — for a lighter, even and radiant complexion.</p>",
         "show_full_list": false,
         "list_title": "Full ingredient list",
         "list_note": ""
-      },
+      }
+    },
+    "ing_yogurt": {
+      "type": "chic-key-ingredients",
       "blocks": {
         "ing_kokum_butter": {
           "type": "ingredient",
@@ -1022,20 +1006,21 @@
         "ing_shea_butter",
         "ing_aloe_vera",
         "ing_almond_oil"
-      ]
-    },
-    "ing_facewash": {
-      "type": "chic-key-ingredients",
-      "name": "Ingredients · Face Wash",
+      ],
+      "name": "Ingredients · Body Yogurt",
       "settings": {
-        "match_keywords": "face-wash, facewash",
-        "eyebrow": "Gentle daily cleanse",
-        "heading": "What's inside the Probiotic Face Wash",
-        "intro": "<p>A gentle, soap-free face wash that cleanses without stripping, supporting a healthy skin barrier with probiotics and calming botanicals.</p>",
+        "match_keywords": "body-yogurt, yogurt",
+        "exclude_keywords": "",
+        "eyebrow": "Whipped nourishment",
+        "heading": "What's inside the Body Yogurt",
+        "intro": "<p>A light, whipped body moisturiser with kokum butter and jojoba that absorbs fast and keeps skin soft and supple all day — without feeling sticky.</p>",
         "show_full_list": false,
         "list_title": "Full ingredient list",
         "list_note": ""
-      },
+      }
+    },
+    "ing_facewash": {
+      "type": "chic-key-ingredients",
       "blocks": {
         "ing_yogurt": {
           "type": "ingredient",
@@ -1111,20 +1096,21 @@
         "ing_tea_tree",
         "ing_turmeric",
         "ing_glycerine"
-      ]
-    },
-    "ing_dtan": {
-      "type": "chic-key-ingredients",
-      "name": "Ingredients · D-Tan Pack",
+      ],
+      "name": "Ingredients · Face Wash",
       "settings": {
-        "match_keywords": "d-tan, clay-pack",
-        "eyebrow": "Detox & de-tan",
-        "heading": "What's inside the D-Tan Pack",
-        "intro": "<p>A purifying clay pack that draws out impurities and helps remove tan, leaving skin fresh, even-toned and glowing.</p>",
+        "match_keywords": "face-wash, facewash",
+        "exclude_keywords": "",
+        "eyebrow": "Gentle daily cleanse",
+        "heading": "What's inside the Probiotic Face Wash",
+        "intro": "<p>A gentle, soap-free face wash that cleanses without stripping, supporting a healthy skin barrier with probiotics and calming botanicals.</p>",
         "show_full_list": false,
         "list_title": "Full ingredient list",
         "list_note": ""
-      },
+      }
+    },
+    "ing_dtan": {
+      "type": "chic-key-ingredients",
       "blocks": {
         "ing_multani_mitti": {
           "type": "ingredient",
@@ -1200,20 +1186,21 @@
         "ing_orange_peel",
         "ing_sandalwood",
         "ing_rose_petals"
-      ]
-    },
-    "ing_kajal": {
-      "type": "chic-key-ingredients",
-      "name": "Ingredients · Kajal",
+      ],
+      "name": "Ingredients · D-Tan Pack",
       "settings": {
-        "match_keywords": "kajal",
-        "eyebrow": "Handmade the traditional way",
-        "heading": "What's inside the Handmade Kajal",
-        "intro": "<p>A traditional handmade kajal prepared with nourishing oils and natural ingredients for soft, intense, long-lasting definition.</p>",
+        "match_keywords": "d-tan, clay-pack",
+        "exclude_keywords": "",
+        "eyebrow": "Detox & de-tan",
+        "heading": "What's inside the D-Tan Pack",
+        "intro": "<p>A purifying clay pack that draws out impurities and helps remove tan, leaving skin fresh, even-toned and glowing.</p>",
         "show_full_list": false,
         "list_title": "Full ingredient list",
         "list_note": ""
-      },
+      }
+    },
+    "ing_kajal": {
+      "type": "chic-key-ingredients",
       "blocks": {
         "ing_almond_oil": {
           "type": "ingredient",
@@ -1265,20 +1252,21 @@
         "ing_castor_oil",
         "ing_camphor",
         "ing_ghee"
-      ]
-    },
-    "ing_lipbalm": {
-      "type": "chic-key-ingredients",
-      "name": "Ingredients · Lip Balm",
+      ],
+      "name": "Ingredients · Kajal",
       "settings": {
-        "match_keywords": "lip-balm, lip balm",
-        "eyebrow": "Soft, nourished lips",
-        "heading": "What's inside the Handmade Lip Balm",
-        "intro": "<p>A handmade lip balm with natural butters and waxes that heals dry, chapped lips and adds a hint of natural tint.</p>",
+        "match_keywords": "kajal",
+        "exclude_keywords": "",
+        "eyebrow": "Handmade the traditional way",
+        "heading": "What's inside the Handmade Kajal",
+        "intro": "<p>A traditional handmade kajal prepared with nourishing oils and natural ingredients for soft, intense, long-lasting definition.</p>",
         "show_full_list": false,
         "list_title": "Full ingredient list",
         "list_note": ""
-      },
+      }
+    },
+    "ing_lipbalm": {
+      "type": "chic-key-ingredients",
       "blocks": {
         "ing_beeswax": {
           "type": "ingredient",
@@ -1354,20 +1342,21 @@
         "ing_coconut_oil",
         "ing_beetroot",
         "ing_vitamin_e"
-      ]
-    },
-    "ing_rosewater": {
-      "type": "chic-key-ingredients",
-      "name": "Ingredients · Rose Water",
+      ],
+      "name": "Ingredients · Lip Balm",
       "settings": {
-        "match_keywords": "rose-water, rose water",
-        "eyebrow": "Pure & refreshing",
-        "heading": "What's inside the Rose Water",
-        "intro": "<p>Steam-distilled rose water that tones, hydrates and refreshes skin — use it as a toner, a face mist or in your face packs.</p>",
+        "match_keywords": "lip-balm, lip balm",
+        "exclude_keywords": "",
+        "eyebrow": "Soft, nourished lips",
+        "heading": "What's inside the Handmade Lip Balm",
+        "intro": "<p>A handmade lip balm with natural butters and waxes that heals dry, chapped lips and adds a hint of natural tint.</p>",
         "show_full_list": false,
         "list_title": "Full ingredient list",
         "list_note": ""
-      },
+      }
+    },
+    "ing_rosewater": {
+      "type": "chic-key-ingredients",
       "blocks": {
         "ing_rose_petals": {
           "type": "ingredient",
@@ -1395,20 +1384,21 @@
       "block_order": [
         "ing_rose_petals",
         "ing_aloe_vera"
-      ]
-    },
-    "ing_haircare": {
-      "type": "chic-key-ingredients",
-      "name": "Ingredients · Shampoo & Conditioner",
+      ],
+      "name": "Ingredients · Rose Water",
       "settings": {
-        "match_keywords": "shampoo, conditioner, hair-spa",
-        "eyebrow": "Salon-like hair spa",
-        "heading": "What's inside the Hair Spa Ritual",
-        "intro": "<p>A keratin-enriched shampoo and spa conditioner with Ayurvedic herbs that cleanse gently, repair damage and leave hair smooth, strong and shiny.</p>",
+        "match_keywords": "rose-water, rose water",
+        "exclude_keywords": "",
+        "eyebrow": "Pure & refreshing",
+        "heading": "What's inside the Rose Water",
+        "intro": "<p>Steam-distilled rose water that tones, hydrates and refreshes skin — use it as a toner, a face mist or in your face packs.</p>",
         "show_full_list": false,
         "list_title": "Full ingredient list",
         "list_note": ""
-      },
+      }
+    },
+    "ing_haircare": {
+      "type": "chic-key-ingredients",
       "blocks": {
         "ing_keratin": {
           "type": "ingredient",
@@ -1484,20 +1474,21 @@
         "ing_hibiscus",
         "ing_amla",
         "ing_aloe_vera"
-      ]
-    },
-    "ing_giftset": {
-      "type": "chic-key-ingredients",
-      "name": "Ingredients · Gift Sets & Kits",
+      ],
+      "name": "Ingredients · Shampoo & Conditioner",
       "settings": {
-        "match_keywords": "glow-box, pamper-kit, hamper, clear-skin-kit, glow-care-kit, clear-skin-defence",
-        "eyebrow": "The CHIC botanicals",
-        "heading": "What's inside this set",
-        "intro": "<p>Every CHIC product is made with time-tested Ayurvedic botanicals — free from parabens, mineral oil and harsh chemicals. Here are some of the key ingredients in this set.</p>",
+        "match_keywords": "shampoo, conditioner, hair-spa",
+        "exclude_keywords": "",
+        "eyebrow": "Salon-like hair spa",
+        "heading": "What's inside the Hair Spa Ritual",
+        "intro": "<p>A keratin-enriched shampoo and spa conditioner with Ayurvedic herbs that cleanse gently, repair damage and leave hair smooth, strong and shiny.</p>",
         "show_full_list": false,
         "list_title": "Full ingredient list",
         "list_note": ""
-      },
+      }
+    },
+    "ing_giftset": {
+      "type": "chic-key-ingredients",
       "blocks": {
         "ing_aloe_vera": {
           "type": "ingredient",
@@ -1597,21 +1588,21 @@
         "ing_licorice",
         "ing_saffron",
         "ing_rose_petals"
-      ]
-    },
-    "ing_general": {
-      "type": "chic-key-ingredients",
-      "name": "Ingredients · All other products",
+      ],
+      "name": "Ingredients · Gift Sets & Kits",
       "settings": {
-        "match_keywords": "",
-        "exclude_keywords": "hair-oil, hair oil, hair-amrut, hair amrut, massager, comb-only, sunscreen, suryaveda, scrub, pigmentation, ayurabright, body-yogurt, yogurt, face-wash, facewash, d-tan, clay-pack, kajal, lip-balm, lip balm, rose-water, rose water, shampoo, conditioner, hair-spa, glow-box, pamper-kit, hamper, clear-skin-kit, glow-care-kit, clear-skin-defence",
+        "match_keywords": "glow-box, pamper-kit, hamper, clear-skin-kit, glow-care-kit, clear-skin-defence",
+        "exclude_keywords": "",
         "eyebrow": "The CHIC botanicals",
-        "heading": "Backed by the Right Ingredients",
-        "intro": "<p>Every CHIC product is made with time-tested Ayurvedic botanicals — free from parabens, mineral oil and harsh chemicals.</p>",
+        "heading": "What's inside this set",
+        "intro": "<p>Every CHIC product is made with time-tested Ayurvedic botanicals — free from parabens, mineral oil and harsh chemicals. Here are some of the key ingredients in this set.</p>",
         "show_full_list": false,
         "list_title": "Full ingredient list",
         "list_note": ""
-      },
+      }
+    },
+    "ing_general": {
+      "type": "chic-key-ingredients",
       "blocks": {
         "ing_aloe_vera": {
           "type": "ingredient",
@@ -1711,7 +1702,38 @@
         "ing_almond_oil",
         "ing_saffron",
         "ing_coconut_oil"
-      ]
+      ],
+      "name": "Ingredients · All other products",
+      "settings": {
+        "match_keywords": "",
+        "exclude_keywords": "hair-oil, hair oil, hair-amrut, hair amrut, massager, comb-only, sunscreen, suryaveda, scrub, pigmentation, ayurabright, body-yogurt, yogurt, face-wash, facewash, d-tan, clay-pack, kajal, lip-balm, lip balm, rose-water, rose water, shampoo, conditioner, hair-spa, glow-box, pamper-kit, hamper, clear-skin-kit, glow-care-kit, clear-skin-defence",
+        "eyebrow": "The CHIC botanicals",
+        "heading": "Backed by the Right Ingredients",
+        "intro": "<p>Every CHIC product is made with time-tested Ayurvedic botanicals — free from parabens, mineral oil and harsh chemicals.</p>",
+        "show_full_list": false,
+        "list_title": "Full ingredient list",
+        "list_note": ""
+      }
+    },
+    "chic_recs": {
+      "type": "chic-recommendations",
+      "name": "Chic recommendations",
+      "settings": {
+        "eyebrow": "Picked for you",
+        "heading": "Recommended For You",
+        "link_label": "View All Products",
+        "max_products": 8
+      }
+    },
+    "chic_journal_8nRxeq": {
+      "type": "chic-journal",
+      "name": "Chic journal",
+      "settings": {
+        "eyebrow": "From the Journal",
+        "heading": "Tips, Rituals & Insights",
+        "blog": "",
+        "link_label": "View All Posts"
+      }
     }
   },
   "order": [
@@ -1729,6 +1751,7 @@
     "ing_haircare",
     "ing_giftset",
     "ing_general",
-    "chic_recs"
+    "chic_recs",
+    "chic_journal_8nRxeq"
   ]
 }
