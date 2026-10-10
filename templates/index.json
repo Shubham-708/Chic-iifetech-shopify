@@ -12,8 +12,21 @@
     "chic_banners": {
       "type": "chic-banner-slider",
       "blocks": {
+        "banner_video": {
+          "type": "video",
+          "settings": {
+            "fallback_video": "banner-video.mp4",
+            "fallback_poster": "chic-banner-video-poster.jpg",
+            "link": "shopify://collections/hair-care",
+            "alt": "CHIC Hair Amrut hair oil in use — for long, strong, healthy hair",
+            "fit_desktop": "contain",
+            "fit_mobile": "cover",
+            "loop": false
+          }
+        },
         "banner_hair": {
           "type": "banner",
+          "disabled": true,
           "settings": {
             "link": "shopify://collections/hair-care",
             "alt": "CHIC Hair Amrut hair oil — infused with 18 herbs for stronger, healthier hair",
@@ -40,6 +53,7 @@
         },
         "banner_sun": {
           "type": "banner",
+          "disabled": true,
           "settings": {
             "link": "shopify://collections/skin-care",
             "alt": "CHIC SuryaVeda Sunscreen SPF 50 PA++++ — leaves no white cast",
@@ -66,6 +80,7 @@
         }
       },
       "block_order": [
+        "banner_video",
         "banner_hair",
         "banner_scrub",
         "banner_sun",
