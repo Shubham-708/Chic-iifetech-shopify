@@ -210,12 +210,18 @@
   @media screen and (max-width: 560px) {
     .chic-promo { grid-template-columns: 1fr; }
     .chic-promo__pt { padding: 26px 24px 6px; }
-    .chic-promo__pi { min-height: 220px; }
+    /* Show the whole photo at its natural shape instead of a cropped strip */
+    .chic-promo__pi {
+      height: auto;
+      min-height: 0;
+      padding: 12px;
+    }
 
     .chic-promo__pi img {
-      inset: 12px;
-      width: calc(100% - 24px);
-      height: calc(100% - 24px);
+      position: static;
+      display: block;
+      width: 100%;
+      height: auto;
     }
 
     .chic-trust { grid-template-columns: 1fr; }
