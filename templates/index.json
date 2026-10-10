@@ -21,6 +21,7 @@
             "alt": "CHIC Hair Amrut hair oil in use — for long, strong, healthy hair",
             "fit_desktop": "contain",
             "fit_mobile": "cover",
+            "sound": true,
             "loop": false
           }
         },
@@ -40,6 +41,7 @@
         },
         "banner_scrub": {
           "type": "banner",
+          "disabled": true,
           "settings": {
             "link": "shopify://collections/skin-care",
             "alt": "CHIC Aloevera & Neem Face & Body Scrub — clear, bright, glowing skin",

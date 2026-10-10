@@ -1,6 +1,12 @@
 {% liquid
   assign s = section.settings
   assign banners = section.blocks
+  assign has_sound = false
+  for block in banners
+    if block.type == 'video' and block.settings.sound
+      assign has_sound = true
+    endif
+  endfor
 %}
 
 <div
@@ -46,6 +52,7 @@
             <video
               class="chic-banners__video-el"
               data-chic-banner-video
+              data-sound="{{ bs.sound }}"
               muted
               playsinline
               disablepictureinpicture
@@ -140,6 +147,13 @@
       </div>
     {% endfor %}
   </div>
+
+  {% if has_sound %}
+    <button type="button" class="chic-banners__sound" data-chic-banners-sound aria-pressed="false" aria-label="Turn sound on" hidden>
+      <svg class="chic-banners__sound-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" /><path d="M17 9l5 6M22 9l-5 6" /></svg>
+      <svg class="chic-banners__sound-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" /><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12" /></svg>
+    </button>
+  {% endif %}
 
   {% if banners.size > 1 %}
     <button type="button" class="chic-banners__arrow chic-banners__arrow--prev" data-chic-banners-prev aria-label="Previous banner">
@@ -289,6 +303,43 @@
   .chic-banners__arrow--prev { left: clamp(12px, 2vw, 28px); }
   .chic-banners__arrow--next { right: clamp(12px, 2vw, 28px); }
 
+  .chic-banners__sound {
+    position: absolute;
+    left: clamp(16px, 3vw, 40px);
+    bottom: clamp(12px, 1.6vw, 24px);
+    z-index: 3;
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.35);
+    color: #fff;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+
+  .chic-banners__sound[hidden] { display: none; }
+  .chic-banners__sound:hover { background: rgba(0, 0, 0, 0.55); transform: scale(1.06); }
+
+  .chic-banners__sound svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .chic-banners__sound .chic-banners__sound-on,
+  .chic-banners__sound[aria-pressed='true'] .chic-banners__sound-off { display: none; }
+  .chic-banners__sound[aria-pressed='true'] .chic-banners__sound-on { display: block; }
+
   .chic-banners__dots {
     position: absolute;
     right: clamp(16px, 3vw, 40px);
@@ -355,14 +406,54 @@
       const track = root.querySelector('[data-chic-banners-track]');
       const slides = Array.from(root.querySelectorAll('[data-chic-banner]'));
       const videoOf = (slide) => slide?.querySelector('[data-chic-banner-video]');
+      const soundBtn = root.querySelector('[data-chic-banners-sound]');
+      const hasSound = (v) => v?.dataset.sound === 'true';
+      let activeSlide = slides[0];
+      let wantSound = true;
+
+      const syncSoundBtn = () => {
+        if (!soundBtn) return;
+        const v = videoOf(activeSlide);
+        soundBtn.hidden = !hasSound(v);
+        const on = Boolean(v && !v.muted);
+        soundBtn.setAttribute('aria-pressed', String(on));
+        soundBtn.setAttribute('aria-label', on ? 'Mute video' : 'Turn sound on');
+      };
+
+      // Browsers block autoplay with sound until the visitor interacts, so fall back to muted
       const play = (slide) => {
+        activeSlide = slide;
         const v = videoOf(slide);
-        if (!v) return;
-        v.muted = true;
+        if (!v) { syncSoundBtn(); return; }
         v.currentTime = 0;
-        v.play()?.catch(() => {});
+        v.muted = !(hasSound(v) && wantSound);
+        const p = v.play();
+        p?.catch(() => {
+          v.muted = true;
+          v.play()?.catch(() => {});
+          syncSoundBtn();
+        });
+        syncSoundBtn();
       };
       const pause = (slide) => videoOf(slide)?.pause();
+
+      soundBtn?.addEventListener('click', () => {
+        const v = videoOf(activeSlide);
+        if (!v) return;
+        v.muted = !v.muted;
+        wantSound = !v.muted;
+        if (v.paused) v.play()?.catch(() => {});
+        syncSoundBtn();
+      });
+
+      // A click or key press anywhere unlocks sound if autoplay forced it off
+      const unlock = (e) => {
+        if (soundBtn?.contains(e.target)) return;
+        const v = videoOf(activeSlide);
+        if (wantSound && hasSound(v) && v.muted) { v.muted = false; syncSoundBtn(); }
+      };
+      ['pointerdown', 'keydown'].forEach((t) => document.addEventListener(t, unlock, true));
+
       if (slides.length < 2) { play(slides[0]); return; }
 
       const dots = Array.from(root.querySelectorAll('[data-chic-banners-dot]'));
@@ -529,7 +620,8 @@
       "type": "video",
       "name": "Video",
       "settings": [
-        { "type": "video", "id": "video", "label": "Video", "info": "Always plays muted." },
+        { "type": "video", "id": "video", "label": "Video" },
+        { "type": "checkbox", "id": "sound", "label": "Play with sound", "info": "Browsers start videos muted until the visitor interacts with the page; a speaker button lets them turn sound on.", "default": false },
         { "type": "image_picker", "id": "poster", "label": "Poster image", "info": "Shown while the video loads, and blurred behind it." },
         { "type": "url", "id": "link", "label": "Link" },
         { "type": "text", "id": "alt", "label": "Description (accessibility)" },
