@@ -383,7 +383,8 @@
         "heading": "Beauty That's Botanical. Confidence That's Real.",
         "text": "At CHIC, we believe nature is not a luxury — it is a necessity. Every formulation begins with carefully chosen botanicals, inspired by centuries of Ayurvedic wisdom and refined through modern skincare research.",
         "founder_name": "CHIC The Botanical Beauty",
-        "founder_role": "Founded in Bhopal, Madhya Pradesh"
+        "founder_role": "Founded in Bhopal, Madhya Pradesh",
+        "fallback_asset": "chic-about-hair-oil.jpg"
       }
     },
     "chic_products": {
@@ -516,7 +517,7 @@
           "type": "reel",
           "settings": {
             "reel_url": "",
-            "fallback_asset": "chic-insta-1.jpg",
+            "fallback_asset": "chic-reel-hair-oil.jpg",
             "product": "hebral-hair-oil-combe"
           }
         },
@@ -524,7 +525,7 @@
           "type": "reel",
           "settings": {
             "reel_url": "",
-            "fallback_asset": "chic-insta-2.jpg",
+            "fallback_asset": "chic-reel-scrub.jpg",
             "product": "aloe-vera-and-neem-face-and-body-scrub"
           }
         },
@@ -540,7 +541,7 @@
           "type": "reel",
           "settings": {
             "reel_url": "",
-            "fallback_asset": "chic-insta-4.jpg",
+            "fallback_asset": "chic-reel-pigmentation.jpg",
             "product": "natural-pigmentation-repair-cream"
           }
         },

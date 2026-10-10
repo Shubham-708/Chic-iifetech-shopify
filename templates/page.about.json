@@ -15,19 +15,33 @@
         "sl_1": {
           "type": "slide",
           "settings": {
-            "fallback_asset": "chic-hero.jpg"
+            "fallback_asset": "chic-hero-hair-oil.jpg"
           }
         },
         "sl_2": {
           "type": "slide",
           "settings": {
-            "fallback_asset": "chic-gift-banner.png"
+            "fallback_asset": "chic-hero-scrub.jpg"
+          }
+        },
+        "sl_3": {
+          "type": "slide",
+          "settings": {
+            "fallback_asset": "chic-hero-aloe-gel.jpg"
+          }
+        },
+        "sl_4": {
+          "type": "slide",
+          "settings": {
+            "fallback_asset": "chic-hero-pigmentation.jpg"
           }
         }
       },
       "block_order": [
         "sl_1",
-        "sl_2"
+        "sl_2",
+        "sl_3",
+        "sl_4"
       ],
       "name": "Chic hero",
       "settings": {
@@ -80,7 +94,8 @@
         "text": "CHIC began with a simple belief — that nature gives us the purest form of care. Every product is crafted with the finest botanical ingredients, without harmful chemicals, so you can feel good about what you put on your skin and hair. What started as a small passion for Ayurvedic remedies has grown into a complete ritual wardrobe for skin, hair and body.",
         "btn_label": "Explore Our Products",
         "btn_link": "shopify://collections/all"
-      }
+      },
+      "disabled": true
     },
     "about_values": {
       "type": "chic-features",
@@ -125,7 +140,8 @@
         "av_india"
       ],
       "name": "Chic features strip",
-      "settings": {}
+      "settings": {},
+      "disabled": true
     },
     "about_mission": {
       "type": "chic-about",
@@ -136,7 +152,8 @@
             "icon": "leaf",
             "value": "100%",
             "label": "Botanical Formulas"
-          }
+          },
+          "disabled": true
         },
         "am_products": {
           "type": "stat",
@@ -144,7 +161,8 @@
             "icon": "drop",
             "value": "29+",
             "label": "Products & Rituals"
-          }
+          },
+          "disabled": true
         },
         "am_customers": {
           "type": "stat",
@@ -152,7 +170,8 @@
             "icon": "users",
             "value": "10K+",
             "label": "Happy Customers"
-          }
+          },
+          "disabled": true
         },
         "am_support": {
           "type": "stat",
@@ -160,7 +179,8 @@
             "icon": "clock",
             "value": "24/7",
             "label": "Customer Support"
-          }
+          },
+          "disabled": true
         }
       },
       "block_order": [
@@ -177,7 +197,8 @@
         "heading": "Honest Beauty, For Every Home",
         "text": "We believe luxury botanical care should not be a privilege. Our mission is to bring clean, effective, Ayurveda-inspired beauty to every home in India — formulations that respect your skin, your values and the planet. Every jar and bottle is a promise: no shortcuts, no harsh chemicals, only nature perfected.",
         "founder_name": "CHIC The Botanical Beauty",
-        "founder_role": "Founded in Bhopal, Madhya Pradesh"
+        "founder_role": "Founded in Bhopal, Madhya Pradesh",
+        "fallback_asset": "chic-mission-scrub.jpg"
       }
     },
     "about_ingredients": {
@@ -264,7 +285,8 @@
       "settings": {
         "eyebrow": "The Botanical Circle",
         "heading": "Loved By Our Community"
-      }
+      },
+      "disabled": true
     },
     "about_reels": {
       "type": "chic-reels",
@@ -315,7 +337,8 @@
         "subheading": "Real routines, real results — tap a product to shop the look.",
         "instagram_url": "https://www.instagram.com/chic_the_botanical_beauty/",
         "link_label": "Follow Us"
-      }
+      },
+      "disabled": true
     },
     "about_cta": {
       "type": "chic-story",
@@ -364,7 +387,8 @@
         "heading": "Tips, Rituals & Insights",
         "blog": "",
         "link_label": "View All Posts"
-      }
+      },
+      "disabled": true
     },
     "section_pcLgze": {
       "type": "section",
@@ -468,6 +492,63 @@
         "padding-block-start": 32,
         "padding-block-end": 32
       }
+    },
+    "about_glow": {
+      "type": "chic-instagram",
+      "blocks": {
+        "glow_1": {
+          "type": "post",
+          "settings": {
+            "default_asset": "chic-glow-1.jpg"
+          }
+        },
+        "glow_2": {
+          "type": "post",
+          "settings": {
+            "default_asset": "chic-glow-2.jpg"
+          }
+        },
+        "glow_3": {
+          "type": "post",
+          "settings": {
+            "default_asset": "chic-glow-3.jpg"
+          }
+        },
+        "glow_4": {
+          "type": "post",
+          "settings": {
+            "default_asset": "chic-glow-4.jpg"
+          }
+        },
+        "glow_5": {
+          "type": "post",
+          "settings": {
+            "default_asset": "chic-glow-5.jpg"
+          }
+        },
+        "glow_6": {
+          "type": "post",
+          "settings": {
+            "default_asset": "chic-glow-6.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "glow_1",
+        "glow_2",
+        "glow_3",
+        "glow_4",
+        "glow_5",
+        "glow_6"
+      ],
+      "name": "Real people, real glow",
+      "settings": {
+        "heading": "Real People. Real Glow.",
+        "handle": "@chic_the_botanical_beauty",
+        "instagram_url": "https://www.instagram.com/chic_the_botanical_beauty/",
+        "background_color": "#FBF9F4",
+        "text_color": "#2F3A2F"
+      }
     }
   },
   "order": [
@@ -476,6 +557,7 @@
     "about_values",
     "about_mission",
     "about_ingredients",
+    "about_glow",
     "about_testimonials",
     "about_reels",
     "about_cta",

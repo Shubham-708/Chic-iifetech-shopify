@@ -2,6 +2,8 @@
   assign s = section.settings
   if s.image != blank
     assign image_url = s.image | image_url: width: 1200
+  elsif s.fallback_asset != blank
+    assign image_url = s.fallback_asset | asset_url
   else
     assign image_url = 'chic-insta-4.jpg' | asset_url
   endif
@@ -179,6 +181,7 @@
   "name": "Chic about",
   "settings": [
     { "type": "image_picker", "id": "image", "label": "Image", "info": "Leave empty to use the bundled brand image" },
+    { "type": "text", "id": "fallback_asset", "label": "Bundled image filename", "info": "Used when no image is picked" },
     { "type": "text", "id": "badge_title", "label": "Image badge title", "default": "Hydration" },
     { "type": "text", "id": "badge_text", "label": "Image badge text", "default": "That Lasts. Softness That Shows." },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "About CHIC" },
