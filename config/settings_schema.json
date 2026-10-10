@@ -2127,7 +2127,7 @@
         "type": "select",
         "id": "chic_floating_position",
         "label": "Button position",
-        "default": "left",
+        "default": "right",
         "options": [
           { "value": "left", "label": "Bottom left" },
           { "value": "right", "label": "Bottom right" }

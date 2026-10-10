@@ -4,7 +4,7 @@
   assign phone_digits = settings.chic_contact_phone | default: '+918878280711' | remove: '+' | remove: ' ' | remove: '-' | remove: '(' | remove: ')'
   assign wa_text = settings.chic_whatsapp_message | url_encode
 -%}
-<div class="chic-fab chic-fab--{{ settings.chic_floating_position | default: 'left' }}" aria-label="Contact CHIC">
+<div class="chic-fab chic-fab--{{ settings.chic_floating_position | default: 'right' }}" aria-label="Contact CHIC">
   <a class="chic-fab__btn chic-fab__btn--wa" href="https://wa.me/{{ phone_digits }}{% if wa_text != blank %}?text={{ wa_text }}{% endif %}" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
     {% render 'chic-contact-icon', icon: 'whatsapp' %}
     <span class="chic-fab__tip">WhatsApp us</span>

@@ -4,7 +4,7 @@
   if s.image != blank
     assign img = s.image | image_url: width: 1200
   else
-    assign img = s.fallback_asset | default: 'chic-contact.jpg' | asset_url
+    assign img = s.fallback_asset | default: 'chic-contact-aloe.jpg' | asset_url
   endif
   assign phone = s.phone | default: settings.chic_contact_phone | default: '+918878280711'
   assign phone_digits = phone | remove: '+' | remove: ' ' | remove: '-' | remove: '(' | remove: ')'
@@ -456,8 +456,8 @@
     { "type": "textarea", "id": "text", "label": "Intro text", "default": "Questions about a product, your order, or which ritual suits your skin? Send us a message, call, or WhatsApp — our team replies quickly." },
     { "type": "header", "content": "Photo panel" },
     { "type": "image_picker", "id": "image", "label": "Image" },
-    { "type": "text", "id": "fallback_asset", "label": "Bundled image filename", "default": "chic-contact.jpg" },
-    { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "Smiling CHIC customer holding Hair Amrut herbal hair oil" },
+    { "type": "text", "id": "fallback_asset", "label": "Bundled image filename", "default": "chic-contact-aloe.jpg" },
+    { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "Smiling CHIC customer holding a jar of CHIC Aloe Vera Gel" },
     { "type": "text", "id": "phone", "label": "Phone number (with country code)", "info": "Leave empty to use the number in Theme settings > CHIC contact buttons." },
     { "type": "text", "id": "phone_label", "label": "Phone number as shown", "default": "+91 88782 80711" },
     { "type": "text", "id": "whatsapp_message", "label": "WhatsApp pre-filled message", "info": "Leave empty to use the theme setting." },
