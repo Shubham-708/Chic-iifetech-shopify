@@ -70,7 +70,8 @@
         "background_color": "{{ settings.color_palette.background }}",
         "padding-block-start": 40,
         "padding-block-end": 0
-      }
+      },
+      "disabled": true
     },
     "form": {
       "type": "section",
@@ -134,10 +135,16 @@
         "gradient_direction": "to top",
         "padding-block-start": 0,
         "padding-block-end": 70
-      }
+      },
+      "disabled": true
+    },
+    "chic_contact": {
+      "type": "chic-contact",
+      "settings": {}
     }
   },
   "order": [
+    "chic_contact",
     "main",
     "form"
   ]

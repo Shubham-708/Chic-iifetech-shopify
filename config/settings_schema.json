@@ -2116,5 +2116,23 @@
         "default": "equal-width-buttons"
       }
     ]
+  },
+  {
+    "name": "CHIC contact buttons",
+    "settings": [
+      { "type": "checkbox", "id": "chic_floating_contact", "label": "Show floating WhatsApp and call buttons", "default": true },
+      { "type": "text", "id": "chic_contact_phone", "label": "Phone / WhatsApp number (with country code)", "default": "+91 88782 80711" },
+      { "type": "text", "id": "chic_whatsapp_message", "label": "WhatsApp pre-filled message", "default": "Hi CHIC! I have a question about your products." },
+      {
+        "type": "select",
+        "id": "chic_floating_position",
+        "label": "Button position",
+        "default": "left",
+        "options": [
+          { "value": "left", "label": "Bottom left" },
+          { "value": "right", "label": "Bottom right" }
+        ]
+      }
+    ]
   }
 ]

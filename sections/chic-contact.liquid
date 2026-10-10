@@ -1,0 +1,474 @@
+{% comment %} Contact page: photo + contact details panel beside a modern contact form (CHIC design). {% endcomment %}
+{% liquid
+  assign s = section.settings
+  if s.image != blank
+    assign img = s.image | image_url: width: 1200
+  else
+    assign img = s.fallback_asset | default: 'chic-contact.jpg' | asset_url
+  endif
+  assign phone = s.phone | default: settings.chic_contact_phone | default: '+918878280711'
+  assign phone_digits = phone | remove: '+' | remove: ' ' | remove: '-' | remove: '(' | remove: ')'
+  assign wa_text = s.whatsapp_message | default: settings.chic_whatsapp_message | url_encode
+  assign form_id = 'ChicContact-' | append: section.id
+%}
+
+<div class="chic-section chic-contact">
+  <div class="chic-wrap">
+    <header class="chic-contact__head">
+      {% if s.eyebrow != blank %}<p class="chic-eyebrow">{{ s.eyebrow | escape }}</p>{% endif %}
+      <h1>{{ s.heading | escape }}{% if s.heading_accent != blank %} <em>{{ s.heading_accent | escape }}</em>{% endif %}</h1>
+      {% if s.text != blank %}<p class="chic-contact__lead">{{ s.text | escape }}</p>{% endif %}
+    </header>
+
+    <div class="chic-contact__grid">
+      <aside class="chic-contact__panel">
+        <img class="chic-contact__img" src="{{ img }}" alt="{{ s.image_alt | escape }}" width="1200" height="1800" loading="eager">
+        <div class="chic-contact__panel-inner">
+          <div class="chic-contact__quick">
+            <a class="chic-contact__pill chic-contact__pill--wa" href="https://wa.me/{{ phone_digits }}?text={{ wa_text }}" target="_blank" rel="noopener">
+              {% render 'chic-contact-icon', icon: 'whatsapp' %} WhatsApp us
+            </a>
+            <a class="chic-contact__pill" href="tel:+{{ phone_digits }}">
+              {% render 'chic-contact-icon', icon: 'phone' %} Call now
+            </a>
+          </div>
+
+          <ul class="chic-contact__info">
+            <li>
+              <span class="chic-contact__ic">{% render 'chic-contact-icon', icon: 'phone' %}</span>
+              <span><small>Call or WhatsApp</small><a href="tel:+{{ phone_digits }}">{{ s.phone_label | default: phone }}</a></span>
+            </li>
+            {% if s.email != blank %}
+              <li>
+                <span class="chic-contact__ic">{% render 'chic-contact-icon', icon: 'mail' %}</span>
+                <span><small>Email</small><a href="mailto:{{ s.email }}">{{ s.email }}</a></span>
+              </li>
+            {% endif %}
+            {% if s.address != blank %}
+              <li>
+                <span class="chic-contact__ic">{% render 'chic-contact-icon', icon: 'pin' %}</span>
+                <span><small>Visit</small>{{ s.address | escape }}</span>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+      </aside>
+
+      <div class="chic-contact__card">
+        {% form 'contact', id: form_id, class: 'chic-contact__form' %}
+          {% if form.posted_successfully? %}
+            <div class="chic-contact__ok" role="status" tabindex="-1" autofocus>
+              <span class="chic-contact__ok-ic">{% render 'chic-contact-icon', icon: 'check' %}</span>
+              <div>
+                <b>Thank you! Your message is on its way.</b>
+                <p>{{ s.success_text | escape }}</p>
+              </div>
+            </div>
+          {% elsif form.errors %}
+            <div class="chic-contact__err" role="alert">{{ form.errors | default_errors }}</div>
+          {% endif %}
+
+          <h2>{{ s.form_heading | escape }}</h2>
+          {% if s.form_text != blank %}<p class="chic-contact__sub">{{ s.form_text | escape }}</p>{% endif %}
+
+          {% assign topics = s.topics | split: ',' %}
+          {% if topics.size > 0 %}
+            <fieldset class="chic-contact__topics">
+              <legend>I'm writing about</legend>
+              {% for t in topics %}
+                {% assign t = t | strip %}
+                <label class="chic-contact__chip">
+                  <input type="radio" name="contact[topic]" value="{{ t | escape }}" {% if forloop.first %}checked{% endif %}>
+                  <span>{{ t | escape }}</span>
+                </label>
+              {% endfor %}
+            </fieldset>
+          {% endif %}
+
+          <div class="chic-contact__row">
+            <div class="chic-field">
+              <input type="text" id="{{ form_id }}-name" name="contact[name]" autocomplete="name" placeholder=" " value="{{ form.name }}" required>
+              <label for="{{ form_id }}-name">Your name</label>
+            </div>
+            <div class="chic-field">
+              <input type="tel" id="{{ form_id }}-phone" name="contact[phone]" autocomplete="tel" placeholder=" " value="{{ form.phone }}" pattern="[0-9\-\+\s\(\)]*">
+              <label for="{{ form_id }}-phone">Phone (optional)</label>
+            </div>
+          </div>
+          <div class="chic-field">
+            <input type="email" id="{{ form_id }}-email" name="contact[email]" autocomplete="email" autocapitalize="off" spellcheck="false" placeholder=" " value="{{ form.email }}" required>
+            <label for="{{ form_id }}-email">Email address</label>
+          </div>
+          <div class="chic-field">
+            <textarea id="{{ form_id }}-body" name="contact[body]" rows="5" placeholder=" " required>{{ form.body }}</textarea>
+            <label for="{{ form_id }}-body">How can we help?</label>
+          </div>
+
+          <button type="submit" class="chic-contact__submit">
+            Send message
+            {% render 'chic-icon', icon: 'arrow' %}
+          </button>
+          <p class="chic-contact__note">
+            Prefer chatting? <a href="https://wa.me/{{ phone_digits }}?text={{ wa_text }}" target="_blank" rel="noopener">Message us on WhatsApp</a> for a quicker reply.
+          </p>
+        {% endform %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .chic-contact {
+    background:
+      radial-gradient(1200px 500px at 85% -10%, var(--chic-lime, #eef5c8) 0, transparent 60%),
+      radial-gradient(900px 500px at -10% 110%, var(--chic-mint, #e7f0d9) 0, transparent 60%),
+      #fff;
+    padding-block: clamp(40px, 6vw, 88px);
+  }
+
+  .chic-contact__head {
+    max-width: 720px;
+    margin: 0 auto clamp(28px, 4vw, 48px);
+    text-align: center;
+  }
+
+  .chic-contact__head h1 {
+    margin: 6px 0 12px;
+    font-family: var(--chic-serif);
+    font-size: clamp(34px, 5vw, 56px);
+    line-height: 1.08;
+    color: var(--chic-ink, #1d1a22);
+  }
+
+  .chic-contact__head h1 em {
+    font-style: normal;
+    color: var(--chic-green, #4f8455);
+  }
+
+  .chic-contact__lead {
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--chic-muted, #6b6576);
+  }
+
+  .chic-contact__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: clamp(20px, 3vw, 36px);
+    align-items: stretch;
+  }
+
+  /* Photo panel */
+  .chic-contact__panel {
+    position: relative;
+    min-height: 560px;
+    border-radius: 28px;
+    overflow: hidden;
+    isolation: isolate;
+    box-shadow: 0 30px 60px -30px rgba(29, 54, 33, 0.45);
+  }
+
+  .chic-contact__img {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+  }
+
+  .chic-contact__panel::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(180deg, rgba(10, 30, 15, 0) 35%, rgba(10, 30, 15, 0.78) 100%);
+  }
+
+  .chic-contact__panel-inner {
+    position: absolute;
+    inset: auto 0 0 0;
+    padding: clamp(18px, 2.4vw, 28px);
+    color: #fff;
+  }
+
+  .chic-contact__quick {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  .chic-contact__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 18px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: #fff;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    transition: transform 0.25s ease, background-color 0.25s ease;
+  }
+
+  .chic-contact__pill:hover { transform: translateY(-2px); background: rgba(255, 255, 255, 0.26); }
+  .chic-contact__pill--wa { background: #25d366; border-color: #25d366; }
+  .chic-contact__pill--wa:hover { background: #1ebe5b; }
+  .chic-contact__pill svg { width: 18px; height: 18px; }
+
+  .chic-contact__info {
+    display: grid;
+    gap: 12px;
+    margin: 0;
+    padding: 16px;
+    list-style: none;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .chic-contact__info li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 15px;
+    line-height: 1.35;
+  }
+
+  .chic-contact__info small {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+
+  .chic-contact__info a { color: #fff; text-decoration: none; word-break: break-word; }
+  .chic-contact__info a:hover { text-decoration: underline; }
+
+  .chic-contact__ic {
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.92);
+    color: var(--chic-green-d, #2d5a36);
+  }
+
+  .chic-contact__ic svg { width: 18px; height: 18px; }
+
+  /* Form card */
+  .chic-contact__card {
+    padding: clamp(22px, 3.4vw, 44px);
+    border-radius: 28px;
+    background: #fff;
+    border: 1px solid var(--chic-line, #e3ead8);
+    box-shadow: 0 24px 60px -28px rgba(29, 54, 33, 0.28);
+  }
+
+  .chic-contact__form h2 {
+    margin: 0 0 6px;
+    font-family: var(--chic-serif);
+    font-size: clamp(26px, 3vw, 34px);
+    color: var(--chic-ink, #1d1a22);
+  }
+
+  .chic-contact__sub { margin: 0 0 22px; color: var(--chic-muted, #6b6576); }
+
+  .chic-contact__topics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0 0 22px;
+    padding: 0;
+    border: 0;
+  }
+
+  .chic-contact__topics legend {
+    width: 100%;
+    margin-bottom: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--chic-ink, #1d1a22);
+  }
+
+  .chic-contact__chip input { position: absolute; opacity: 0; pointer-events: none; }
+
+  .chic-contact__chip span {
+    display: inline-block;
+    padding: 9px 16px;
+    border-radius: 999px;
+    border: 1.5px solid var(--chic-line, #e3ead8);
+    background: var(--chic-mint-xl, #f5f9ee);
+    color: var(--chic-ink, #1d1a22);
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .chic-contact__chip:hover span { border-color: var(--chic-green, #4f8455); }
+
+  .chic-contact__chip input:checked + span {
+    background: var(--chic-green-d, #2d5a36);
+    border-color: var(--chic-green-d, #2d5a36);
+    color: #fff;
+  }
+
+  .chic-contact__chip input:focus-visible + span { outline: 2px solid var(--chic-green, #4f8455); outline-offset: 2px; }
+
+  .chic-contact__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  /* Floating-label fields */
+  .chic-field {
+    position: relative;
+    margin-bottom: 14px;
+  }
+
+  .chic-field input,
+  .chic-field textarea {
+    display: block;
+    width: 100%;
+    padding: 24px 18px 10px;
+    border: 1.5px solid var(--chic-line, #e3ead8);
+    border-radius: 16px;
+    background: var(--chic-mint-xl, #f5f9ee);
+    color: var(--chic-ink, #1d1a22);
+    font: inherit;
+    font-size: 16px;
+    transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .chic-field textarea { min-height: 150px; resize: vertical; }
+
+  .chic-field label {
+    position: absolute;
+    top: 17px;
+    left: 19px;
+    color: var(--chic-muted, #6b6576);
+    font-size: 16px;
+    pointer-events: none;
+    transform-origin: left top;
+    transition: transform 0.2s ease, color 0.2s ease;
+  }
+
+  .chic-field input:focus,
+  .chic-field textarea:focus {
+    outline: none;
+    border-color: var(--chic-green, #4f8455);
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(79, 132, 85, 0.14);
+  }
+
+  .chic-field input:focus + label,
+  .chic-field textarea:focus + label,
+  .chic-field input:not(:placeholder-shown) + label,
+  .chic-field textarea:not(:placeholder-shown) + label {
+    transform: translateY(-9px) scale(0.78);
+    color: var(--chic-green-d, #2d5a36);
+  }
+
+  .chic-contact__submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    margin-top: 6px;
+    padding: 17px 28px;
+    border: 0;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--chic-green, #4f8455), var(--chic-green-d, #2d5a36));
+    color: #fff;
+    font: inherit;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 14px 30px -14px rgba(45, 90, 54, 0.8);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .chic-contact__submit:hover { transform: translateY(-2px); box-shadow: 0 18px 34px -14px rgba(45, 90, 54, 0.9); }
+  .chic-contact__submit svg { width: 18px; height: 18px; }
+
+  .chic-contact__note {
+    margin: 14px 0 0;
+    text-align: center;
+    font-size: 14px;
+    color: var(--chic-muted, #6b6576);
+  }
+
+  .chic-contact__note a { color: var(--chic-green-d, #2d5a36); font-weight: 600; }
+
+  .chic-contact__ok,
+  .chic-contact__err {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    margin-bottom: 22px;
+    padding: 16px 18px;
+    border-radius: 16px;
+  }
+
+  .chic-contact__ok { background: var(--chic-mint, #e7f0d9); color: var(--chic-green-d, #2d5a36); }
+  .chic-contact__ok p { margin: 4px 0 0; color: var(--chic-ink, #1d1a22); }
+  .chic-contact__ok-ic { display: grid; flex: none; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--chic-green, #4f8455); color: #fff; }
+  .chic-contact__ok-ic svg { width: 18px; height: 18px; }
+  .chic-contact__err { display: block; background: #fdecec; color: #9b1c1c; }
+  .chic-contact__err ul { margin: 6px 0 0; padding-left: 18px; }
+
+  @media screen and (max-width: 900px) {
+    .chic-contact__grid { grid-template-columns: 1fr; }
+    .chic-contact__panel { min-height: 520px; }
+  }
+
+  @media screen and (max-width: 560px) {
+    .chic-contact__row { grid-template-columns: 1fr; gap: 0; }
+    .chic-contact__panel { min-height: 480px; border-radius: 22px; }
+    .chic-contact__card { border-radius: 22px; }
+    .chic-contact__info li { font-size: 13.5px; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Chic contact",
+  "tag": "section",
+  "class": "chic-contact-section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "We're here for you" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Let's Talk" },
+    { "type": "text", "id": "heading_accent", "label": "Heading accent", "default": "Botanical Beauty" },
+    { "type": "textarea", "id": "text", "label": "Intro text", "default": "Questions about a product, your order, or which ritual suits your skin? Send us a message, call, or WhatsApp — our team replies quickly." },
+    { "type": "header", "content": "Photo panel" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "fallback_asset", "label": "Bundled image filename", "default": "chic-contact.jpg" },
+    { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "Smiling CHIC customer holding Hair Amrut herbal hair oil" },
+    { "type": "text", "id": "phone", "label": "Phone number (with country code)", "info": "Leave empty to use the number in Theme settings > CHIC contact buttons." },
+    { "type": "text", "id": "phone_label", "label": "Phone number as shown", "default": "+91 88782 80711" },
+    { "type": "text", "id": "whatsapp_message", "label": "WhatsApp pre-filled message", "info": "Leave empty to use the theme setting." },
+    { "type": "text", "id": "email", "label": "Email", "default": "chicthebotanicalbeauty@gmail.com" },
+    { "type": "text", "id": "address", "label": "Address", "default": "Saket Nagar, Bhopal, Madhya Pradesh" },
+    { "type": "header", "content": "Form" },
+    { "type": "text", "id": "form_heading", "label": "Form heading", "default": "Send us a message" },
+    { "type": "text", "id": "form_text", "label": "Form text", "default": "Fill in the form and we'll get back to you as soon as we can." },
+    { "type": "text", "id": "topics", "label": "Topics (comma separated)", "default": "Product advice, My order, Bulk / gifting, Something else" },
+    { "type": "text", "id": "success_text", "label": "Success message", "default": "We'll reply to you by email soon. For anything urgent, WhatsApp us." }
+  ],
+  "presets": [{ "name": "Chic contact", "category": "Forms" }]
+}
+{% endschema %}

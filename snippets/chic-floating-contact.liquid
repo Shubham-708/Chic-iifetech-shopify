@@ -1,0 +1,91 @@
+{%- comment -%} Floating WhatsApp + call buttons shown on every page. Configured in Theme settings > CHIC contact buttons. {%- endcomment -%}
+{%- if settings.chic_floating_contact -%}
+{%- liquid
+  assign phone_digits = settings.chic_contact_phone | default: '+918878280711' | remove: '+' | remove: ' ' | remove: '-' | remove: '(' | remove: ')'
+  assign wa_text = settings.chic_whatsapp_message | url_encode
+-%}
+<div class="chic-fab chic-fab--{{ settings.chic_floating_position | default: 'left' }}" aria-label="Contact CHIC">
+  <a class="chic-fab__btn chic-fab__btn--wa" href="https://wa.me/{{ phone_digits }}{% if wa_text != blank %}?text={{ wa_text }}{% endif %}" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
+    {% render 'chic-contact-icon', icon: 'whatsapp' %}
+    <span class="chic-fab__tip">WhatsApp us</span>
+  </a>
+  <a class="chic-fab__btn chic-fab__btn--call" href="tel:+{{ phone_digits }}" aria-label="Call us">
+    {% render 'chic-contact-icon', icon: 'phone' %}
+    <span class="chic-fab__tip">Call us</span>
+  </a>
+</div>
+<style>
+  .chic-fab {
+    position: fixed;
+    bottom: max(20px, env(safe-area-inset-bottom));
+    z-index: 60;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 12px;
+  }
+  .chic-fab--left { left: max(20px, env(safe-area-inset-left)); }
+  .chic-fab--right { right: max(20px, env(safe-area-inset-right)); align-items: flex-end; }
+  .chic-fab__btn {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    color: #fff;
+    text-decoration: none;
+    box-shadow: 0 10px 24px -8px rgba(0, 0, 0, 0.35);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .chic-fab__btn:hover { transform: translateY(-3px) scale(1.04); box-shadow: 0 14px 28px -8px rgba(0, 0, 0, 0.4); }
+  .chic-fab__btn:focus-visible { outline: 3px solid #fff; outline-offset: 2px; box-shadow: 0 0 0 6px rgba(0, 0, 0, 0.35); }
+  .chic-fab__btn svg { width: 28px; height: 28px; }
+  .chic-fab__btn--wa { background: #25d366; }
+  .chic-fab__btn--wa::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: #25d366;
+    z-index: -1;
+    animation: chic-fab-pulse 2.4s ease-out infinite;
+  }
+  .chic-fab__btn--call { background: var(--chic-navy, #0d4a70); }
+  .chic-fab__btn--call svg { width: 24px; height: 24px; }
+  .chic-fab__tip {
+    position: absolute;
+    top: 50%;
+    padding: 7px 12px;
+    border-radius: 999px;
+    background: #1d1a22;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-50%);
+    transition: opacity 0.2s ease;
+  }
+  .chic-fab--left .chic-fab__tip { left: calc(100% + 10px); }
+  .chic-fab--right .chic-fab__tip { right: calc(100% + 10px); }
+  .chic-fab__btn:hover .chic-fab__tip,
+  .chic-fab__btn:focus-visible .chic-fab__tip { opacity: 1; }
+  @keyframes chic-fab-pulse {
+    0% { transform: scale(1); opacity: 0.55; }
+    80%, 100% { transform: scale(1.6); opacity: 0; }
+  }
+  @media (max-width: 749px) {
+    .chic-fab { gap: 10px; bottom: max(16px, env(safe-area-inset-bottom)); }
+    .chic-fab--left { left: 14px; }
+    .chic-fab--right { right: 14px; }
+    .chic-fab__btn { width: 50px; height: 50px; }
+    .chic-fab__btn svg { width: 26px; height: 26px; }
+    .chic-fab__tip { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .chic-fab__btn--wa::before { animation: none; }
+  }
+  @media print { .chic-fab { display: none; } }
+</style>
+{%- endif -%}
