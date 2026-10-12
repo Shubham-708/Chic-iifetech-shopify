@@ -151,6 +151,7 @@
       "block_order": [
         "group_T9Emrg"
       ],
+      "disabled": true,
       "name": "t:names.collection_list",
       "settings": {
         "layout_type": "grid",
@@ -169,9 +170,58 @@
         "padding-block-start": 48,
         "padding-block-end": 48
       }
+    },
+    "chic_products_UfiXih": {
+      "type": "chic-products",
+      "blocks": {
+        "tab_whUfgA": {
+          "type": "tab",
+          "settings": {
+            "label": "Skincare",
+            "match": "skin care"
+          }
+        },
+        "tab_nHdXnb": {
+          "type": "tab",
+          "settings": {
+            "label": "Haircare",
+            "match": "hair"
+          }
+        },
+        "tab_FmJNkx": {
+          "type": "tab",
+          "settings": {
+            "label": "Bodycare",
+            "match": "body"
+          }
+        },
+        "tab_BLbDPQ": {
+          "type": "tab",
+          "settings": {
+            "label": "Gift Sets & Combos",
+            "match": "gift"
+          }
+        }
+      },
+      "block_order": [
+        "tab_whUfgA",
+        "tab_nHdXnb",
+        "tab_FmJNkx",
+        "tab_BLbDPQ"
+      ],
+      "name": "Chic products",
+      "settings": {
+        "eyebrow": "Our bestsellers",
+        "heading": "Loved By Thousands",
+        "collection": "",
+        "max_products": 10,
+        "link_label": "View All Products",
+        "link": ""
+      }
     }
   },
   "order": [
-    "collection_list_KreTXe"
+    "collection_list_KreTXe",
+    "chic_products_UfiXih"
   ]
 }
