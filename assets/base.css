@@ -1836,3 +1836,40 @@ main > .shopify-section:first-child .section:not(.disable-section-top-offset) {
     margin-top: calc(var(--header-height) * var(--transparent-header-offset-boolean) * -1);
   }
 }
+/* ── Chic Mobile Drawer ── */
+@media screen and (max-width: 749px) {
+
+  /* Glassmorphism background */
+  .header__drawer [data-header-drawer-type="mobile-drawer"],
+  .header__drawer .drawer {
+    background: rgba(245, 249, 238, 0.92) !important;
+    backdrop-filter: blur(24px) !important;
+    -webkit-backdrop-filter: blur(24px) !important;
+  }
+
+  /* Center + brand font for all links */
+  .header__drawer a {
+    font-family: var(--font-heading--family, Georgia, serif) !important;
+    font-size: 1.4rem !important;
+    font-weight: 400 !important;
+    text-align: center !important;
+    color: #0d4a70 !important;
+    display: block !important;
+    padding: 14px 20px !important;
+    text-decoration: none !important;
+    border-bottom: 1px solid rgba(13, 74, 112, 0.08) !important;
+    letter-spacing: 0.03em !important;
+  }
+
+  .header__drawer a:hover {
+    color: #4f8455 !important;
+    background: rgba(79, 132, 85, 0.06) !important;
+  }
+
+  /* Nav list */
+  .header__drawer ul {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+}
