@@ -140,60 +140,10 @@
         "collection_inverse_logo": false,
         "text_color_transparent_collection": ""
       }
-    },
-    "chic_products_D9VPRH": {
-      "type": "chic-products",
-      "blocks": {
-        "tab_Jm4gkL": {
-          "type": "tab",
-          "settings": {
-            "label": "Skincare",
-            "match": "skin care"
-          }
-        },
-        "tab_BHnx6m": {
-          "type": "tab",
-          "settings": {
-            "label": "Haircare",
-            "match": "hair"
-          }
-        },
-        "tab_GGwxQb": {
-          "type": "tab",
-          "settings": {
-            "label": "Bodycare",
-            "match": "body"
-          }
-        },
-        "tab_xDewca": {
-          "type": "tab",
-          "settings": {
-            "label": "Gift Sets & Combos",
-            "match": "gift"
-          }
-        }
-      },
-      "block_order": [
-        "tab_Jm4gkL",
-        "tab_BHnx6m",
-        "tab_GGwxQb",
-        "tab_xDewca"
-      ],
-      "disabled": true,
-      "name": "Chic products",
-      "settings": {
-        "eyebrow": "Our bestsellers",
-        "heading": "Loved By Thousands",
-        "collection": "",
-        "max_products": 10,
-        "link_label": "View All Products",
-        "link": ""
-      }
     }
   },
   "order": [
     "header_announcements_pbXTDf",
-    "header_section",
-    "chic_products_D9VPRH"
+    "header_section"
   ]
 }
