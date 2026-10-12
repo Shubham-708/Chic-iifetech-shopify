@@ -1873,5 +1873,12 @@ main > .shopify-section:first-child .section:not(.disable-section-top-offset) {
     margin: 0 !important;
   }
 }
-
+/* Tablet fix for footer newsletter shadow */
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .chic-footer .newsletter__wrapper,
+  .chic-footer .email-signup__container {
+    align-items: center;
+    justify-content: center;
+  }
+}
 
