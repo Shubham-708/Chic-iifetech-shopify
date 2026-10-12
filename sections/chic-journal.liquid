@@ -32,7 +32,7 @@
           {% for article in blog.articles limit: 6 %}
             <a class="chic-blog" href="{{ article.url }}">
               {% if article.image %}
-                {{ article.image | image_url: width: 480 | image_tag: loading: 'lazy', alt: article.title }}
+                {{ article.image | image_url: width: 400 | image_tag: loading: 'lazy', alt: article.title }}
               {% else %}
                 {{ 'lifestyle-1' | placeholder_svg_tag: 'chic-blog__placeholder' }}
               {% endif %}
@@ -44,10 +44,10 @@
             </a>
           {% endfor %}
         {% else %}
-          {% assign placeholders = 'Why Nature Is Not a Luxury, But a Necessity|The Champi Ritual: Herbal Hair Oiling, Done Right|Morning vs. Night: Building Your Skin Ritual' | split: '|' %}
+          {% assign placeholders = 'Why Nature Is Not a Luxury|The Champi Ritual|Morning vs. Night Ritual|Haldi for Skin|Neem: Village Pharmacy' | split: '|' %}
           {% for title in placeholders %}
             <div class="chic-blog">
-              <img src="{{ 'chic-insta-' | append: forloop.index | append: '.jpg' | asset_url }}" alt="" loading="lazy" width="480" height="480">
+              <img src="{{ 'chic-insta-' | append: forloop.index | append: '.jpg' | asset_url }}" alt="" loading="lazy" width="400" height="400">
               <div class="chic-blog__content">
                 <time>{{ 'now' | date: '%B %d, %Y' }}</time>
                 <h4>{{ title }}</h4>
@@ -71,7 +71,7 @@
 
     const scrollAmount = () => {
       const card = grid.querySelector('.chic-blog');
-      return card ? card.offsetWidth + 18 : 340;
+      return card ? card.offsetWidth + 18 : 220;
     };
 
     prevBtn.addEventListener('click', () => {
@@ -100,8 +100,8 @@
   }
 
   .chic-arrow {
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     border: 1.5px solid var(--chic-line);
     background: #fff;
@@ -118,8 +118,8 @@
   }
 
   .chic-arrow svg {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     stroke: var(--chic-navy);
     fill: none;
     stroke-width: 2;
@@ -134,7 +134,7 @@
 
   .chic-blogs {
     display: flex;
-    gap: 18px;
+    gap: 14px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
@@ -143,18 +143,19 @@
 
   .chic-blogs::-webkit-scrollbar { display: none; }
 
+  /* ── Desktop: 5 cards visible ── */
   .chic-blog {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto auto;
     background: var(--chic-card);
     border: 1px solid var(--chic-line);
-    border-radius: 12px;
+    border-radius: 10px;
     overflow: hidden;
     text-decoration: none;
-    flex: 0 0 calc(33.33% - 12px);
+    flex: 0 0 calc(20% - 12px);
     scroll-snap-align: start;
-    min-width: 260px;
+    min-width: 160px;
   }
 
   .chic-blog:hover { text-decoration: none; }
@@ -169,34 +170,36 @@
     display: block;
   }
 
-  .chic-blog__content { padding: 16px; }
+  .chic-blog__content { padding: 12px; }
 
   .chic-blog time {
-    font-size: 11px;
+    font-size: 10px;
     color: var(--chic-muted);
   }
 
   .chic-blog h4 {
     font-family: var(--chic-serif);
     font-weight: 400;
-    font-size: 14.5px;
-    line-height: 1.45;
-    margin: 6px 0 10px;
+    font-size: 12.5px;
+    line-height: 1.4;
+    margin: 4px 0 8px;
     color: var(--chic-ink);
   }
 
   .chic-blog__rm {
-    font-size: 12px;
+    font-size: 11px;
     color: var(--chic-navy);
     font-weight: 500;
   }
 
-  /* ── Tablet ── */
+  /* ── Tablet: 3 cards ── */
   @media screen and (max-width: 1024px) {
-    .chic-blog { flex: 0 0 calc(50% - 9px); }
+    .chic-blog {
+      flex: 0 0 calc(33.33% - 10px);
+    }
   }
 
-  /* ── Mobile ── */
+  /* ── Mobile: 3 cards visible ── */
   @media screen and (max-width: 860px) {
     .chic-sec-head {
       flex-direction: column;
@@ -209,7 +212,18 @@
       justify-content: space-between;
     }
 
-    .chic-blog { flex: 0 0 80%; }
+    .chic-blog {
+      flex: 0 0 calc(33.33% - 10px);
+      min-width: 130px;
+    }
+
+    .chic-blog h4 {
+      font-size: 11px;
+    }
+
+    .chic-blog__content {
+      padding: 8px;
+    }
   }
 {% endstylesheet %}
 
