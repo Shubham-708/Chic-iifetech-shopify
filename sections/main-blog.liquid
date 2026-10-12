@@ -32,73 +32,12 @@
       class="blog-posts-container"
     >
       {% liquid
-        assign items_on_page = blog.articles.size
         assign image_index = 0
         assign eager_image_count = 2
-        assign compact_image_sizes = '(min-width: 1520px) 456px, (min-width: 750px) calc(33.33vw - 51px), calc(100vw - 32px)'
-        assign standard_image_sizes = '(min-width: 1520px) 702px, (min-width: 750px) calc(50vw - 58px), calc(100vw - 32px)'
-        assign hero_image_sizes = '(min-width: 1520px) 983px, (min-width: 750px) calc(70vw - 81px), calc(100vw - 32px)'
+        assign image_sizes = '(min-width: 1520px) 456px, (min-width: 750px) calc(33.33vw - 51px), calc(100vw - 32px)'
       %}
       {% for article in blog.articles %}
         {% liquid
-          assign col_span = 2
-          assign scale = 0.6
-          assign is_horizontal = false
-
-          case items_on_page
-            when 1
-              assign col_span = 6
-              assign scale = 1
-              assign is_horizontal = true
-            when 2
-              assign col_span = 3
-              assign scale = 0.8
-            when 3
-              if forloop.index == 1
-                assign col_span = 6
-                assign scale = 1
-                assign is_horizontal = true
-              else
-                assign col_span = 3
-                assign scale = 0.8
-              endif
-            when 4
-              assign col_span = 3
-              assign scale = 0.8
-            when 5
-              if forloop.index == 1
-                assign col_span = 6
-                assign scale = 1
-                assign is_horizontal = true
-              else
-                assign col_span = 2
-                assign scale = 0.6
-              endif
-            else
-              if forloop.index == 1
-                assign col_span = 6
-                assign scale = 1
-                assign is_horizontal = true
-              elsif forloop.index <= 3
-                assign col_span = 3
-                assign scale = 0.8
-              else
-                assign col_span = 2
-                assign scale = 0.6
-              endif
-          endcase
-
-          case col_span
-            when 2
-              assign image_sizes = compact_image_sizes
-            when 3
-              assign image_sizes = standard_image_sizes
-            when 6
-              assign image_sizes = hero_image_sizes
-            else
-              assign image_sizes = '100vw'
-          endcase
-
           assign image_loading = 'lazy'
           assign image_fetch_priority = 'auto'
           if article.image
@@ -111,23 +50,9 @@
             endif
           endif
         %}
-        {% style %}
-          [data-blog-index="{{ section.id }}-{{ forloop.index }}"] {
-            --col-span: {{ col_span }};
-            --blog-post-card-scale: {{ scale }};
-          }
-
-          @media screen and (max-width: 749px) {
-            [data-blog-index="{{ section.id }}-{{ forloop.index }}"] {
-              --col-span: 6;
-              --blog-post-card-scale: 0.5;
-            }
-          }
-        {% endstyle %}
         <div
           class="blog-post-item"
           data-testid="blog-post-item"
-          data-blog-index="{{ section.id }}-{{ forloop.index }}"
         >
           {% content_for 'block',
             id: 'static-blog-post-card',
@@ -136,7 +61,7 @@
             image_sizes: image_sizes,
             image_loading: image_loading,
             image_fetch_priority: image_fetch_priority,
-            is_horizontal: is_horizontal
+            is_horizontal: false
           %}
         </div>
       {% endfor %}
@@ -148,32 +73,65 @@
   .blog-posts {
     --page-content-width: var(--narrow-page-width);
     --page-width: calc(var(--page-content-width) + (var(--page-margin) * 2));
-    --columns-gap: 36px;
-    --rows-gap: 36px;
+    --columns-gap: 24px;
+    --rows-gap: 24px;
   }
 
+  /* ── Desktop: 3 equal columns ── */
   .blog-posts-container {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 1rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--rows-gap) var(--columns-gap);
     width: 100%;
-    column-gap: var(--columns-gap);
-    row-gap: var(--rows-gap);
   }
 
   .blog-post-item {
-    grid-column: span var(--col-span);
+    grid-column: span 1;
     background-color: var(--color-background);
-  }
-
-  .blog-post-item {
+    border-radius: 12px;
+    overflow: hidden;
     border: 1px solid rgb(var(--color-foreground-rgb) / var(--opacity-20));
-    padding: 0 1rem 1rem;
   }
 
   .blog-post-item:has(.blog-post-card__image-container) {
     border: none;
     padding: 0;
+  }
+
+  /* ── Square image fix ── */
+  .blog-post-card__image-container img,
+  .blog-post-card__image-container .placeholder-svg {
+    aspect-ratio: 1 / 1 !important;
+    object-fit: cover !important;
+    object-position: center top !important;
+    width: 100% !important;
+    height: auto !important;
+    display: block;
+  }
+
+  /* ── Tablet: 2 columns ── */
+  @media screen and (max-width: 1024px) and (min-width: 750px) {
+    .blog-posts-container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  /* ── Mobile: 1 column ── */
+  @media screen and (max-width: 749px) {
+    .blog-posts-container {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .blog-post-item {
+      grid-column: span 1;
+    }
+
+    .blog-post-card__image-container img,
+    .blog-post-card__image-container .placeholder-svg {
+      aspect-ratio: 1 / 1 !important;
+      height: auto !important;
+    }
   }
 {% endstylesheet %}
 
