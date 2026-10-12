@@ -77,25 +77,27 @@
 </script>
 
 {% stylesheet %}
+  /* ── Hero Section ── */
   .blog-post-hero {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    max-width: 1400px;
+    grid-template-columns: 1fr;
+    gap: 32px;
+    max-width: 860px;
     margin: 0 auto 60px;
     padding: 40px 40px;
-    align-items: center;
   }
 
   .blog-post-hero__img {
     width: 100%;
-    height: 500px;
+    aspect-ratio: 1 / 1;
     object-fit: cover;
+    object-position: center top;
     display: block;
+    border-radius: 12px;
   }
 
   .blog-post-hero__content {
-    padding: 20px 0;
+    padding: 0;
   }
 
   .blog-post-hero__date {
@@ -120,6 +122,7 @@
     color: rgb(var(--color-foreground-rgb) / 0.75);
   }
 
+  /* ── Body ── */
   .blog-post-body {
     max-width: 860px;
     margin: 0 auto 80px;
@@ -132,6 +135,7 @@
     color: var(--color-foreground);
   }
 
+  /* ── Related Posts ── */
   .blog-post-related {
     background: #faf8f5;
     padding: 60px 40px;
@@ -164,12 +168,15 @@
     transform: translateY(-4px);
   }
 
+  /* ── Related image: 1:1 square ── */
   .blog-post-related__img {
     width: 100%;
-    aspect-ratio: 4/3;
+    aspect-ratio: 1 / 1;
     object-fit: cover;
+    object-position: center top;
     display: block;
     margin-bottom: 16px;
+    border-radius: 8px;
   }
 
   .blog-post-related__card-date {
@@ -200,6 +207,7 @@
     text-decoration: underline;
   }
 
+  /* ── Comments ── */
   .blog-post-comments-container {
     width: 100%;
     max-width: var(--normal-content-width);
@@ -248,15 +256,23 @@
     border-bottom: 1px solid var(--color-foreground);
   }
 
-  @media screen and (max-width: 749px) {
+  /* ── Tablet ── */
+  @media screen and (max-width: 1024px) {
     .blog-post-hero {
-      grid-template-columns: 1fr;
-      gap: 24px;
-      padding: 24px 16px;
+      padding: 32px 24px;
     }
 
-    .blog-post-hero__img {
-      height: 280px;
+    .blog-post-related__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  /* ── Mobile ── */
+  @media screen and (max-width: 749px) {
+    .blog-post-hero {
+      padding: 24px 16px;
+      gap: 20px;
+      margin-bottom: 32px;
     }
 
     .blog-post-hero__title {
