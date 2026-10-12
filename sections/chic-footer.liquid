@@ -6,6 +6,7 @@
 
 <footer class="chic-footer" style="--cf-bg: {{ s.background }}; --cf-accent: {{ s.accent }};">
   <div class="chic-footer__inner">
+    {%- comment -%} Newsletter card {%- endcomment -%}
     {% if s.show_newsletter %}
       <div class="chic-footer__news">
         <div class="chic-footer__news-copy">
@@ -39,6 +40,7 @@
     {% endif %}
 
     <div class="chic-footer__grid">
+      {%- comment -%} Brand {%- endcomment -%}
       <div class="chic-footer__brand">
         <a href="{{ routes.root_url }}" class="chic-footer__logo" aria-label="{{ shop.name | escape }}">
           {% if s.logo != blank %}
@@ -70,6 +72,7 @@
         {% endif %}
       </div>
 
+      {%- comment -%} Link columns {%- endcomment -%}
       {% if menu_1.links.size > 0 %}
         <nav class="chic-footer__col" aria-label="{{ s.menu_1_heading | escape }}">
           <h3 class="chic-footer__heading">{{ s.menu_1_heading | escape }}</h3>
@@ -99,6 +102,7 @@
         </ul>
       </nav>
 
+      {%- comment -%} Contact {%- endcomment -%}
       <div class="chic-footer__col chic-footer__contact">
         <h3 class="chic-footer__heading">{{ s.contact_heading | escape }}</h3>
         <ul role="list">
@@ -340,12 +344,11 @@
   }
 
   .chic-footer__col ul {
+    display: grid;
+    gap: 12px;
     margin: 0;
     padding: 0;
     list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
   }
 
   .chic-footer__col a {
@@ -397,12 +400,6 @@
   .chic-footer__contact a,
   .chic-footer__contact span { align-self: center; word-break: break-word; }
 
-  /* ── Email fix ── */
-  .chic-footer__contact a[href^="mailto"] {
-    word-break: break-all;
-    font-size: 13px;
-  }
-
   /* Bottom bar */
   .chic-footer__bottom {
     display: flex;
@@ -431,54 +428,21 @@
 
   .chic-footer__pay svg { display: block; width: 38px; height: 24px; }
 
-  /* ── Tablet ── */
   @media screen and (max-width: 989px) {
-    .chic-footer__grid { grid-template-columns: repeat(2, 1fr); }
+    .chic-footer__grid { grid-template-columns: repeat(3, 1fr); }
     .chic-footer__brand { grid-column: 1 / -1; }
     .chic-footer__contact { grid-column: 1 / -1; }
   }
 
-  /* ── Mobile ── */
   @media screen and (max-width: 749px) {
-    .chic-footer__news {
-      grid-template-columns: 1fr;
-      border-radius: 22px;
-      text-align: center;
-    }
-
+    .chic-footer__news { grid-template-columns: 1fr; border-radius: 22px; text-align: center; }
     .chic-footer__form { border-radius: 22px; }
     .chic-footer__submit { flex: 1 1 100%; }
-
-    .chic-footer__grid {
-      grid-template-columns: 1fr;
-      gap: 28px;
-    }
-
-    .chic-footer__brand {
-      grid-column: 1;
-      text-align: center;
-    }
-
+    .chic-footer__grid { grid-template-columns: 1fr 1fr; gap: 32px 20px; }
+    .chic-footer__brand { text-align: center; }
     .chic-footer__tagline { margin-inline: auto; }
     .chic-footer__social { justify-content: center; }
-
-    /* Nav columns: 2 side by side */
-    .chic-footer__col:not(.chic-footer__contact) {
-      display: inline-block;
-      width: calc(50% - 10px);
-      vertical-align: top;
-    }
-
-    /* Contact: full width */
-    .chic-footer__contact {
-      display: block;
-      width: 100%;
-    }
-
-    .chic-footer__bottom {
-      flex-direction: column;
-      text-align: center;
-    }
+    .chic-footer__bottom { flex-direction: column; text-align: center; }
   }
 {% endstylesheet %}
 
