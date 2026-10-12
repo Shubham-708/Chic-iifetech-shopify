@@ -11,7 +11,6 @@
   <!-- Magazine Grid -->
   <div class="bp-magazine">
 
-    <!-- TOP LEFT: Image -->
     <div class="bp-magazine__image">
       {% if article.image %}
         {{ article.image | image_url: width: 800 | image_tag:
@@ -22,7 +21,6 @@
       {% endif %}
     </div>
 
-    <!-- TOP RIGHT: Heading + Key Points -->
     <div class="bp-magazine__intro">
       <p class="bp-magazine__date">{{ article.published_at | date: '%B %d, %Y' }}</p>
       <h1 class="bp-magazine__title">{{ article.title }}</h1>
@@ -38,7 +36,6 @@
       {% endif %}
     </div>
 
-    <!-- BOTTOM: Full article content (spans both columns) -->
     <div class="bp-magazine__body">
       {{ article.content }}
     </div>
@@ -69,35 +66,188 @@
 
   <!-- Related Posts -->
   <div class="blog-post-related">
-    <h2 class="blog-post-related__heading">More from the Journal</h2>
-    <div class="blog-post-related__grid">
-      {% assign count = 0 %}
-      {% for related in blog.articles %}
-        {% if related.id != article.id and count < 3 %}
-          {% assign count = count | plus: 1 %}
-          <a href="{{ related.url }}" class="blog-post-related__card">
-            {% if related.image %}
-              {{ related.image | image_url: width: 600 | image_tag: loading: 'lazy', class: 'blog-post-related__img' }}
-            {% endif %}
-            <div class="blog-post-related__card-content">
-              <p class="blog-post-related__card-date">{{ related.published_at | date: '%B %d, %Y' }}</p>
-              <h3 class="blog-post-related__card-title">{{ related.title }}</h3>
-              <p class="blog-post-related__card-excerpt">{{ related.excerpt_or_content | strip_html | truncate: 100 }}</p>
-              <span class="blog-post-related__read-more">Read more →</span>
-            </div>
-          </a>
-        {% endif %}
-      {% endfor %}
+    <div class="blog-post-related__header">
+      <h2 class="blog-post-related__heading">More from the Journal</h2>
+      <div class="chic-carousel-arrows">
+        <button class="chic-arrow bpr-prev" aria-label="Previous">
+          <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="chic-arrow bpr-next" aria-label="Next">
+          <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="blog-post-related__wrapper">
+      <div class="blog-post-related__grid">
+        {% assign count = 0 %}
+        {% for related in blog.articles %}
+          {% if related.id != article.id and count < 5 %}
+            {% assign count = count | plus: 1 %}
+            <a href="{{ related.url }}" class="blog-post-related__card">
+              {% if related.image %}
+                {{ related.image | image_url: width: 400 | image_tag: loading: 'lazy', class: 'blog-post-related__img' }}
+              {% endif %}
+              <div class="blog-post-related__card-content">
+                <p class="blog-post-related__card-date">{{ related.published_at | date: '%B %d, %Y' }}</p>
+                <h3 class="blog-post-related__card-title">{{ related.title }}</h3>
+                <span class="blog-post-related__read-more">Read more →</span>
+              </div>
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
     </div>
   </div>
 
 </div>
+
+<script>
+  (function() {
+    const grid = document.querySelector('.blog-post-related__grid');
+    const prevBtn = document.querySelector('.bpr-prev');
+    const nextBtn = document.querySelector('.bpr-next');
+    if (!grid || !prevBtn || !nextBtn) return;
+
+    const scrollAmount = () => {
+      const card = grid.querySelector('.blog-post-related__card');
+      return card ? card.offsetWidth + 14 : 200;
+    };
+
+    prevBtn.addEventListener('click', () => {
+      grid.scrollBy({ left: -scrollAmount(), behavior: 'smooth' });
+    });
+
+    nextBtn.addEventListener('click', () => {
+      grid.scrollBy({ left: scrollAmount(), behavior: 'smooth' });
+    });
+  })();
+</script>
 
 <script type="application/ld+json">
   {{ article | structured_data }}
 </script>
 
 {% stylesheet %}
+
+  /* ── Related Posts ── */
+  .blog-post-related {
+    background: #faf8f5;
+    padding: 60px 40px;
+    margin-top: 60px;
+  }
+
+  .blog-post-related__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+  }
+
+  .blog-post-related__heading {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .chic-carousel-arrows {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .chic-arrow {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1.5px solid var(--chic-line, #ddd);
+    background: #fff;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+    flex: none;
+  }
+
+  .chic-arrow:hover {
+    background: var(--chic-navy, #1a2e44);
+    border-color: var(--chic-navy, #1a2e44);
+  }
+
+  .chic-arrow svg {
+    width: 16px;
+    height: 16px;
+    stroke: var(--chic-navy, #1a2e44);
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: stroke 0.2s ease;
+  }
+
+  .chic-arrow:hover svg { stroke: #fff; }
+
+  .blog-post-related__wrapper { overflow: hidden; }
+
+  .blog-post-related__grid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 14px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    padding-bottom: 4px;
+  }
+
+  .blog-post-related__grid::-webkit-scrollbar { display: none; }
+
+  .blog-post-related__card {
+    text-decoration: none;
+    color: inherit;
+    flex: 0 0 calc(20% - 12px);
+    min-width: 160px;
+    scroll-snap-align: start;
+    border: 1px solid rgb(var(--color-foreground-rgb) / 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.2s ease;
+    display: block;
+  }
+
+  .blog-post-related__card:hover { transform: translateY(-4px); }
+
+  .blog-post-related__img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+  }
+
+  .blog-post-related__card-content { padding: 10px; }
+
+  .blog-post-related__card-date {
+    font-size: 10px;
+    color: rgb(var(--color-foreground-rgb) / 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+  }
+
+  .blog-post-related__card-title {
+    font-size: 12.5px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    line-height: 1.4;
+    color: var(--color-foreground);
+  }
+
+  .blog-post-related__read-more {
+    font-size: 11px;
+    font-weight: 600;
+    text-decoration: underline;
+  }
 
   /* ── Magazine Grid ── */
   .bp-magazine {
@@ -110,11 +260,7 @@
     padding: 40px;
   }
 
-  /* Top-left: image */
-  .bp-magazine__image {
-    grid-column: 1;
-    grid-row: 1;
-  }
+  .bp-magazine__image { grid-column: 1; grid-row: 1; }
 
   .bp-magazine__img {
     width: 100%;
@@ -125,7 +271,6 @@
     border-radius: 12px;
   }
 
-  /* Top-right: intro + keypoints */
   .bp-magazine__intro {
     grid-column: 2;
     grid-row: 1;
@@ -176,7 +321,6 @@
     border-radius: 8px;
   }
 
-  /* Bottom: full content spans both columns */
   .bp-magazine__body {
     grid-column: 1 / -1;
     grid-row: 2;
@@ -195,75 +339,6 @@
     border-radius: 8px;
     column-span: all;
     margin-bottom: 16px;
-  }
-
-  /* ── Related Posts ── */
-  .blog-post-related {
-    background: #faf8f5;
-    padding: 60px 40px;
-    margin-top: 60px;
-  }
-
-  .blog-post-related__heading {
-    text-align: center;
-    font-size: 1.6rem;
-    margin-bottom: 40px;
-    font-weight: 600;
-  }
-
-  .blog-post-related__grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .blog-post-related__card {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-    transition: transform 0.2s ease;
-  }
-
-  .blog-post-related__card:hover { transform: translateY(-4px); }
-
-  .blog-post-related__img {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    object-position: center top;
-    display: block;
-    margin-bottom: 16px;
-    border-radius: 8px;
-  }
-
-  .blog-post-related__card-date {
-    font-size: 0.8rem;
-    color: rgb(var(--color-foreground-rgb) / 0.5);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-bottom: 8px;
-  }
-
-  .blog-post-related__card-title {
-    font-size: 1rem;
-    font-weight: 600;
-    margin-bottom: 10px;
-    line-height: 1.4;
-  }
-
-  .blog-post-related__card-excerpt {
-    font-size: 0.875rem;
-    color: rgb(var(--color-foreground-rgb) / 0.7);
-    line-height: 1.6;
-    margin-bottom: 12px;
-  }
-
-  .blog-post-related__read-more {
-    font-size: 0.875rem;
-    font-weight: 600;
-    text-decoration: underline;
   }
 
   /* ── Comments ── */
@@ -310,18 +385,11 @@
 
   /* ── Tablet ── */
   @media screen and (max-width: 1024px) {
-    .bp-magazine {
-      padding: 32px 24px;
-      gap: 24px;
-    }
-
+    .bp-magazine { padding: 32px 24px; gap: 24px; }
     .bp-magazine__title { font-size: 1.5rem; }
-
     .bp-magazine__body { column-count: 1; }
-
-    .blog-post-related__grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
+    .blog-post-related__card { flex: 0 0 calc(33.33% - 10px); }
+    .blog-post-related { padding: 40px 24px; }
   }
 
   /* ── Mobile ── */
@@ -332,35 +400,18 @@
       gap: 20px;
     }
 
-    .bp-magazine__image {
-      grid-column: 1;
-      grid-row: 1;
-    }
-
-    .bp-magazine__intro {
-      grid-column: 1;
-      grid-row: 2;
-    }
-
-    .bp-magazine__body {
-      grid-column: 1;
-      grid-row: 3;
-      column-count: 1;
-    }
-
+    .bp-magazine__image { grid-column: 1; grid-row: 1; }
+    .bp-magazine__intro { grid-column: 1; grid-row: 2; }
+    .bp-magazine__body  { grid-column: 1; grid-row: 3; column-count: 1; }
     .bp-magazine__title { font-size: 1.4rem; }
 
-    .blog-post-related {
-      padding: 40px 16px;
+    .blog-post-related { padding: 40px 16px; }
+    .blog-post-related__card {
+      flex: 0 0 calc(33.33% - 10px);
+      min-width: 120px;
     }
 
-    .blog-post-related__grid {
-      grid-template-columns: 1fr;
-    }
-
-    .blog-post-comments-container {
-      padding: 0 16px;
-    }
+    .blog-post-comments-container { padding: 0 16px; }
   }
 
 {% endstylesheet %}
