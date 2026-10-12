@@ -6,8 +6,29 @@
  * or related systems. Please exercise caution as any changes
  * made to this file may be overwritten.
  * ------------------------------------------------------------
- */{
+ */
+{
   "sections": {
+    "chic_contact": {
+      "type": "chic-contact",
+      "settings": {
+        "eyebrow": "We're here for you",
+        "heading": "Let's Talk",
+        "heading_accent": "Botanical Beauty",
+        "text": "Questions about a product, your order, or which ritual suits your skin? Send us a message, call, or WhatsApp — our team replies quickly.",
+        "fallback_asset": "chic-contact-aloe.jpg",
+        "image_alt": "Smiling CHIC customer holding a jar of CHIC Aloe Vera Gel",
+        "phone": "",
+        "phone_label": "+91 88782 80711",
+        "whatsapp_message": "",
+        "email": "chicthebotanicalbeauty@gmail.com",
+        "address": "Saket Nagar, Bhopal, Madhya Pradesh",
+        "form_heading": "Send us a message",
+        "form_text": "Fill in the form and we'll get back to you as soon as we can.",
+        "topics": "Product advice, My order, Bulk / gifting, Something else",
+        "success_text": "We'll reply to you by email soon. For anything urgent, WhatsApp us."
+      }
+    },
     "main": {
       "type": "main-page",
       "blocks": {
@@ -21,10 +42,12 @@
             "alignment": "center",
             "type_preset": "h2",
             "font": "var(--font-body--family)",
+            "font_size": "1rem",
             "line_height": "normal",
             "letter_spacing": "normal",
             "case": "none",
             "wrap": "pretty",
+            "text_color": "",
             "background": false,
             "background_color": "#00000026",
             "corner_radius": 0,
@@ -45,10 +68,12 @@
             "alignment": "center",
             "type_preset": "rte",
             "font": "var(--font-body--family)",
+            "font_size": "1rem",
             "line_height": "normal",
             "letter_spacing": "normal",
             "case": "none",
             "wrap": "pretty",
+            "text_color": "",
             "background": false,
             "background_color": "#00000026",
             "corner_radius": 0,
@@ -64,14 +89,14 @@
         "title",
         "content"
       ],
+      "disabled": true,
       "settings": {
         "content_direction": "column",
         "gap": 32,
         "background_color": "{{ settings.color_palette.background }}",
         "padding-block-start": 40,
         "padding-block-end": 0
-      },
-      "disabled": true
+      }
     },
     "form": {
       "type": "section",
@@ -83,6 +108,13 @@
             "custom_width": 50,
             "width_mobile": "custom",
             "custom_width_mobile": 100,
+            "background_color": "",
+            "input_style": "default",
+            "input_background_color": "{{ settings.color_palette.background }}",
+            "input_text_color": "{{ settings.color_palette.foreground }}",
+            "input_border_color": "{{ settings.color_palette.foreground }}",
+            "border_width": 1,
+            "border_radius": 0,
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
@@ -95,6 +127,9 @@
               "settings": {
                 "label": "Submit",
                 "style_class": "button",
+                "custom_button_background": "{{ settings.color_palette.foreground }}",
+                "custom_button_text": "{{ settings.color_palette.background }}",
+                "custom_button_border": "{{ settings.color_palette.background }}",
                 "width": "fit-content",
                 "custom_width": 100,
                 "width_mobile": "fit-content",
@@ -109,6 +144,7 @@
       "block_order": [
         "contact_form_UwiCkQ"
       ],
+      "disabled": true,
       "name": "t:names.contact_form",
       "settings": {
         "content_direction": "column",
@@ -120,32 +156,40 @@
         "vertical_alignment_flex_direction_column": "center",
         "gap": 32,
         "section_width": "page-width",
+        "section_height": "",
         "section_height_custom": 50,
         "background_media": "none",
         "background_color": "{{ settings.color_palette.background }}",
         "video_position": "cover",
         "background_image_position": "cover",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_radius": 0,
         "toggle_overlay": false,
         "overlay_color": "#00000026",
         "overlay_style": "solid",
         "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
         "padding-block-start": 0,
         "padding-block-end": 70
-      },
-      "disabled": true
+      }
     },
-    "chic_contact": {
-      "type": "chic-contact",
-      "settings": {}
+    "chic_journal_Y6iHQ3": {
+      "type": "chic-journal",
+      "name": "Chic journal",
+      "settings": {
+        "eyebrow": "From the Journal",
+        "heading": "Tips, Rituals & Insights",
+        "blog": "",
+        "link_label": "View All Posts"
+      }
     }
   },
   "order": [
     "chic_contact",
     "main",
-    "form"
+    "form",
+    "chic_journal_Y6iHQ3"
   ]
 }
