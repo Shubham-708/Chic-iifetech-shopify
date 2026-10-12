@@ -1873,112 +1873,43 @@ main > .shopify-section:first-child .section:not(.disable-section-top-offset) {
     margin: 0 !important;
   }
 }
-/* ── Chic: Light Botanical Side Drawer ── */
 
-/* Overlay backdrop */
-.header-drawer__overlay,
-[data-drawer-overlay] {
-  background: rgba(13, 74, 112, 0.4) !important;
-  backdrop-filter: blur(4px) !important;
-}
 
-/* Main drawer panel - left side slide */
-header-drawer,
-.header-drawer,
-[data-header-drawer-type="mobile-drawer"],
-.drawer--left,
-.drawer {
+/* ── Chic Mobile Drawer ── */
+.header__drawer > * {
   position: fixed !important;
   top: 0 !important;
   left: 0 !important;
   bottom: 0 !important;
-  width: min(320px, 85vw) !important;
+  width: min(300px, 85vw) !important;
   height: 100dvh !important;
   background: #f5f9ee !important;
-  background-image:
-    radial-gradient(600px 400px at 0% 0%, rgba(79, 132, 85, 0.15), transparent 60%),
-    radial-gradient(400px 300px at 0% 100%, rgba(13, 74, 112, 0.08), transparent 60%) !important;
-  border-right: 1px solid rgba(13, 74, 112, 0.1) !important;
-  box-shadow: 4px 0 32px rgba(13, 74, 112, 0.15) !important;
+  border-right: 1px solid rgba(13, 74, 112, 0.12) !important;
+  box-shadow: 4px 0 24px rgba(13, 74, 112, 0.15) !important;
   overflow-y: auto !important;
-  padding: 24px 0 40px !important;
   z-index: 9999 !important;
+  padding-top: 60px !important;
 }
 
-/* Logo area at top */
-header-drawer .header-drawer__logo,
-header-drawer .drawer__logo {
-  padding: 0 24px 24px !important;
-  border-bottom: 1px solid rgba(13, 74, 112, 0.1) !important;
-  margin-bottom: 16px !important;
-}
-
-/* Nav links */
-header-drawer a,
-.header-drawer a,
-[data-header-drawer-type="mobile-drawer"] a {
+.header__drawer a {
   font-family: var(--font-heading--family, Georgia, serif) !important;
   font-size: 1.1rem !important;
-  font-weight: 400 !important;
   color: #0d4a70 !important;
-  text-decoration: none !important;
   display: flex !important;
-  align-items: center !important;
   padding: 14px 24px !important;
-  letter-spacing: 0.03em !important;
   border-bottom: 1px solid rgba(13, 74, 112, 0.06) !important;
-  transition: background 0.2s ease, color 0.2s ease !important;
+  text-decoration: none !important;
+  transition: all 0.2s ease !important;
 }
 
-header-drawer a:hover,
-.header-drawer a:hover {
+.header__drawer a:hover {
   background: rgba(79, 132, 85, 0.08) !important;
-  color: #4f8455 !important;
   padding-left: 30px !important;
-}
-
-/* Active link */
-header-drawer a[aria-current="page"] {
   color: #4f8455 !important;
-  font-weight: 600 !important;
-  border-left: 3px solid #4f8455 !important;
 }
 
-/* List reset */
-header-drawer ul,
-.header-drawer ul {
+.header__drawer ul {
   list-style: none !important;
   padding: 0 !important;
   margin: 0 !important;
-}
-
-/* Close button */
-header-drawer button[aria-label*="close"],
-header-drawer button[aria-label*="Close"],
-header-drawer .drawer__close {
-  position: absolute !important;
-  top: 16px !important;
-  right: 16px !important;
-  width: 36px !important;
-  height: 36px !important;
-  border-radius: 50% !important;
-  background: rgba(13, 74, 112, 0.08) !important;
-  border: none !important;
-  color: #0d4a70 !important;
-  display: grid !important;
-  place-items: center !important;
-  cursor: pointer !important;
-}
-
-/* Branding at bottom */
-header-drawer::after {
-  content: '🌿 Chic — The Botanical Beauty' !important;
-  display: block !important;
-  text-align: center !important;
-  padding: 24px !important;
-  font-size: 11px !important;
-  color: rgba(13, 74, 112, 0.4) !important;
-  letter-spacing: 0.1em !important;
-  text-transform: uppercase !important;
-  margin-top: auto !important;
 }
