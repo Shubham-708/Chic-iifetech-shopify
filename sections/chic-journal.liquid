@@ -36,7 +36,7 @@
               {% else %}
                 {{ 'lifestyle-1' | placeholder_svg_tag: 'chic-blog__placeholder' }}
               {% endif %}
-              <div>
+              <div class="chic-blog__content">
                 <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%B %d, %Y' }}</time>
                 <h4>{{ article.title | escape }}</h4>
                 <span class="chic-blog__rm">Read More</span>
@@ -48,7 +48,7 @@
           {% for title in placeholders %}
             <div class="chic-blog">
               <img src="{{ 'chic-insta-' | append: forloop.index | append: '.jpg' | asset_url }}" alt="" loading="lazy" width="480" height="480">
-              <div>
+              <div class="chic-blog__content">
                 <time>{{ 'now' | date: '%B %d, %Y' }}</time>
                 <h4>{{ title }}</h4>
                 <span class="chic-blog__rm">Read More</span>
@@ -87,7 +87,6 @@
 {%- endif -%}
 
 {% stylesheet %}
-  /* Controls row */
   .chic-journal-controls {
     display: flex;
     align-items: center;
@@ -131,10 +130,7 @@
 
   .chic-arrow:hover svg { stroke: #fff; }
 
-  /* Blogs wrapper */
-  .chic-blogs-wrapper {
-    overflow: hidden;
-  }
+  .chic-blogs-wrapper { overflow: hidden; }
 
   .chic-blogs {
     display: flex;
@@ -149,7 +145,8 @@
 
   .chic-blog {
     display: grid;
-    grid-template-columns: 48% 1fr;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
     background: var(--chic-card);
     border: 1px solid var(--chic-line);
     border-radius: 12px;
@@ -157,7 +154,7 @@
     text-decoration: none;
     flex: 0 0 calc(33.33% - 12px);
     scroll-snap-align: start;
-    min-width: 280px;
+    min-width: 260px;
   }
 
   .chic-blog:hover { text-decoration: none; }
@@ -166,12 +163,13 @@
   .chic-blog img,
   .chic-blog__placeholder {
     width: 100%;
-    height: 100%;
+    aspect-ratio: 1 / 1;
     object-fit: cover;
-    min-height: 150px;
+    object-position: center top;
+    display: block;
   }
 
-  .chic-blog > div { padding: 16px; }
+  .chic-blog__content { padding: 16px; }
 
   .chic-blog time {
     font-size: 11px;
@@ -193,7 +191,24 @@
     font-weight: 500;
   }
 
+  /* ── Tablet ── */
+  @media screen and (max-width: 1024px) {
+    .chic-blog { flex: 0 0 calc(50% - 9px); }
+  }
+
+  /* ── Mobile ── */
   @media screen and (max-width: 860px) {
+    .chic-sec-head {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .chic-journal-controls {
+      width: 100%;
+      justify-content: space-between;
+    }
+
     .chic-blog { flex: 0 0 80%; }
   }
 {% endstylesheet %}
