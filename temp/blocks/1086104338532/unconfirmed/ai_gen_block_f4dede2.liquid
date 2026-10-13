@@ -1,6 +1,98 @@
+{% doc %}
+  @prompt
+    Create a premium email subscribe banner section with the following design:
+    
+    Layout: Horizontal card with rounded corners, dark navy/teal gradient background (#1a3a4a to #0d2d3a), full-width but contained with padding on sides, content split into two columns — left for text, right for the email form.
+    
+    Left column:
+    - Small uppercase label "STAY GLOWING" in lime/mint green color
+    - Large heading "Join our Botanical Circle" in white
+    - Subtext: "Skincare tips, offers and early access to new collections." in light muted white
+    
+    Right column (vertically centered):
+    - Email input field: white pill/rounded rectangle, placeholder "Enter your email"
+    - Subscribe button: dark green pill button with white text "Subscribe →"
+    
+    Overall: rounded corners (16px+), smooth dark teal-navy gradient, soft box-shadow, proper padding so nothing is cramped. On mobile, stack columns vertically. Ensure the card fits its container without overflow.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+{% assign ai_form_id = 'BotanicalCircleForm-' | append: ai_gen_id %}
+
+{% style %}
+  .ai-botanical-banner-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 42px 48px;
+    border-radius: {{ block.settings.corner_radius }}px;
+    background: linear-gradient(120deg, #1a3a4a 0%, #0d2d3a 100%);
+    box-shadow: 0 14px 36px rgba(13, 45, 58, 0.18);
+    color: #ffffff;
+  }
+  .ai-botanical-banner-{{ ai_gen_id }} *, .ai-botanical-banner-{{ ai_gen_id }} *::before, .ai-botanical-banner-{{ ai_gen_id }} *::after { box-sizing: border-box; }
+  .ai-botanical-banner__layout-{{ ai_gen_id }} { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 0.9fr); align-items: center; gap: 48px; width: 100%; }
+  .ai-botanical-banner__copy-{{ ai_gen_id }} { min-width: 0; }
+  .ai-botanical-banner__eyebrow-{{ ai_gen_id }} { margin: 0 0 12px; color: #b9e58e; font-family: {{ settings.type_accent_font.family }}, sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.16em; line-height: 1.4; text-transform: uppercase; }
+  .ai-botanical-banner__heading-{{ ai_gen_id }} { margin: 0; color: #ffffff; font-family: {{ settings.type_heading_font.family }}, serif; font-size: clamp(28px, 3.2vw, 42px); font-weight: 400; line-height: 1.15; letter-spacing: -0.025em; }
+  .ai-botanical-banner__text-{{ ai_gen_id }} { max-width: 470px; margin: 14px 0 0; color: #e0e9e9; font-family: {{ settings.type_body_font.family }}, sans-serif; font-size: 15px; line-height: 1.65; }
+  .ai-botanical-banner__form-{{ ai_gen_id }} { width: 100%; min-width: 0; }
+  .ai-botanical-banner__field-{{ ai_gen_id }} { display: flex; align-items: stretch; gap: 10px; width: 100%; }
+  .ai-botanical-banner__input-{{ ai_gen_id }} { flex: 1 1 auto; min-width: 0; height: 54px; padding: 0 20px; border: 2px solid #ffffff; border-radius: 999px; background: #ffffff; color: #1d1a22; font: inherit; font-size: 14px; }
+  .ai-botanical-banner__input-{{ ai_gen_id }}::placeholder { color: #555b5d; opacity: 1; }
+  .ai-botanical-banner__input-{{ ai_gen_id }}:focus-visible, .ai-botanical-banner__button-{{ ai_gen_id }}:focus-visible { outline: 3px solid #b9e58e; outline-offset: 3px; }
+  .ai-botanical-banner__button-{{ ai_gen_id }} { flex: 0 0 auto; min-height: 54px; padding: 0 23px; border: 2px solid #174a3b; border-radius: 999px; background: #174a3b; color: #ffffff; cursor: pointer; font-family: {{ settings.type_body_font.family }}, sans-serif; font-size: 14px; font-weight: 600; line-height: 1.2; white-space: nowrap; }
+  .ai-botanical-banner__button-{{ ai_gen_id }}:hover { background: #103d31; border-color: #103d31; }
+  .ai-botanical-banner__message-{{ ai_gen_id }} { margin: 12px 4px 0; color: #ffffff; font-family: {{ settings.type_body_font.family }}, sans-serif; font-size: 13px; line-height: 1.5; }
+  .ai-botanical-banner__message-{{ ai_gen_id }} a { color: #d9f5bc; }
+  @media screen and (max-width: 749px) {
+    .ai-botanical-banner-{{ ai_gen_id }} { width: 100%; padding: 30px 24px; }
+    .ai-botanical-banner__layout-{{ ai_gen_id }} { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+    .ai-botanical-banner__heading-{{ ai_gen_id }} { font-size: clamp(28px, 8vw, 36px); }
+    .ai-botanical-banner__field-{{ ai_gen_id }} { flex-direction: column; }
+    .ai-botanical-banner__button-{{ ai_gen_id }} { width: 100%; }
+  }
+{% endstyle %}
+
+<div class="ai-botanical-banner-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-botanical-banner__layout-{{ ai_gen_id }}">
+    <div class="ai-botanical-banner__copy-{{ ai_gen_id }}">
+      <p class="ai-botanical-banner__eyebrow-{{ ai_gen_id }}">{{ block.settings.eyebrow | escape }}</p>
+      <h2 class="ai-botanical-banner__heading-{{ ai_gen_id }}">{{ block.settings.heading | escape }}</h2>
+      <p class="ai-botanical-banner__text-{{ ai_gen_id }}">{{ block.settings.description | escape }}</p>
+    </div>
+    <div class="ai-botanical-banner__form-{{ ai_gen_id }}">
+      {%- form 'customer', id: ai_form_id -%}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <div class="ai-botanical-banner__field-{{ ai_gen_id }}">
+          <input class="ai-botanical-banner__input-{{ ai_gen_id }}" type="email" name="contact[email]" value="{{ form.email | escape }}" placeholder="{{ block.settings.email_placeholder | escape }}" aria-label="{{ block.settings.email_label | escape }}" autocomplete="email" autocorrect="off" autocapitalize="off" required {% if form.errors %}aria-invalid="true" aria-describedby="BotanicalCircleError-{{ ai_gen_id }}"{% endif %} {% if form.posted_successfully? %}aria-describedby="BotanicalCircleSuccess-{{ ai_gen_id }}"{% endif %}>
+          <button class="ai-botanical-banner__button-{{ ai_gen_id }}" type="submit">{{ block.settings.button_label | escape }}</button>
+        </div>
+        {% if form.errors %}<div class="ai-botanical-banner__message-{{ ai_gen_id }}" id="BotanicalCircleError-{{ ai_gen_id }}" role="alert">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</div>{% endif %}
+        {% if form.posted_successfully? %}<p class="ai-botanical-banner__message-{{ ai_gen_id }}" id="BotanicalCircleSuccess-{{ ai_gen_id }}" role="status">{{ block.settings.success_message | escape }}</p>{% endif %}
+      {%- endform -%}
+    </div>
+  </div>
+</div>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Botanical email banner",
+  "settings": [
+    { "type": "range", "id": "desktop_width_percent", "label": "Desktop width", "min": 50, "max": 100, "step": 5, "unit": "%", "default": 100 },
+    { "type": "range", "id": "corner_radius", "label": "Corner radius", "min": 16, "max": 32, "step": 2, "unit": "px", "default": 18 },
+    { "type": "header", "content": "Banner content" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "STAY GLOWING" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Join our Botanical Circle" },
+    { "type": "textarea", "id": "description", "label": "Description", "default": "Skincare tips, offers and early access to new collections." },
+    { "type": "header", "content": "Email signup" },
+    { "type": "text", "id": "email_label", "label": "Email field label", "default": "Email address" },
+    { "type": "text", "id": "email_placeholder", "label": "Placeholder", "default": "Enter your email" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Subscribe →" },
+    { "type": "text", "id": "success_message", "label": "Success message", "default": "Thank you for joining our Botanical Circle." }
+  ],
+  "presets": [{ "name": "Botanical email banner" }],
+  "tag": null,
+  "class": "botanical-email-banner-block"
+}
 {% endschema %}
