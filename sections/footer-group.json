@@ -1,14 +1,75 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "type": "footer",
   "name": "t:names.footer",
   "sections": {
+    "blocks_mrtmU9": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_f4dede2_bjGANg": {
+          "type": "ai_gen_block_f4dede2",
+          "settings": {
+            "desktop_width_percent": 100,
+            "corner_radius": 18,
+            "eyebrow": "STAY GLOWING",
+            "heading": "Join our Botanical Circle",
+            "description": "Skincare tips, offers and early access to new collections.",
+            "email_label": "Email address",
+            "email_placeholder": "Enter your email",
+            "button_label": "Subscribe →",
+            "success_message": "Thank you for joining our Botanical Circle."
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_f4dede2_bjGANg"
+      ],
+      "name": "Botanical email banner",
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "background_media": "none",
+        "background_color": "",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
     "chic_footer": {
       "type": "chic-footer",
       "settings": {
         "background": "#f5f9ee",
         "accent": "#4f8455",
         "tagline": "Ayurvedic, botanical skin and hair care, made with love in Bhopal.",
-        "show_newsletter": true,
+        "show_newsletter": false,
         "news_eyebrow": "Stay glowing",
         "news_heading": "Join our Botanical Circle",
         "news_text": "Skincare tips, offers and early access to new collections.",
@@ -29,6 +90,7 @@
     }
   },
   "order": [
+    "blocks_mrtmU9",
     "chic_footer"
   ]
 }

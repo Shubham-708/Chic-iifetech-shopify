@@ -15,14 +15,14 @@
         "banner_video": {
           "type": "video",
           "settings": {
-            "fallback_video": "banner-video.mp4",
-            "fallback_poster": "chic-banner-video-poster.jpg",
+            "sound": true,
             "link": "shopify://collections/hair-care",
             "alt": "CHIC Hair Amrut hair oil in use — for long, strong, healthy hair",
             "fit_desktop": "contain",
             "fit_mobile": "cover",
-            "sound": true,
-            "loop": false
+            "loop": false,
+            "fallback_video": "banner-video.mp4",
+            "fallback_poster": "chic-banner-video-poster.jpg"
           }
         },
         "banner_hair": {
@@ -377,14 +377,14 @@
       ],
       "name": "Chic about",
       "settings": {
+        "fallback_asset": "chic-about-hair-oil.jpg",
         "badge_title": "Hydration",
         "badge_text": "That Lasts. Softness That Shows.",
         "eyebrow": "About CHIC",
         "heading": "Beauty That's Botanical. Confidence That's Real.",
         "text": "At CHIC, we believe nature is not a luxury — it is a necessity. Every formulation begins with carefully chosen botanicals, inspired by centuries of Ayurvedic wisdom and refined through modern skincare research.",
         "founder_name": "CHIC The Botanical Beauty",
-        "founder_role": "Founded in Bhopal, Madhya Pradesh",
-        "fallback_asset": "chic-about-hair-oil.jpg"
+        "founder_role": "Founded in Bhopal, Madhya Pradesh"
       }
     },
     "chic_products": {
@@ -517,48 +517,48 @@
           "type": "reel",
           "settings": {
             "reel_url": "",
-            "fallback_asset": "chic-reel-hair-oil.jpg",
-            "product": "hebral-hair-oil-combe"
+            "product": "hebral-hair-oil-combe",
+            "fallback_asset": "chic-reel-hair-oil.jpg"
           }
         },
         "reel_2": {
           "type": "reel",
           "settings": {
             "reel_url": "",
-            "fallback_asset": "chic-reel-scrub.jpg",
-            "product": "aloe-vera-and-neem-face-and-body-scrub"
+            "product": "aloe-vera-and-neem-face-and-body-scrub",
+            "fallback_asset": "chic-reel-scrub.jpg"
           }
         },
         "reel_3": {
           "type": "reel",
           "settings": {
             "reel_url": "",
-            "fallback_asset": "chic-insta-3.jpg",
-            "product": "suryaveda-ayurvedic-sunscreen-spf-50-pa-no-white-cast-hyaluronic-acid-aloe-vera-mineral-uv-filters-for-tweens-teenagers-all-skin-types"
+            "product": "suryaveda-ayurvedic-sunscreen-spf-50-pa-no-white-cast-hyaluronic-acid-aloe-vera-mineral-uv-filters-for-tweens-teenagers-all-skin-types",
+            "fallback_asset": "chic-insta-3.jpg"
           }
         },
         "reel_4": {
           "type": "reel",
           "settings": {
             "reel_url": "",
-            "fallback_asset": "chic-reel-pigmentation.jpg",
-            "product": "natural-pigmentation-repair-cream"
+            "product": "natural-pigmentation-repair-cream",
+            "fallback_asset": "chic-reel-pigmentation.jpg"
           }
         },
         "reel_5": {
           "type": "reel",
           "settings": {
             "reel_url": "",
-            "fallback_asset": "chic-insta-5.jpg",
-            "product": "body-yogurt-moisturizer-with-kokum-and-jojoba-seeds"
+            "product": "body-yogurt-moisturizer-with-kokum-and-jojoba-seeds",
+            "fallback_asset": "chic-insta-5.jpg"
           }
         },
         "reel_6": {
           "type": "reel",
           "settings": {
             "reel_url": "",
-            "fallback_asset": "chic-insta-6.jpg",
-            "product": "ayurabright-ayurvedic-pigmentation-correcting-cream-reduces-dark-spots-tanning-uneven-skin-tone-herbal-extracts-for-all-skin-types-daily-use"
+            "product": "ayurabright-ayurvedic-pigmentation-correcting-cream-reduces-dark-spots-tanning-uneven-skin-tone-herbal-extracts-for-all-skin-types-daily-use",
+            "fallback_asset": "chic-insta-6.jpg"
           }
         }
       },
@@ -574,9 +574,9 @@
       "settings": {
         "eyebrow": "@chic_the_botanical_beauty",
         "heading": "Fresh From Our Instagram",
+        "subheading": "Real routines, real results — tap a product to shop the look.",
         "instagram_url": "https://www.instagram.com/chic_the_botanical_beauty/",
-        "link_label": "Follow us on Instagram",
-        "subheading": "Real routines, real results — tap a product to shop the look."
+        "link_label": "Follow us on Instagram"
       }
     },
     "chic_journal": {
@@ -587,6 +587,59 @@
         "heading": "Tips, Rituals & Insights",
         "blog": "",
         "link_label": "View All Posts"
+      }
+    },
+    "179186924005606257": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_f4dede2_KryGd3": {
+          "type": "ai_gen_block_f4dede2",
+          "settings": {
+            "desktop_width_percent": 100,
+            "corner_radius": 18,
+            "eyebrow": "STAY GLOWING",
+            "heading": "Join our Botanical Circle",
+            "description": "Skincare tips, offers and early access to new collections.",
+            "email_label": "Email address",
+            "email_placeholder": "Enter your email",
+            "button_label": "Subscribe →",
+            "success_message": "Thank you for joining our Botanical Circle."
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_f4dede2_KryGd3"
+      ],
+      "disabled": true,
+      "name": "email banner",
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "background_media": "none",
+        "background_color": "",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 0,
+        "padding-block-end": 0
       }
     }
   },
@@ -601,6 +654,7 @@
     "chic_story",
     "chic_testimonials",
     "chic_reels",
-    "chic_journal"
+    "chic_journal",
+    "179186924005606257"
   ]
 }
