@@ -1874,7 +1874,7 @@ main > .shopify-section:first-child .section:not(.disable-section-top-offset) {
   }
 }
 #shopify-section-sections--23916368199780__chic_footer {
-  padding-top: 20px !important; /* अपनी जरूरत के हिसाब से value बदलें */
+  margin-top: 20px !important; /* अपनी जरूरत के हिसाब से value बदलें */
 }
 
 
